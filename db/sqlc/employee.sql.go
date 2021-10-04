@@ -89,3 +89,34 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 	}
 	return items, nil
 }
+
+const selectEmployeeById = `-- name: SelectEmployeeById :one
+SELECT
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_duductions, phone_number, rate, hour_limit, payment_method
+from
+  employees
+where
+  id = ?
+LIMIT
+  1
+`
+
+func (q *Queries) SelectEmployeeById(ctx context.Context, id int64) (Employee, error) {
+	row := q.db.QueryRowContext(ctx, selectEmployeeById, id)
+	var i Employee
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Password,
+		&i.Type,
+		&i.Mail,
+		&i.SocialSecurityNumber,
+		&i.StandardTaxDeductions,
+		&i.OtherDuductions,
+		&i.PhoneNumber,
+		&i.Rate,
+		&i.HourLimit,
+		&i.PaymentMethod,
+	)
+	return i, err
+}

@@ -18,3 +18,12 @@ FROM
   employees
 ORDER BY
   id;
+-- name: SelectEmployeeById :one
+SELECT
+  *
+from
+  employees
+where
+  id = ?
+LIMIT
+  1;

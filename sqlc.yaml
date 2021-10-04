@@ -1,7 +1,7 @@
 version: 1
 packages:
   - name: "db"
-    path: "./db/"
+    path: "./db/sqlc"
     engine: "mysql"
     schema: "./db/migration"
     queries: "./db/query"
