@@ -3,12 +3,12 @@ CREATE TABLE `employees` (
   `name` varchar(255) DEFAULT "employee 007",
   `password` varchar(255) DEFAULT "123456",
   `type` ENUM ('hour', 'salaried', 'commissioned'),
-  `mail` varchar(255),
-  `social_security_number` varchar(255),
-  `standard_tax_deductions` varchar(255),
-  `other_duductions` varchar(255),
-  `phone_number` varchar(255),
-  `rate` decimal,
+  `mail` varchar(255) not null,
+  `social_security_number` varchar(255) not null,
+  `standard_tax_deductions` varchar(255) not null,
+  `other_duductions` varchar(255) not null,
+  `phone_number` varchar(255) not null,
+  `rate` decimal not null,
   `hour_limit` int DEFAULT 99999999,
   `payment_method` ENUM ('pick_up', 'mail', 'deposit') DEFAULT "pick_up"
 );

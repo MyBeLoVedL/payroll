@@ -5,10 +5,12 @@ package db
 
 import (
 	"context"
+	"database/sql"
 )
 
-const createEmployee = `-- name: CreateEmployee :exec
-INSERT INTO employees (
+const createEmployee = `-- name: CreateEmployee :execresult
+INSERT INTO
+  employees (
     type,
     mail,
     social_security_number,
@@ -17,7 +19,8 @@ INSERT INTO employees (
     phone_number,
     rate
   )
-VALUES (?,?,?,?,?,?,?)
+VALUES
+  (?, ?, ?, ?, ?, ?, ?)
 `
 
 type CreateEmployeeParams struct {
@@ -30,8 +33,8 @@ type CreateEmployeeParams struct {
 	Rate                  string        `json:"rate"`
 }
 
-func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) error {
-	_, err := q.db.ExecContext(ctx, createEmployee,
+func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createEmployee,
 		arg.Type,
 		arg.Mail,
 		arg.SocialSecurityNumber,
@@ -40,5 +43,49 @@ func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) 
 		arg.PhoneNumber,
 		arg.Rate,
 	)
-	return err
+}
+
+const listEmployees = `-- name: ListEmployees :many
+SELECT
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_duductions, phone_number, rate, hour_limit, payment_method
+FROM
+  employees
+ORDER BY
+  id
+`
+
+func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
+	rows, err := q.db.QueryContext(ctx, listEmployees)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Employee
+	for rows.Next() {
+		var i Employee
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Password,
+			&i.Type,
+			&i.Mail,
+			&i.SocialSecurityNumber,
+			&i.StandardTaxDeductions,
+			&i.OtherDuductions,
+			&i.PhoneNumber,
+			&i.Rate,
+			&i.HourLimit,
+			&i.PaymentMethod,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }

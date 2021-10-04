@@ -52,12 +52,12 @@ type Employee struct {
 	Name                  sql.NullString         `json:"name"`
 	Password              sql.NullString         `json:"password"`
 	Type                  EmployeesType          `json:"type"`
-	Mail                  sql.NullString         `json:"mail"`
-	SocialSecurityNumber  sql.NullString         `json:"social_security_number"`
-	StandardTaxDeductions sql.NullString         `json:"standard_tax_deductions"`
-	OtherDuductions       sql.NullString         `json:"other_duductions"`
-	PhoneNumber           sql.NullString         `json:"phone_number"`
-	Rate                  sql.NullString         `json:"rate"`
+	Mail                  string                 `json:"mail"`
+	SocialSecurityNumber  string                 `json:"social_security_number"`
+	StandardTaxDeductions string                 `json:"standard_tax_deductions"`
+	OtherDuductions       string                 `json:"other_duductions"`
+	PhoneNumber           string                 `json:"phone_number"`
+	Rate                  string                 `json:"rate"`
 	HourLimit             sql.NullInt32          `json:"hour_limit"`
 	PaymentMethod         EmployeesPaymentMethod `json:"payment_method"`
 }

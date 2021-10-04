@@ -1,4 +1,4 @@
--- name: CreateEmployee :one
+-- name: CreateEmployee :execresult
 INSERT INTO
   employees (
     type,
@@ -10,4 +10,11 @@ INSERT INTO
     rate
   )
 VALUES
-  (?, ?, ?, ?, ?, ?, ?) RETURNING id;
+  (?, ?, ?, ?, ?, ?, ?);
+-- name: ListEmployees :many
+SELECT
+  *
+FROM
+  employees
+ORDER BY
+  id;
