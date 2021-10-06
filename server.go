@@ -84,39 +84,43 @@ func main() {
 		}
 		validatedRes := db.ValidateUser(info.User, info.Password)
 		if validatedRes == nil {
+			//* send session id to client here
+
+			c.SetCookie("id", "2345", 0, "", "", false, false)
 			c.HTML(http.StatusOK, "todo.html", gin.H{
 				"User":  info.User,
 				"Todos": []todo{{"study", false}, {"work", true}},
 			})
+
 		} else {
 			c.String(http.StatusBadRequest, validatedRes.Error())
 		}
 	})
 
-	r.POST("/loginJson", func(c *gin.Context) {
-		log.Printf("%v : %v\n", c.Request.Method, c.Request.RequestURI)
-		var info Login
-		if err = c.ShouldBindJSON(&info); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-		validatedRes := db.ValidateUser(info.User, info.Password)
-		if validatedRes == nil {
-			c.String(http.StatusOK, "You has successfully authenticated")
-		} else {
-			c.String(http.StatusBadRequest, validatedRes.Error())
-		}
-	})
+	// r.POST("/loginJson", func(c *gin.Context) {
+	// 	log.Printf("%v : %v\n", c.Request.Method, c.Request.RequestURI)
+	// 	var info Login
+	// 	if err = c.ShouldBindJSON(&info); err != nil {
+	// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// 		return
+	// 	}
+	// 	validatedRes := db.ValidateUser(info.User, info.Password)
+	// 	if validatedRes == nil {
+	// 		c.String(http.StatusOK, "You has successfully authenticated")
+	// 	} else {
+	// 		c.String(http.StatusBadRequest, validatedRes.Error())
+	// 	}
+	// })
 
-	r.POST("/form", func(c *gin.Context) {
-		name := c.PostForm("username")
-		pass := c.PostForm("password")
-		c.JSON(http.StatusOK, gin.H{
-			"name":     name,
-			"password": pass,
-		})
+	// r.POST("/form", func(c *gin.Context) {
+	// 	name := c.PostForm("username")
+	// 	pass := c.PostForm("password")
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"name":     name,
+	// 		"password": pass,
+	// 	})
 
-	})
+	// })
 
 	r.POST("/upload", func(c *gin.Context) {
 		file, _ := c.FormFile("file")
