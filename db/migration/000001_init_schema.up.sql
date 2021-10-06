@@ -58,6 +58,54 @@ CREATE TABLE `paycheck` (
   `start_date` timestamp,
   `end_date` timestamp
 );
+<<<<<<< HEAD
+ALTER TABLE
+  `timecard`
+ADD
+  FOREIGN KEY (`employees_id`) REFERENCES `employees` (`id`);
+ALTER TABLE
+  `timecard_record`
+ADD
+  FOREIGN KEY (`card_id`) REFERENCES `timecard` (`id`);
+ALTER TABLE
+  `order_info`
+ADD
+  FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`);
+ALTER TABLE
+  `purchase_order`
+ADD
+  FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
+ALTER TABLE
+  `paycheck`
+ADD
+  FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
+ALTER TABLE
+  `employee_account`
+ADD
+  FOREIGN KEY (`id`) REFERENCES `employees` (`id`);
+CREATE INDEX `employees_index_0` ON `employees` (`id`, `password`);
+
+-- v1.1 
+-- change the type of columnns regarding tax from varchar to decimal in table employees
+ALTER TABLE `payroll_system`.`employees` 
+CHANGE COLUMN `standard_tax_deductions` `standard_tax_deductions` DECIMAL(3,2) NULL DEFAULT NULL ,
+CHANGE COLUMN `other_duductions` `other_duductions` DECIMAL(10) NULL DEFAULT NULL ,
+-- clarify the definition of rate which is used to represents the three attributes: 
+-- hourly rate, salary and commission rate as a whole
+CHANGE COLUMN `rate` `salary_rate` DECIMAL(10,0) NULL DEFAULT NULL;
+
+-- unify the column name for the same attribute
+ALTER TABLE `payroll_system`.`timecard` 
+DROP FOREIGN KEY `timecard_ibfk_1`;
+ALTER TABLE `payroll_system`.`timecard` 
+CHANGE COLUMN `employees_id` `emp_id` BIGINT NULL DEFAULT NULL ;
+ALTER TABLE `payroll_system`.`timecard` 
+ADD CONSTRAINT `timecard_ibfk_1`
+  FOREIGN KEY (`emp_id`)
+  REFERENCES `payroll_system`.`employees` (`id`);
+
+
+=======
 
 ALTER TABLE `timecard` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
 
@@ -72,3 +120,4 @@ ALTER TABLE `paycheck` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
 ALTER TABLE `employee_account` ADD FOREIGN KEY (`id`) REFERENCES `employees` (`id`);
 
 CREATE INDEX `employees_index_0` ON `employees` (`id`, `password`);
+>>>>>>> a62a3db33ac2e24c1e68251138bdb1f4e6a02c17
