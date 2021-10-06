@@ -1,9 +1,7 @@
 package misc
 
 import (
-	"crypto/rand"
-	"io"
-	"log"
+	"payroll/db/util"
 )
 
 type SessionManager struct {
@@ -12,18 +10,18 @@ type SessionManager struct {
 
 var GSS SessionManager
 
+func init() {
+	GSS = SessionManager{}
+	GSS.sessions = make(map[string]Session)
+}
+
 type Session struct {
 	s_id string
 	user string
 }
 
 func (s *SessionManager) generateID() string {
-	buf := make([]byte, 32)
-	_, err := io.ReadFull(rand.Reader, buf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(buf)
+	return util.RandStr(32)
 }
 
 func (s *SessionManager) Get(id string) (Session, error) {

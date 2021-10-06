@@ -7,55 +7,19 @@ import (
 	"net/http"
 	"os"
 	db "payroll/db/sqlc"
-	"time"
+	"payroll/misc"
 
 	"github.com/gin-gonic/gin"
 )
-
-func echo(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	fmt.Printf("server handler started\n")
-	defer fmt.Printf("server handler ended\n")
-	select {
-	case <-time.After(time.Second * 5):
-		fmt.Fprint(w, "hi\n")
-	case <-ctx.Done():
-		fmt.Println(ctx.Err().Error())
-		http.Error(w, ctx.Err().Error(), http.StatusInternalServerError)
-	}
-}
-
-func header(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Following is your headers\n")
-	for name, headers := range r.Header {
-		for _, header := range headers {
-			fmt.Fprint(w, fmt.Sprintf("%v %v\n", name, header))
-		}
-	}
-}
-
-type student struct {
-	Name string
-	Age  int8
-}
-
-type index struct {
-	Title, Msg string
-}
 
 type Login struct {
 	User     string `form:"user" json:"user" xml:"user"  binding:"required"`
 	Password string `form:"password" json:"password" xml:"password" binding:"required"`
 }
 
-type todo struct {
-	Name string
-	Done bool
-}
-
 func main() {
 	r := gin.Default()
-	r.LoadHTMLGlob("./assets/templates/*")
+	r.LoadHTMLFiles("./assets/templates/todo.html", "./assets/templates/login_test.html")
 	r.MaxMultipartMemory = 32 << 20
 
 	logFile, err := os.OpenFile("conn.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
@@ -66,12 +30,14 @@ func main() {
 	r.Static("/assets", "./assets")
 
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", index{"First Web Page", "Hello,world"})
+		c.HTML(http.StatusOK, "login_test.html", nil)
 	})
 
-	r.GET("/images/:file", func(c *gin.Context) {
-		filename := c.Param("file")
-		c.File(fmt.Sprintf("../assets/images/%v", filename))
+	r.GET("/cookie", func(c *gin.Context) {
+		cookie, _ := c.Cookie("sid")
+		c.JSON(http.StatusOK, gin.H{
+			"session id": cookie,
+		})
 	})
 
 	r.Any("/loginForm", func(c *gin.Context) {
@@ -85,42 +51,14 @@ func main() {
 		validatedRes := db.ValidateUser(info.User, info.Password)
 		if validatedRes == nil {
 			//* send session id to client here
+			sid := misc.GSS.AddSession(info.User)
 
-			c.SetCookie("id", "2345", 0, "", "", false, false)
-			c.HTML(http.StatusOK, "todo.html", gin.H{
-				"User":  info.User,
-				"Todos": []todo{{"study", false}, {"work", true}},
-			})
-
+			c.SetCookie("sid", sid, 0, "", "", false, false)
+			c.HTML(http.StatusOK, "todo.html", nil)
 		} else {
 			c.String(http.StatusBadRequest, validatedRes.Error())
 		}
 	})
-
-	// r.POST("/loginJson", func(c *gin.Context) {
-	// 	log.Printf("%v : %v\n", c.Request.Method, c.Request.RequestURI)
-	// 	var info Login
-	// 	if err = c.ShouldBindJSON(&info); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	// 		return
-	// 	}
-	// 	validatedRes := db.ValidateUser(info.User, info.Password)
-	// 	if validatedRes == nil {
-	// 		c.String(http.StatusOK, "You has successfully authenticated")
-	// 	} else {
-	// 		c.String(http.StatusBadRequest, validatedRes.Error())
-	// 	}
-	// })
-
-	// r.POST("/form", func(c *gin.Context) {
-	// 	name := c.PostForm("username")
-	// 	pass := c.PostForm("password")
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"name":     name,
-	// 		"password": pass,
-	// 	})
-
-	// })
 
 	r.POST("/upload", func(c *gin.Context) {
 		file, _ := c.FormFile("file")
@@ -134,5 +72,5 @@ func main() {
 		c.String(http.StatusOK, "%v uploaded", name)
 	})
 
-	r.Run()
+	r.Run(":9999")
 }
