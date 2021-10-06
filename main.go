@@ -4,11 +4,17 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
-	db "payroll/db"
+	"log"
+	db "payroll/db/sqlc"
 
 	_ "github.com/go-sql-driver/mysql"
 )
+
+func check(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 func main() {
 	ctx := context.Background()
@@ -21,18 +27,12 @@ func main() {
 	queries := db.New(dbIns)
 
 	// create an author
-	err = queries.CreateEmployee(ctx, db.CreateEmployeeParams{
-		Type:                  "hour",
-		Mail:                  "17752254783@163.com",
-		SocialSecurityNumber:  "111",
-		StandardTaxDeductions: "0",
-		OtherDuductions:       "0",
-		PhoneNumber:           "17752254783",
-		Rate:                  "0.15",
-	})
-	if err != nil {
-		panic(err)
+	rows, err := queries.ListEmployees(ctx)
+	check(err)
+	for _, row := range rows {
+		fmt.Printf("%v\n", row)
 	}
+
 	fmt.Printf("Word Done\n")
 
 }
