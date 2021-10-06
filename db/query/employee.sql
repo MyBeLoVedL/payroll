@@ -1,13 +1,13 @@
--- name: CreateEmployee :execresult
+-- name: AddEmployee :execresult
 INSERT INTO
   employees (
     type,
     mail,
     social_security_number,
     standard_tax_deductions,
-    other_duductions,
+    other_deductions,
     phone_number,
-    rate
+    salary_rate
   )
 VALUES
   (?, ?, ?, ?, ?, ?, ?);
@@ -18,6 +18,8 @@ FROM
   employees
 ORDER BY
   id;
+
+
 -- name: SelectEmployeeById :one
 SELECT
   *
@@ -27,3 +29,32 @@ where
   id = ?
 LIMIT
   1;
+
+
+-- name: SelectEmployeeByMail :one
+SELECT * FROM employees WHERE mail = ?;
+
+
+
+-- name: UpdatePassword :exec
+UPDATE employees SET password = ?
+WHERE id = ?;
+
+
+
+-- name: DeleteEmployee :exec
+UPDATE employees SET deleted = 1 where id = ?;
+
+
+
+-- name: UpdateEmployee :exec
+UPDATE employees SET type = ?,mail = ?,social_security_number=?,standard_tax_deductions=?,other_deductions=?,phone_number = ?,salary_rate=?,hour_limit=? where id = ?;
+
+
+-- name: AddTimecard :exec
+INSERT INTO timecard(emp_id) VALUES (?);
+
+
+-- name: AddTimecardRecord :exec
+INSERT INTO timecard_record(charge_number,card_id,hours,date) VALUES (?,?,?,?);
+

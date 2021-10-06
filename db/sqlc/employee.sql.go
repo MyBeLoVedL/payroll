@@ -6,48 +6,88 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
-const createEmployee = `-- name: CreateEmployee :execresult
+const addEmployee = `-- name: AddEmployee :execresult
 INSERT INTO
   employees (
     type,
     mail,
     social_security_number,
     standard_tax_deductions,
-    other_duductions,
+    other_deductions,
     phone_number,
-    rate
+    salary_rate
   )
 VALUES
   (?, ?, ?, ?, ?, ?, ?)
 `
 
-type CreateEmployeeParams struct {
+type AddEmployeeParams struct {
 	Type                  EmployeesType `json:"type"`
 	Mail                  string        `json:"mail"`
 	SocialSecurityNumber  string        `json:"social_security_number"`
 	StandardTaxDeductions string        `json:"standard_tax_deductions"`
-	OtherDuductions       string        `json:"other_duductions"`
+	OtherDeductions       string        `json:"other_deductions"`
 	PhoneNumber           string        `json:"phone_number"`
-	Rate                  string        `json:"rate"`
+	SalaryRate            string        `json:"salary_rate"`
 }
 
-func (q *Queries) CreateEmployee(ctx context.Context, arg CreateEmployeeParams) (sql.Result, error) {
-	return q.db.ExecContext(ctx, createEmployee,
+func (q *Queries) AddEmployee(ctx context.Context, arg AddEmployeeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, addEmployee,
 		arg.Type,
 		arg.Mail,
 		arg.SocialSecurityNumber,
 		arg.StandardTaxDeductions,
-		arg.OtherDuductions,
+		arg.OtherDeductions,
 		arg.PhoneNumber,
-		arg.Rate,
+		arg.SalaryRate,
 	)
+}
+
+const addTimecard = `-- name: AddTimecard :exec
+INSERT INTO timecard(emp_id) VALUES (?)
+`
+
+func (q *Queries) AddTimecard(ctx context.Context, empID int64) error {
+	_, err := q.db.ExecContext(ctx, addTimecard, empID)
+	return err
+}
+
+const addTimecardRecord = `-- name: AddTimecardRecord :exec
+INSERT INTO timecard_record(charge_number,card_id,hours,date) VALUES (?,?,?,?)
+`
+
+type AddTimecardRecordParams struct {
+	ChargeNumber int64     `json:"charge_number"`
+	CardID       int64     `json:"card_id"`
+	Hours        int32     `json:"hours"`
+	Date         time.Time `json:"date"`
+}
+
+func (q *Queries) AddTimecardRecord(ctx context.Context, arg AddTimecardRecordParams) error {
+	_, err := q.db.ExecContext(ctx, addTimecardRecord,
+		arg.ChargeNumber,
+		arg.CardID,
+		arg.Hours,
+		arg.Date,
+	)
+	return err
+}
+
+const deleteEmployee = `-- name: DeleteEmployee :exec
+UPDATE employees SET deleted = 1 where id = ?
+`
+
+func (q *Queries) DeleteEmployee(ctx context.Context, id int64) error {
+	_, err := q.db.ExecContext(ctx, deleteEmployee, id)
+	return err
 }
 
 const listEmployees = `-- name: ListEmployees :many
 SELECT
-  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_duductions, phone_number, rate, hour_limit, payment_method
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
 FROM
   employees
 ORDER BY
@@ -71,11 +111,12 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 			&i.Mail,
 			&i.SocialSecurityNumber,
 			&i.StandardTaxDeductions,
-			&i.OtherDuductions,
+			&i.OtherDeductions,
 			&i.PhoneNumber,
-			&i.Rate,
+			&i.SalaryRate,
 			&i.HourLimit,
 			&i.PaymentMethod,
+			&i.Deleted,
 		); err != nil {
 			return nil, err
 		}
@@ -92,7 +133,7 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 
 const selectEmployeeById = `-- name: SelectEmployeeById :one
 SELECT
-  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_duductions, phone_number, rate, hour_limit, payment_method
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
 from
   employees
 where
@@ -112,11 +153,83 @@ func (q *Queries) SelectEmployeeById(ctx context.Context, id int64) (Employee, e
 		&i.Mail,
 		&i.SocialSecurityNumber,
 		&i.StandardTaxDeductions,
-		&i.OtherDuductions,
+		&i.OtherDeductions,
 		&i.PhoneNumber,
-		&i.Rate,
+		&i.SalaryRate,
 		&i.HourLimit,
 		&i.PaymentMethod,
+		&i.Deleted,
 	)
 	return i, err
+}
+
+const selectEmployeeByMail = `-- name: SelectEmployeeByMail :one
+SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted FROM employees WHERE mail = ?
+`
+
+func (q *Queries) SelectEmployeeByMail(ctx context.Context, mail string) (Employee, error) {
+	row := q.db.QueryRowContext(ctx, selectEmployeeByMail, mail)
+	var i Employee
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Password,
+		&i.Type,
+		&i.Mail,
+		&i.SocialSecurityNumber,
+		&i.StandardTaxDeductions,
+		&i.OtherDeductions,
+		&i.PhoneNumber,
+		&i.SalaryRate,
+		&i.HourLimit,
+		&i.PaymentMethod,
+		&i.Deleted,
+	)
+	return i, err
+}
+
+const updateEmployee = `-- name: UpdateEmployee :exec
+UPDATE employees SET type = ?,mail = ?,social_security_number=?,standard_tax_deductions=?,other_deductions=?,phone_number = ?,salary_rate=?,hour_limit=? where id = ?
+`
+
+type UpdateEmployeeParams struct {
+	Type                  EmployeesType `json:"type"`
+	Mail                  string        `json:"mail"`
+	SocialSecurityNumber  string        `json:"social_security_number"`
+	StandardTaxDeductions string        `json:"standard_tax_deductions"`
+	OtherDeductions       string        `json:"other_deductions"`
+	PhoneNumber           string        `json:"phone_number"`
+	SalaryRate            string        `json:"salary_rate"`
+	HourLimit             sql.NullInt32 `json:"hour_limit"`
+	ID                    int64         `json:"id"`
+}
+
+func (q *Queries) UpdateEmployee(ctx context.Context, arg UpdateEmployeeParams) error {
+	_, err := q.db.ExecContext(ctx, updateEmployee,
+		arg.Type,
+		arg.Mail,
+		arg.SocialSecurityNumber,
+		arg.StandardTaxDeductions,
+		arg.OtherDeductions,
+		arg.PhoneNumber,
+		arg.SalaryRate,
+		arg.HourLimit,
+		arg.ID,
+	)
+	return err
+}
+
+const updatePassword = `-- name: UpdatePassword :exec
+UPDATE employees SET password = ?
+WHERE id = ?
+`
+
+type UpdatePasswordParams struct {
+	Password sql.NullString `json:"password"`
+	ID       int64          `json:"id"`
+}
+
+func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) error {
+	_, err := q.db.ExecContext(ctx, updatePassword, arg.Password, arg.ID)
+	return err
 }

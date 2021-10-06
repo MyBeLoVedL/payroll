@@ -5,8 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-
-	db "payroll/db"
+	db "payroll/db/sqlc"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -28,15 +27,6 @@ func main() {
 	queries := db.New(dbIns)
 
 	// create an author
-	queries.CreateEmployee(ctx, db.CreateEmployeeParams{
-		Type:                  "salaried",
-		Mail:                  "17752254783@gmail.com",
-		SocialSecurityNumber:  "222",
-		StandardTaxDeductions: "0.8",
-		OtherDuductions:       "0",
-		PhoneNumber:           "17752254783",
-		Rate:                  "0.25",
-	})
 	rows, err := queries.ListEmployees(ctx)
 	check(err)
 	for _, row := range rows {

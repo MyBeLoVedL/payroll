@@ -5,6 +5,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"time"
 )
 
 type EmployeesPaymentMethod string
@@ -55,17 +56,18 @@ type Employee struct {
 	Mail                  string                 `json:"mail"`
 	SocialSecurityNumber  string                 `json:"social_security_number"`
 	StandardTaxDeductions string                 `json:"standard_tax_deductions"`
-	OtherDuductions       string                 `json:"other_duductions"`
+	OtherDeductions       string                 `json:"other_deductions"`
 	PhoneNumber           string                 `json:"phone_number"`
-	Rate                  string                 `json:"rate"`
+	SalaryRate            string                 `json:"salary_rate"`
 	HourLimit             sql.NullInt32          `json:"hour_limit"`
 	PaymentMethod         EmployeesPaymentMethod `json:"payment_method"`
+	Deleted               sql.NullInt32          `json:"deleted"`
 }
 
 type EmployeeAccount struct {
-	ID            int64          `json:"id"`
-	BankName      sql.NullString `json:"bank_name"`
-	AccountNumber sql.NullString `json:"account_number"`
+	ID            int64  `json:"id"`
+	BankName      string `json:"bank_name"`
+	AccountNumber string `json:"account_number"`
 }
 
 type OrderInfo struct {
@@ -93,17 +95,16 @@ type PurchaseOrder struct {
 }
 
 type Timecard struct {
-	ID          int64         `json:"id"`
-	EmployeesID sql.NullInt64 `json:"employees_id"`
-	StartDate   sql.NullTime  `json:"start_date"`
-	EndDate     sql.NullTime  `json:"end_date"`
-	Status      sql.NullInt32 `json:"status"`
+	ID        int64         `json:"id"`
+	EmpID     int64         `json:"emp_id"`
+	StartDate sql.NullTime  `json:"start_date"`
+	Committed sql.NullInt32 `json:"committed"`
 }
 
 type TimecardRecord struct {
-	ID           int64         `json:"id"`
-	ChargeNumber sql.NullInt64 `json:"charge_number"`
-	CardID       sql.NullInt64 `json:"card_id"`
-	Hours        sql.NullInt32 `json:"hours"`
-	Date         sql.NullTime  `json:"date"`
+	ID           int64     `json:"id"`
+	ChargeNumber int64     `json:"charge_number"`
+	CardID       int64     `json:"card_id"`
+	Hours        int32     `json:"hours"`
+	Date         time.Time `json:"date"`
 }
