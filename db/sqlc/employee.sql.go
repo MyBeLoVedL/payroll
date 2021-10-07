@@ -85,6 +85,22 @@ func (q *Queries) DeleteEmployee(ctx context.Context, id int64) error {
 	return err
 }
 
+const insertBank = `-- name: InsertBank :exec
+INSERT INTO employee_account(id,bank_name,account_number)
+	VALUES (?,?,?)
+`
+
+type InsertBankParams struct {
+	ID            int64  `json:"id"`
+	BankName      string `json:"bank_name"`
+	AccountNumber string `json:"account_number"`
+}
+
+func (q *Queries) InsertBank(ctx context.Context, arg InsertBankParams) error {
+	_, err := q.db.ExecContext(ctx, insertBank, arg.ID, arg.BankName, arg.AccountNumber)
+	return err
+}
+
 const listEmployees = `-- name: ListEmployees :many
 SELECT
   id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
@@ -231,5 +247,34 @@ type UpdatePasswordParams struct {
 
 func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) error {
 	_, err := q.db.ExecContext(ctx, updatePassword, arg.Password, arg.ID)
+	return err
+}
+
+const updatePaymentMethod = `-- name: UpdatePaymentMethod :exec
+UPDATE employees SET payment_method = ? where id = ?
+`
+
+type UpdatePaymentMethodParams struct {
+	PaymentMethod EmployeesPaymentMethod `json:"payment_method"`
+	ID            int64                  `json:"id"`
+}
+
+func (q *Queries) UpdatePaymentMethod(ctx context.Context, arg UpdatePaymentMethodParams) error {
+	_, err := q.db.ExecContext(ctx, updatePaymentMethod, arg.PaymentMethod, arg.ID)
+	return err
+}
+
+const updatePaymentMethodWithMail = `-- name: UpdatePaymentMethodWithMail :exec
+UPDATE employees SET payment_method = ?,mail = ?  where id = ?
+`
+
+type UpdatePaymentMethodWithMailParams struct {
+	PaymentMethod EmployeesPaymentMethod `json:"payment_method"`
+	Mail          string                 `json:"mail"`
+	ID            int64                  `json:"id"`
+}
+
+func (q *Queries) UpdatePaymentMethodWithMail(ctx context.Context, arg UpdatePaymentMethodWithMailParams) error {
+	_, err := q.db.ExecContext(ctx, updatePaymentMethodWithMail, arg.PaymentMethod, arg.Mail, arg.ID)
 	return err
 }

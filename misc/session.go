@@ -16,8 +16,8 @@ func init() {
 }
 
 type Session struct {
-	s_id string
-	user string
+	S_id string
+	User int64
 }
 
 func (s *SessionManager) generateID() string {
@@ -33,7 +33,7 @@ func (s *SessionManager) Get(id string) (Session, error) {
 	}
 }
 
-func (s *SessionManager) AddSession(user string) string {
+func (s *SessionManager) AddSession(user int64) string {
 	id := s.generateID()
 	s.sessions[id] = Session{id, user}
 	return id

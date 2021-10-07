@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,7 +18,7 @@ type Login struct {
 
 func main() {
 	r := gin.Default()
-	r.LoadHTMLFiles("./assets/templates/todo.html", "./assets/templates/login_test.html")
+	r.LoadHTMLFiles("./resources/templates/main.html", "./resources/templates/login.html", "./resources/templates/todo.html")
 	r.MaxMultipartMemory = 32 << 20
 
 	logFile, err := os.OpenFile("conn.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
@@ -27,10 +26,10 @@ func main() {
 		log.Fatal(err)
 	}
 	log.SetOutput(logFile)
-	r.Static("/assets", "./assets")
+	r.Static("./resources", "./resources")
 
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login_test.html", nil)
+		c.HTML(http.StatusOK, "login.html", nil)
 	})
 
 	r.GET("/cookie", func(c *gin.Context) {
@@ -38,6 +37,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{
 			"session id": cookie,
 		})
+
 	})
 
 	r.Any("/loginForm", func(c *gin.Context) {
@@ -48,28 +48,34 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		validatedRes := db.ValidateUser(info.User, info.Password)
+		id, validatedRes := db.ValidateUser(info.User, info.Password)
 		if validatedRes == nil {
 			//* send session id to client here
-			sid := misc.GSS.AddSession(info.User)
+			sid := misc.GSS.AddSession(id)
 
 			c.SetCookie("sid", sid, 0, "", "", false, false)
-			c.HTML(http.StatusOK, "todo.html", nil)
+			c.HTML(http.StatusOK, "main.html", gin.H{
+				"showUsername": info.User,
+			})
 		} else {
 			c.String(http.StatusBadRequest, validatedRes.Error())
 		}
 	})
 
-	r.POST("/upload", func(c *gin.Context) {
-		file, _ := c.FormFile("file")
-		name := file.Filename
-		loc := fmt.Sprintf("./assets/upload/%v", name)
-		os.OpenFile(loc, os.O_RDWR|os.O_CREATE, 0644)
-		err := c.SaveUploadedFile(file, loc)
-		if err != nil {
-			log.Fatal(err)
+	r.Any("/updatePay", func(c *gin.Context) {
+		method := c.PostForm("updatePay")
+		sid, _ := c.Cookie("sid")
+		session, err := misc.GSS.Get(sid)
+		switch method {
+		case "pick_up":
+			db.UpdatePayment(method, session.User)
+		case "mail":
+		case "deposit":
 		}
-		c.String(http.StatusOK, "%v uploaded", name)
+		c.JSON(http.StatusOK, gin.H{
+			"error":  err,
+			"method": method,
+		})
 	})
 
 	r.Run(":9999")

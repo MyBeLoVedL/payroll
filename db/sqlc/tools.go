@@ -20,27 +20,42 @@ func init() {
 	q = New(dbIns)
 }
 
-func ValidateUser(idOrMail string, passwd string) error {
+func ValidateUser(idOrMail string, passwd string) (int64, error) {
 	var res Employee
 	var err error
+	var id int
 	if strings.Contains(idOrMail, "@") {
 		res, err = q.SelectEmployeeByMail(context.Background(), idOrMail)
 		if err != nil {
-			return errors.New("no such user")
+			return 0, errors.New("no such user")
 		}
 	} else {
-		id, err := strconv.Atoi(idOrMail)
+		id, err = strconv.Atoi(idOrMail)
 		if err != nil {
-			return errors.New("invalid user id")
+			return 0, errors.New("invalid user id")
 		}
 		res, err = q.SelectEmployeeById(context.Background(), int64(id))
 		if err != nil {
-			return errors.New("no such user")
+			return 0, errors.New("no such user")
 		}
 	}
 
 	if res.Password.String != passwd {
-		return errors.New("invalid password")
+		return 0, errors.New("invalid password")
 	}
+	return int64(id), nil
+}
+
+func UpdatePayment(method string, id int64) error {
+	return q.UpdatePaymentMethod(context.Background(), UpdatePaymentMethodParams{EmployeesPaymentMethod(method), id})
+}
+
+func UpdatePaymentWIthMail(method string, id int64, mail string) error {
+	return q.UpdatePaymentMethodWithMail(context.Background(), UpdatePaymentMethodWithMailParams{EmployeesPaymentMethod(method), mail, id})
+}
+
+func UpdatePaymentWithBank(method string, id int64, bank, account string) error {
+	q.UpdatePaymentMethod(context.Background(), UpdatePaymentMethodParams{EmployeesPaymentMethod(method), id})
+	q.InsertBank(context.Background(), InsertBankParams{id, bank, account})
 	return nil
 }
