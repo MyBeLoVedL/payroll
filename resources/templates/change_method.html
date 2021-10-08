@@ -4,19 +4,18 @@
 		<meta charset="utf-8" />
 		<title>家庭经济管理系统</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- <meta content <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">> -->
+		<meta conte<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 		<html lang="en">
 			<head>
 				<meta charset="utf-8" />
 				<title>Simulor - Responsive Admin Dashboard Template</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-					name="description" />
+				<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
 				<meta content="Coderthemes" name="author" />
 				<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 				<!-- App favicon -->
-				<link rel="shortcut icon" href="/resources/assets/images/favicon.ico">
+				<link rel="shortcut icon" href="assets/images/favicon.ico">
 				<script type="text/javascript">
 					// function canuse(){
 					// 	var phonenumber = <%=(String)session.getAttribute("user") %>
@@ -30,20 +29,19 @@
 					//
 				</script>
 				<!-- App css -->
-				<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-				<link href="/resources/css/icons.min.css" rel="stylesheet" type="text/css" />
-				<link href="/resources/css/app.min.css" rel="stylesheet" type="text/css" />
+				<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+				<link href="../css/icons.min.css" rel="stylesheet" type="text/css" />
+				<link href="../css/app.min.css" rel="stylesheet" type="text/css" />
 				<style type="text/css">
-					.card-body>ul {
+					.card-body > ul {
 						list-style: none;
 					}
 
-					.card-body>ul>li {
+					.card-body > ul > li {
 						position: absolute;
 						left: 200px;
 						top: 100px;
 						width: 100%;
-						height: 484px;
 					}
 				</style>
 			</head>
@@ -61,10 +59,10 @@
 					<!-- LOGO -->
 					<a href="#" class="logo text-center mb-4">
 						<span class="logo-lg">
-							<img src="/resources/assets/images/logo.png" alt="" height="50">
+							<img src="../assets/images/logo.png" alt="" height="50">
 						</span>
 						<span class="logo-sm">
-							<img src="/resources/assets/images/logo-sm.png" alt="" height="24">
+							<img src="../assets/images/logo-sm.png" alt="" height="24">
 						</span>
 					</a>
 
@@ -92,11 +90,16 @@
 										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+										<a href="getUserServlet" onclick="return canuse()">展示订单</a>
 									</li>
 								</ul>
 							</li>
-
+							<li>
+								<a href="#">
+									<i class="mdi mdi-account-heart"></i>
+									<span> 生成员工报告</span>
+								</a>
+							</li>
 
 
 							<li>
@@ -115,12 +118,7 @@
 								</a>
 							</li>
 
-							<li>
-								<a href="#">
-									<i class="mdi mdi-account-heart"></i>
-									<span> 生成员工报告</span>
-								</a>
-							</li>
+
 
 							<li class="menu-title">更多功能</li>
 
@@ -158,12 +156,11 @@
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
 							<li class="dropdown notification-list">
-								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
-									role="button" aria-haspopup="false" aria-expanded="false">
-									<img src="/resources/assets/images/users/avatar-1.jpg" alt="user-image"
-										class="rounded-circle">
+								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+								 aria-expanded="false">
+									<img src="../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
 									<small class="pro-user-name ml-1">
-										{{.showUsername}}
+										用户名
 									</small>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
@@ -238,145 +235,98 @@
 						<div class="row">
 							<div class="col-12">
 								<!-- <div class="card"> -->
-								<div class="card-body" id="banner">
-									<ul>
-										<li><img src="/resources/assets/images/banner2.jpg" /></li>
-										<li><img src="/resources/assets/images/banner3.jpg" /></li>
-										<li><img src="/resources/assets/images/banner4.jpg" /></li>
-										<li><img src="/resources/assets/images/banner1.jpg" /></li>
-										<li><img src="/resources/assets/images/banner5.jpg" /></li>
-										<li><img src="/resources/assets/images/banner6.jpg" /></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<form action="/updatePay" method="post">
-							<div>
-								<label for="updatePay">Update Payment Method</label>
-								<select name="updatePay" id="updatePay">
-									<option value="pick_up">pickup</option>
-									<option value="mail">mail</option>
-									<option value="deposit">deposit</option>
-								</select>
-
-								<p></p>
-
-								<button type="submit">
-									submit
-								</button>
-							</div>
-						</form>
-					</div>
-					<script type="application/javascript">
-						main();
-
-						function main() {
-							var obj1 = document.getElementById('banner');
-							var li = obj1.getElementsByTagName('li');
-							var j = 0;
-							var iIndex = 1;
-							var timer;
-
-							for (var i = 0; i < li.length; i++) {
-								console.log(i, j);
-								if (i == j) {
-									li[i].style.opacity = '1';
-									continue;
-								}
-								li[i].style.opacity = '0';
-							}
-
-							function startRoll() {
-								j++;
-								if (j >= li.length) {
-									j = 0;
-								}
-								li[j].style.zIndex = iIndex;
-								iIndex++;
-								fadeIn(li[j], 1);
-							};
-
-							function fadeIn(obj, period) {
-								var COUNT = 50;
-								clearInterval(obj.timer);
-								obj.timer = setInterval(function() {
-									var opacityValue = Number.parseFloat(obj.style.opacity);
-									opacityValue += period / COUNT;
-									if (opacityValue < 1) {
-										obj.style.opacity = opacityValue;
-									} else {
-										obj.style.opacity = 1;
-										clearInterval(obj.timer);
-										for (var i = 0; i < li.length; i++) {
-											if (i == j) {
-												continue;
-											}
-											li[i].style.opacity = '0';
-										}
-									}
-								}, 1000 / COUNT);
-							}
-
-							timer = setInterval(startRoll, 3500);
-						}
-					</script>
-
-
-
-
-					<!-- <div id="record-map">
-						<ul>
-							<li><img src="img/banner1.jpg"/></li>
-							<li><img src="img/banner2.jpg"/></li>
-							<li><img src="img/banner3.jpg"/></li>
-							<li><img src="img/banner4.jpg"/></li>
-							<li><img src="img/banner5.jpg"/></li>
-							<li><img src="img/banner6.jpg"/></li>
-						</ul>
-					</div> -->
-					<!-- Footer Start -->
-					<footer class="footer">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-md-6">
-									Happy Working! &copy; 2021 - JLU.edu
-								</div>
-								<div class="col-md-6">
-									<div class="text-md-right footer-links d-none d-sm-block">
-										<a href="#">LP</a>
-										<a href="#">LZY</a>
-										<a href="#">CYZ</a>
-										<a href="#">LH</a>
-										<a href="#">LW</a>
+									<div class="card-body" id="banner">
+										<form action="" method="get" name="frm">
+											<div id="how-to-pay">
+												<h3>请选择工资的支付方式</h3>
+												<label><input type="radio" name="method" value="0" /> 直取 </label>
+												<label><input type="radio" name="method" id="mail" value="邮寄" onClick="getAddr('text')" /> 邮寄 </label>
+												<label><input type="radio" name="method" id="deposit" value="银行储蓄" onClick="getAccount('text')" /> 银行储蓄 </label>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-					</footer>
-					<!-- end Footer -->
+					
+						<!-- Footer Start -->
+						<footer class="footer">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-6">
+										Happy Working! &copy; 2021 - JLU.edu
+									</div>
+									<div class="col-md-6">
+										<div class="text-md-right footer-links d-none d-sm-block">
+											<a href="#">LP</a>
+											<a href="#">LZY</a>
+											<a href="#">CYZ</a>
+											<a href="#">LH</a>
+											<a href="#">LW</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</footer>
+						<!-- end Footer -->
+
+					</div>
+
+					<!-- ============================================================== -->
+					<!-- End Page content -->
+					<!-- ============================================================== -->
+
 
 				</div>
-
-				<!-- ============================================================== -->
-				<!-- End Page content -->
-				<!-- ============================================================== -->
+				<!-- END wrapper -->
 
 
-			</div>
-			<!-- END wrapper -->
+				<!-- App js -->
+				<script src="../js/vendor.min.js"></script>
+				<script src="../js/app.min.js"></script>
 
+				<!-- Plugins js -->
+				<script src="../js/vendor/Chart.bundle.js"></script>
+				<script src="../js/vendor/jquery.sparkline.min.js"></script>
+				<script src="../js/vendor/jquery.knob.min.js"></script>
 
-			<!-- App js -->
-			<script src="/resources/js/vendor.min.js"></script>
-			<script src="/resources/js/app.min.js"></script>
-
-			<!-- Plugins js -->
-			<script src="/resources/js/vendor/Chart.bundle.js"></script>
-			<script src="/resources/js/vendor/jquery.sparkline.min.js"></script>
-			<script src="/resources/js/vendor/jquery.knob.min.js"></script>
-
-			<script src="/resources/js/pages/dashboard.init.js"></script>
-			<!-- record map -->
-
+				<script src="../js/pages/dashboard.init.js"></script>
+				<!-- record map -->
+				<script language="javascript">
+					var flag1 = true, flag2 = true;
+					function getAddr(mytype){ 
+						if (flag1) {
+							var mytype,TemO=document.getElementById("how-to-pay");
+							var newAddr = document.createElement("input"); 
+							newAddr.type=mytype; 
+							newAddr.name="addr"; 
+							var newline= document.createElement("br");
+							TemO.appendChild(newline); 
+							TemO.appendChild(newAddr); 
+						}
+						flag1 = false;
+					}
+				   function getAccount(mytype){
+					   if (flag2) {
+						   var mytype,TemO=document.getElementById("how-to-pay");
+						   var newAccount = document.createElement("input"); 
+						   var newBankName = document.createElement("input");
+						   var newline= document.createElement("br");
+						   TemO.appendChild(newline);
+						   // document.getElementById("how-to-pay).innerHTML += "<span>账户名称:</span>";
+						   newAccount.type=mytype; 
+						   newAccount.name="account"; 
+						   newBankName.type=mytype;
+						   newBankName.name="bank-name";	
+						   TemO.appendChild(newAccount);
+						   var newline= document.createElement("br");
+						   TemO.appendChild(newline);
+						 <!--  document.getElementById("how-to-pay).innerHTML += "<span>账户名称:</span>"; -->
+						   TemO.appendChild(newBankName);
+						    
+					   }
+						flag2 = false;
+				    } 
+				</script>
 	</body>
 </html>

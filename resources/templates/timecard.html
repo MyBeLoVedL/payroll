@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<script src="../layui/layui.js"></script>
+		<script type="text/javascript">
+			// function canuse() {
+			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
+			// 		if (phonenumber == "15809872335") {
+			// 			return true;
+			// 		} else {
+			// 			alert("对不起，只有管理员可以使用该功能！");
+			// 			return false;
+			// 		}
+			// }
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#st' //指定元素
+				});
+			});
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#et' //指定元素
+				});
+			});
+
+			function deletes(root) {
+				var flag = confirm("【确认删除？】");
+				if (flag) {
+
+					var outid = root.nextElementSibling.value;
+					var xml = new XMLHttpRequest();
+					xml.open("get", "DeleteExpenseServlet?eid=" + outid, true);
+					xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xml.send(null);
+					xml.onreadystatechange = function() {
+						if (xml.readyState == 4) {
+							alert("【删除成功】");
+							location.href = "DisplayExpenseServlet";
+						}
+					}
+				}
+			}
+		</script>
+		<title>维护工时卡</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+		<meta content="Coderthemes" name="author" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- App favicon -->
+		<link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+		<!-- third party css -->
+		<link href="../css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="../css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="../css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="../css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<!-- third party css end -->
+
+		<!-- App css -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="../css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="../css/app.min.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<!-- Begin page -->
+		<div id="wrapper">
+
+			<!-- ========== Left Sidebar Start ========== -->
+			<div class="left-side-menu">
+
+				<div class="slimscroll-menu">
+
+					<!-- LOGO -->
+					<a href="MainServlet" class="logo text-center mb-4">
+						<span class="logo-lg">
+							<img src="../assets/images/logo.png" alt="" height="50">
+						</span>
+						<span class="logo-sm">
+							<img src="../assets/images/logo-sm.png" alt="" height="24">
+						</span>
+					</a>
+
+					<!--- Sidemenu -->
+					<div id="sidebar-menu">
+
+						<ul class="metismenu" id="side-menu">
+
+							<li class="menu-title">基础功能</li>
+
+							<li>
+								<a href="#">
+									<i class="fe-airplay"></i>
+									<span> 个人主页 </span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript: void(0);">
+									<i class="fe-cpu"></i>
+									<span> 维护购买订单 </span>
+									<span class="menu-arrow"></span>
+								</a>
+								<ul class="nav-second-level" aria-expanded="false">
+									<li>
+										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
+									</li>
+									<li>
+										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+									</li>
+								</ul>
+							</li>
+
+
+
+							<li>
+								<a href="#">
+									<i class="fe-type"></i>
+									<span> 维护工时卡 </span>
+								</a>
+							</li>
+
+
+
+							<li>
+								<a href="#">
+									<i class="fe-bar-chart-2"></i>
+									<span> 选择支付方式 </span>
+								</a>
+							</li>
+
+							<li>
+								<a href="#">
+									<i class="mdi mdi-account-heart"></i>
+									<span> 生成员工报告</span>
+								</a>
+							</li>
+
+							<li class="menu-title">更多功能</li>
+
+							<li>
+								<a href="#">
+									<i class="fe-map"></i>
+									<span> 财务管理 </span>
+								</a>
+							</li>
+
+
+						</ul>
+
+					</div>
+					<!-- End Sidebar -->
+
+					<div class="clearfix"></div>
+
+				</div>
+				<!-- Sidebar -left -->
+
+			</div>
+			<!-- Left Sidebar End -->
+			<!-- ============================================================== -->
+			<!-- Start Page Content here -->
+			<!-- ============================================================== -->
+
+			<div class="content-page">
+				<div class="content">
+
+					<!-- Topbar Start -->
+					<div class="navbar-custom">
+						<ul class="list-unstyled topbar-right-menu float-right mb-0">
+							<li class="dropdown notification-list">
+								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
+									role="button" aria-haspopup="false" aria-expanded="false">
+									<img src="../assets/images/users/avatar-1.jpg" alt="user-image"
+										class="rounded-circle">
+									<small class="pro-user-name ml-1">
+										{{.showUsername}}
+									</small>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
+									<!-- item-->
+									<div class="dropdown-header noti-title">
+										<h6 class="text-overflow m-0">Welcome !</h6>
+									</div>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="fe-user"></i>
+										<span>My Account</span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="fe-settings"></i>
+										<span>Settings</span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<i class="fe-lock"></i>
+										<span>Lock Screen</span>
+									</a>
+
+									<div class="dropdown-divider"></div>
+
+									<!-- item-->
+									<a href="LogoutServlet" class="dropdown-item notify-item">
+										<i class="fe-log-out"></i>
+										<span>Logout</span>
+									</a>
+								</div>
+							</li>
+
+						</ul>
+						<button class="button-menu-mobile open-left disable-btn">
+							<i class="fe-menu"></i>
+						</button>
+						<div class="app-search">
+							<form>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="No Search..." disabled>
+									<div class="input-group-append">
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- end Topbar -->
+					<!-- Start Content-->
+					{{if .Committed}}				
+					<div class="container-fluid">
+
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="header-title">
+											<查看当前工时卡> ID：${out.card_id}
+										</h4>
+										<!-- <p class="text-muted font-13 mb-4">
+										<form action="SearchExpenseServlet" method="post">
+
+											<span>客户联系方式</span>
+
+											<br>
+											<span><input type="text" name="phonenumber" id="pn"
+													class="form-control"></span>
+
+											<br>
+											<span>商品类别</span>
+
+											<br>
+
+											<span>
+												<select name="kind" data-plugin="customselect">
+													<option value="null">全部</option>
+													<option value="服装">服装</option>
+													<option value="运动">运动</option>
+													<option value="文具">文具</option>
+													<option value="家电">家电</option>
+												</select>
+											</span>
+
+											<br>
+											<br>
+											<span>开始时间</span>
+
+											<br>
+											<span><input type="text" name="starttime" id="st" placeholder="YYYY-MM-DD"
+													class="form-control"></span>
+
+											<br>
+											<span>截止时间</span>
+
+											<br>
+											<span><input type="text" name="endtime" id="et" placeholder="YYYY-MM-DD"
+													class="form-control"></span>
+
+											<br>
+											<span><input type="submit" value="查询"
+													class="btn btn-block btn-primary"></span>
+											<br>
+										</form>
+										</p> -->
+
+										<table class="layui-table">
+											<thead>
+
+												<tr>
+													<th>序号</th>
+													<th>项目号码</th>
+													<th>工作时长</th>
+													<th>登记日期</th>
+													<!-- <th>花费金额</th>
+													<th>日期</th>
+													<th>订单状态</th> -->
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:choose>
+													<c:when test="${alist=='[]'}">
+													</c:when>
+													<c:otherwise>
+														<c:forEach items="${alist}" var="out">
+															<form action="GetExpenseByID" method="post">
+																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
+																<tr>
+																	<td>
+																		<span>${out.no}</span>
+																	</td>
+																	<td>
+																		<span>${out.charge_number}</span>
+
+																	</td>
+																	<td>
+																		<span>${out.hour}</span>
+																	</td>
+																	<!-- <td>
+																		<span>${out.ex_amount}</span>
+																	</td>
+																	<td>
+																		<span>${out.ex_time}</span>
+																	</td> -->
+																	<td>
+																		<span>${out.date}</span>
+																	</td>
+																	<td>
+																		<input type="submit" value="修改"
+																			class="btn btn-primary btn-sm">
+																		<input type="button" value="删除"
+																			class="btn btn-danger btn-sm"
+																			onclick="deletes(this)">
+																		<input type="hidden" name="eid"
+																			value="${out.eid}" id="eid">
+																	</td>
+																</tr>
+															</form>
+														</c:forEach>
+													</c:otherwise>
+												</c:choose>
+											</tbody>
+										</table>
+
+										<div>
+											<a href="add_timecard.html">
+												<i class="layui-icon layui-icon-addition"></i>
+											</a>
+											<form style="float: right;" method="post">
+												<input type="submit" value="提交" class="btn btn-primary btn-sm">
+											</form>
+										</div>
+
+									</div> <!-- end card body-->
+								</div> <!-- end card -->
+							</div><!-- end col-->
+						</div>
+						<!-- end row-->
+
+
+
+					</div> <!-- container -->
+					{{else}}
+					<div class="container-fluid">
+						<form action="addExpenseServlet" method="post">
+							<table class="layui-table">
+								<tr>
+									<th colspan="2" align="center">
+										<span style="text-align:center">【新增工时记录】</span>
+									</th>
+								</tr>
+								<!-- <tr>
+									<th width=200px>
+										<span>客户联系方式</span>
+									</th>
+									<td align="center">
+										<input type="text" name="phone" id="phone" class="layui-input">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<span>客户地址 </span>
+									</th>
+									<td align="center">
+										<input type="text" name="ex_amount" id="ex_amount" class="layui-input">
+									</td>
+								</tr> -->
+								<tr>
+									<th>
+										<span>项目号码</span>
+									</th>
+									<td align="center">
+										<span>
+											<select name="kind" data-plugin="customselect">
+												<option value="衣服">衣服</option>
+												<option value="篮球">篮球 </option>
+												<option value="钢笔">钢笔</option>
+												<option value="空调">空调</option>
+											</select>
+										</span>
+									</td>
+					
+								</tr>
+								<tr>
+									<th>
+										<span>工作时长</span>
+									</th>
+									<td align="center">
+										<input type="text" name="cost" id="cost" class="layui-input">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<span>日期</span>
+									</th>
+									<td align="center">
+										<input type="text" name="ex_time" id="ex_time" class="layui-input"
+											placeholder="YYYY-MM-DD">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<span>备注</span>
+									</th>
+									<td align="center">
+										<input type="text" name="ex_note" id="ex_note" value="无" class="layui-input">
+									</td>
+								</tr>
+					
+								<tr>
+									<td colspan="2">
+										<input type="submit" value="确认" id="makeadd" class="btn btn-success"
+											onclick="return check()">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="button" value="取消" id="disadd" class="btn btn-danger"
+											onclick="back()">
+									</td>
+								</tr>
+							</table>
+						</form>
+					
+					
+					</div> <!-- container -->
+					{{end}}
+				</div> <!-- content -->
+
+
+			</div>
+
+			<!-- ============================================================== -->
+			<!-- End Page content -->
+			<!-- ============================================================== -->
+
+
+		</div>
+		<!-- END wrapper -->
+
+		<!-- App js -->
+		<script src="../js/vendor.min.js"></script>
+		<script src="../js/app.min.js"></script>
+
+		<!-- third party js -->
+		<script src="js/vendor/jquery.dataTables.js"></script>
+		<script src="js/vendor/dataTables.bootstrap4.js"></script>
+		<script src="js/vendor/dataTables.responsive.min.js"></script>
+		<script src="../js/vendor/responsive.bootstrap4.min.js"></script>
+		<script src="../js/vendor/dataTables.buttons.min.js"></script>
+		<script src="../js/vendor/buttons.bootstrap4.min.js"></script>
+		<script src="../js/vendor/buttons.html5.min.js"></script>
+		<script src="../js/vendor/buttons.flash.min.js"></script>
+		<script src="../js/vendor/buttons.print.min.js"></script>
+		<script src="../js/vendor/dataTables.keyTable.min.js"></script>
+		<script src="../js/vendor/dataTables.select.min.js"></script>
+		<!-- third party js ends -->
+
+		<!-- demo app -->
+		<script src="../js/pages/datatables.init.js"></script>
+		<!-- end demo js-->
+	</body>
+</html>
