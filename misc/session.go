@@ -1,6 +1,7 @@
 package misc
 
 import (
+	db "payroll/db/sqlc"
 	"payroll/db/util"
 )
 
@@ -17,7 +18,7 @@ func init() {
 
 type Session struct {
 	S_id string
-	User int64
+	User *db.Employee
 }
 
 func (s *SessionManager) generateID() string {
@@ -33,7 +34,7 @@ func (s *SessionManager) Get(id string) (Session, error) {
 	}
 }
 
-func (s *SessionManager) AddSession(user int64) string {
+func (s *SessionManager) AddSession(user *db.Employee) string {
 	id := s.generateID()
 	s.sessions[id] = Session{id, user}
 	return id

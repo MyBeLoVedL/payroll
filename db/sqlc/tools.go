@@ -61,3 +61,7 @@ func UpdatePaymentWithBank(id int64, bank, account string) error {
 	err := store.UpdatePaymentMethodWithBank(context.Background(), UpdateBankParam{id, bank, account})
 	return err
 }
+
+func GetUser(id int64) (Employee, error) {
+	return q.GetUser(context.Background(), id)
+}

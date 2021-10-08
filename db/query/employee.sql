@@ -53,7 +53,7 @@ UPDATE employees SET type = ?,mail = ?,social_security_number=?,
 
 
 -- name: SelectActiveTimecard :one
-SELECT * FROM timecard WHERE emp_id = ? and committed = 0;
+SELECT * FROM timecard WHERE emp_id = ?;
 
 -- name: AddTimecard :execresult
 INSERT INTO timecard(emp_id) VALUES (?);
@@ -75,3 +75,7 @@ UPDATE employees SET payment_method = ?,mail = ?  where id = ?;
 INSERT INTO employee_account(id,bank_name,account_number)
 	VALUES (?,?,?);
 
+
+
+-- name: GetUser :one
+SELECT * FROM employees WHERE id = ?;

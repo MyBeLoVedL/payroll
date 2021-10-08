@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"database/sql"
-	"log"
 	"time"
 )
 
@@ -21,6 +20,14 @@ func getProjects() []project {
 	}
 }
 
+func IfCommitted(id int64) bool {
+	card, err := q.SelectActiveTimecard(context.Background(), id)
+	if err != nil {
+		return false
+	}
+	return card.Committed == 1
+}
+
 func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
 	var cardID int64
 	card, err := q.SelectActiveTimecard(context.Background(), id)
@@ -35,7 +42,11 @@ func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
 			return err
 		}
 	} else {
-		cardID = card.ID
+		if card.Committed == 1 {
+
+		} else {
+			cardID = card.ID
+		}
 	}
 	err = q.AddTimecardRecord(context.Background(), AddTimecardRecordParams{
 		ChargeNumber: int64(chargeNumber),
@@ -43,7 +54,6 @@ func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
 		Hours:        int32(hours),
 		Date:         date,
 	})
-	log.Printf("inssert ress :%v\n", err)
 
 	return err
 }

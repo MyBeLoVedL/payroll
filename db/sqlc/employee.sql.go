@@ -84,6 +84,43 @@ func (q *Queries) DeleteEmployee(ctx context.Context, id int64) error {
 	return err
 }
 
+const getHours = `-- name: GetHours :one
+SELECT sum(hours) FROM timecard_record 
+WHERE id = (SELECT id FROM timecard WHERE emp_id = ?)
+`
+
+func (q *Queries) GetHours(ctx context.Context, empID int64) (interface{}, error) {
+	row := q.db.QueryRowContext(ctx, getHours, empID)
+	var sum interface{}
+	err := row.Scan(&sum)
+	return sum, err
+}
+
+const getUser = `-- name: GetUser :one
+SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted FROM employees WHERE id = ?
+`
+
+func (q *Queries) GetUser(ctx context.Context, id int64) (Employee, error) {
+	row := q.db.QueryRowContext(ctx, getUser, id)
+	var i Employee
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Password,
+		&i.Type,
+		&i.Mail,
+		&i.SocialSecurityNumber,
+		&i.StandardTaxDeductions,
+		&i.OtherDeductions,
+		&i.PhoneNumber,
+		&i.SalaryRate,
+		&i.HourLimit,
+		&i.PaymentMethod,
+		&i.Deleted,
+	)
+	return i, err
+}
+
 const insertBank = `-- name: InsertBank :exec
 INSERT INTO employee_account(id,bank_name,account_number)
 	VALUES (?,?,?)
@@ -147,7 +184,7 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 }
 
 const selectActiveTimecard = `-- name: SelectActiveTimecard :one
-SELECT id, emp_id, start_date, committed FROM timecard WHERE emp_id = ? and committed = 0
+SELECT id, emp_id, start_date, committed FROM timecard WHERE emp_id = ?
 `
 
 func (q *Queries) SelectActiveTimecard(ctx context.Context, empID int64) (Timecard, error) {

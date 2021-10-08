@@ -17,9 +17,11 @@ type Login struct {
 	Password string `form:"password" json:"password" xml:"password" binding:"required"`
 }
 
+var prefix string
+
 func main() {
 	r := gin.Default()
-	r.LoadHTMLFiles("./resources/templates/main.html", "./resources/templates/login.html", "./resources/templates/todo.html")
+	r.LoadHTMLGlob("./resources/templates/*")
 	r.MaxMultipartMemory = 32 << 20
 
 	logFile, err := os.OpenFile("conn.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
@@ -51,8 +53,14 @@ func main() {
 		}
 		id, validatedRes := db.ValidateUser(info.User, info.Password)
 		if validatedRes == nil {
+
+			emp, err := db.GetUser(id)
+			if err != nil {
+				c.AbortWithError(http.StatusInternalServerError, err)
+			}
+
 			//* send session id to client here
-			sid := misc.GSS.AddSession(id)
+			sid := misc.GSS.AddSession(&emp)
 
 			c.SetCookie("sid", sid, 0, "", "", false, false)
 			c.HTML(http.StatusOK, "main.html", gin.H{
@@ -69,20 +77,20 @@ func main() {
 		session, err := misc.GSS.Get(sid)
 		switch method {
 		case "pick_up":
-			db.UpdatePayment(method, session.User)
+			db.UpdatePayment(method, session.User.ID)
 			c.JSON(http.StatusOK, gin.H{
 				"error": err,
 			})
 		case "mail":
 			mail := c.PostForm("mail")
-			err = db.UpdatePaymentWIthMail(session.User, mail)
+			err = db.UpdatePaymentWIthMail(session.User.ID, mail)
 			c.JSON(http.StatusOK, gin.H{
 				"error": err,
 			})
 		case "deposit":
 			bankName := c.PostForm("bankName")
 			bankAccount := c.PostForm("bankAccount")
-			err = db.UpdatePaymentWithBank(session.User, bankName, bankAccount)
+			err = db.UpdatePaymentWithBank(session.User.ID, bankName, bankAccount)
 			c.JSON(http.StatusOK, gin.H{
 				"error": err,
 			})
@@ -104,13 +112,33 @@ func main() {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
 
+		if db.IfCommitted(session.User.ID) {
+			c.HTML(http.StatusOK, "timecard.html", gin.H{
+				"Committed":    true,
+				"showUsername": session.User.Name,
+				"prefix":       prefix,
+			})
+		}
+
 		var arg timecardParam
 		err := c.BindQuery(&arg)
 		if err != nil {
 			c.AbortWithError(http.StatusBadRequest, err)
 		}
 
-		err = db.UpdateTimecard(session.User, arg.Charge, arg.Hours, arg.Date)
+		hours, _ := db.GetHours(session.User.ID)
+		if arg.Hours > 24 || hours > int(session.User.HourLimit.Int32) {
+			log.Printf("invalid hours %v\n", hours)
+			c.HTML(http.StatusOK, "timecard.html", gin.H{
+				"Committed":    false,
+				"showUsername": session.User.Name,
+				"prefix":       prefix,
+				"Exceeded":     true,
+			})
+			return
+		}
+
+		err = db.UpdateTimecard(session.User.ID, arg.Charge, arg.Hours, arg.Date)
 		log.Printf("%v\n", err)
 		c.JSON(http.StatusOK, gin.H{
 			"error": err,
