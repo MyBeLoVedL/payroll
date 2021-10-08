@@ -115,7 +115,7 @@
 								</ul>
 							</li>
 							<li>
-								<a href="timecard.html">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
@@ -365,7 +365,7 @@
 					</div> <!-- container -->
 					{{else}}
 						<div class="container-fluid">
-							<form action="addExpenseServlet" method="post">
+							<form action="/timecard" method="get">
 								<table class="layui-table">
 									<tr>
 										<th colspan="2" align="center">
@@ -394,11 +394,13 @@
 										</th>
 										<td align="center">
 											<span>
-												<select name="kind" data-plugin="customselect">
-													<option value="衣服">衣服</option>
-													<option value="篮球">篮球 </option>
-													<option value="钢笔">钢笔</option>
-													<option value="空调">空调</option>
+												<select name="charge" data-plugin="customselect">
+
+													{{range .Projects}}
+													<option value={{.ChargeNumber}}>
+														{{.ProjectName}}
+													</option>
+													{{end}}
 												</select>
 											</span>
 										</td>
@@ -409,7 +411,7 @@
 											<span>工作时长</span>
 										</th>
 										<td align="center">
-											<input type="text" name="cost" id="cost" class="layui-input">
+											<input type="number" name="hours" id="cost" class="layui-input" max="24" min="1">
 										</td>
 									</tr>
 									<tr>
@@ -417,7 +419,7 @@
 											<span>日期</span>
 										</th>
 										<td align="center">
-											<input type="text" name="ex_time" id="ex_time" class="layui-input"
+											<input type="date" name="date" id="ex_time" class="layui-input"
 												placeholder="YYYY-MM-DD">
 										</td>
 									</tr>
@@ -426,7 +428,7 @@
 											<span>备注</span>
 										</th>
 										<td align="center">
-											<input type="text" name="ex_note" id="ex_note" value="无"
+											<input type="text" name="note" id="ex_note" placeholder="无"
 												class="layui-input">
 										</td>
 									</tr>

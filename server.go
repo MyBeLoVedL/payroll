@@ -140,8 +140,12 @@ func main() {
 
 		err = db.UpdateTimecard(session.User.ID, arg.Charge, arg.Hours, arg.Date)
 		log.Printf("%v\n", err)
-		c.JSON(http.StatusOK, gin.H{
-			"error": err,
+		c.HTML(http.StatusOK, "timecard.html", gin.H{
+			"Committed":    false,
+			"showUsername": session.User.Name,
+			"prefix":       prefix,
+			"Exceeded":     false,
+			"Projects":     db.GetProjects(),
 		})
 	})
 

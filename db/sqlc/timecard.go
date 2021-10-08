@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-type project struct {
-	chargeNumber int
-	projectName  string
+type Project struct {
+	ChargeNumber int
+	ProjectName  string
 }
 
-func getProjects() []project {
-	return []project{
+func GetProjects() []Project {
+	return []Project{
 		{2011, "database"},
 		{2022, "operating system"},
 		{2023, "compiler"},
