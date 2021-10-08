@@ -95,10 +95,10 @@ type PurchaseOrder struct {
 }
 
 type Timecard struct {
-	ID        int64         `json:"id"`
-	EmpID     int64         `json:"emp_id"`
-	StartDate sql.NullTime  `json:"start_date"`
-	Committed sql.NullInt32 `json:"committed"`
+	ID        int64     `json:"id"`
+	EmpID     int64     `json:"emp_id"`
+	StartDate time.Time `json:"start_date"`
+	Committed int32     `json:"committed"`
 }
 
 type TimecardRecord struct {

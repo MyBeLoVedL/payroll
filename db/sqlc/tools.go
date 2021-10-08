@@ -11,9 +11,11 @@ import (
 )
 
 var q *Queries
+var dbIns *sql.DB
 
 func init() {
-	dbIns, err := sql.Open("mysql", "root:Lp262783@/payroll")
+	var err error
+	dbIns, err = sql.Open("mysql", "root:Lp262783@/payroll?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
@@ -50,12 +52,12 @@ func UpdatePayment(method string, id int64) error {
 	return q.UpdatePaymentMethod(context.Background(), UpdatePaymentMethodParams{EmployeesPaymentMethod(method), id})
 }
 
-func UpdatePaymentWIthMail(method string, id int64, mail string) error {
-	return q.UpdatePaymentMethodWithMail(context.Background(), UpdatePaymentMethodWithMailParams{EmployeesPaymentMethod(method), mail, id})
+func UpdatePaymentWIthMail(id int64, mail string) error {
+	return q.UpdatePaymentMethodWithMail(context.Background(), UpdatePaymentMethodWithMailParams{EmployeesPaymentMethod("mail"), mail, id})
 }
 
-func UpdatePaymentWithBank(method string, id int64, bank, account string) error {
-	q.UpdatePaymentMethod(context.Background(), UpdatePaymentMethodParams{EmployeesPaymentMethod(method), id})
-	q.InsertBank(context.Background(), InsertBankParams{id, bank, account})
-	return nil
+func UpdatePaymentWithBank(id int64, bank, account string) error {
+	store := NewStore(dbIns)
+	err := store.UpdatePaymentMethodWithBank(context.Background(), UpdateBankParam{id, bank, account})
+	return err
 }

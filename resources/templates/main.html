@@ -248,14 +248,43 @@
 									</div>
 								</div>
 							</div>
+							
+							<h3>Timecard</h3>
+							<form action="/timecard" method="get">
+								<div>
+									<label for="charge">Charge Number</label>
+									<input type="text" name="charge" id="charge">
+								</div>
+
+								<div>
+									<label for="hours">Hours</label>
+									<input type="number" name="hours" id="hours">
+								</div>
+
+								<div>
+									<label for="date">Data</label>
+									<input type="date" name="date" id="date">
+								</div>
+
+									<button type="submit">
+										submit
+									</button>
+							</form>
+
 							<form action="/updatePay" method="post">
 								<div>
 									<label for="updatePay">Update Payment Method</label>
 									<select name="updatePay" id="updatePay">
-										<option value="pick_up">pickup</option>
-										<option value="mail">mail</option>
-										<option value="deposit">deposit</option>
+										<!-- <option value="pick_up">pickup</option> -->
+										<option value="deposit">mail</option>
+										<!-- <option value="deposit">deposit</option> -->
 									</select>
+									<div>
+										<label for="bankName">bank Name</label>
+										<input type="text" name="bankName" id="bankName">
+										<label for="bankAccount">bank Account</label>
+										<input type="text" name="bankAccount" id="bankAccount">
+									</div>
 
 									<p></p>
 

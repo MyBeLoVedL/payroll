@@ -46,13 +46,12 @@ func (q *Queries) AddEmployee(ctx context.Context, arg AddEmployeeParams) (sql.R
 	)
 }
 
-const addTimecard = `-- name: AddTimecard :exec
+const addTimecard = `-- name: AddTimecard :execresult
 INSERT INTO timecard(emp_id) VALUES (?)
 `
 
-func (q *Queries) AddTimecard(ctx context.Context, empID int64) error {
-	_, err := q.db.ExecContext(ctx, addTimecard, empID)
-	return err
+func (q *Queries) AddTimecard(ctx context.Context, empID int64) (sql.Result, error) {
+	return q.db.ExecContext(ctx, addTimecard, empID)
 }
 
 const addTimecardRecord = `-- name: AddTimecardRecord :exec
@@ -147,6 +146,22 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 	return items, nil
 }
 
+const selectActiveTimecard = `-- name: SelectActiveTimecard :one
+SELECT id, emp_id, start_date, committed FROM timecard WHERE emp_id = ? and committed = 0
+`
+
+func (q *Queries) SelectActiveTimecard(ctx context.Context, empID int64) (Timecard, error) {
+	row := q.db.QueryRowContext(ctx, selectActiveTimecard, empID)
+	var i Timecard
+	err := row.Scan(
+		&i.ID,
+		&i.EmpID,
+		&i.StartDate,
+		&i.Committed,
+	)
+	return i, err
+}
+
 const selectEmployeeById = `-- name: SelectEmployeeById :one
 SELECT
   id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
@@ -205,7 +220,9 @@ func (q *Queries) SelectEmployeeByMail(ctx context.Context, mail string) (Employ
 }
 
 const updateEmployee = `-- name: UpdateEmployee :exec
-UPDATE employees SET type = ?,mail = ?,social_security_number=?,standard_tax_deductions=?,other_deductions=?,phone_number = ?,salary_rate=?,hour_limit=? where id = ?
+UPDATE employees SET type = ?,mail = ?,social_security_number=?,
+	standard_tax_deductions=?,other_deductions=?,phone_number = ?,
+	salary_rate=?,hour_limit=? where id = ?
 `
 
 type UpdateEmployeeParams struct {
