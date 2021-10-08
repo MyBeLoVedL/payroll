@@ -91,13 +91,10 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
-
 						<ul class="metismenu" id="side-menu">
-
 							<li class="menu-title">基础功能</li>
-
 							<li>
-								<a href="#">
+								<a href="main.html">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -110,51 +107,49 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
+										<a href="add_order.html" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+										<a href="order_info.html" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
-
-
-
 							<li>
-								<a href="#">
+								<a href="timecard.html">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
-
-
-
 							<li>
-								<a href="#">
+								<a href="change_method.html">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
-
+					
 							<li>
-								<a href="#">
+								<a href="employee_report.html">
 									<i class="mdi mdi-account-heart"></i>
 									<span> 生成员工报告</span>
 								</a>
 							</li>
-
-							<li class="menu-title">更多功能</li>
-
+							<li class="menu-title">高级功能</li>
 							<li>
-								<a href="#">
-									<i class="fe-map"></i>
-									<span> 财务管理 </span>
+								<a href="javascript: void(0);">
+									<i class="fe-cpu"></i>
+									<span> 管理功能 </span>
+									<span class="menu-arrow"></span>
 								</a>
+								<ul class="nav-second-level" aria-expanded="false">
+									<li>
+										<a href="employee_info.html" onclick="return canuse()">维护员工信息</a>
+									</li>
+									<li>
+										<a href="admin_report.html" onclick="return canuse()">管理员工报告</a>
+									</li>
+								</ul>
 							</li>
-
-
 						</ul>
-
 					</div>
 					<!-- End Sidebar -->
 
@@ -235,7 +230,7 @@
 					</div>
 					<!-- end Topbar -->
 					<!-- Start Content-->
-					{{if .Committed}}				
+					{{if .Committed}}
 					<div class="container-fluid">
 
 						<div class="row">
@@ -369,15 +364,15 @@
 
 					</div> <!-- container -->
 					{{else}}
-					<div class="container-fluid">
-						<form action="addExpenseServlet" method="post">
-							<table class="layui-table">
-								<tr>
-									<th colspan="2" align="center">
-										<span style="text-align:center">【新增工时记录】</span>
-									</th>
-								</tr>
-								<!-- <tr>
+						<div class="container-fluid">
+							<form action="addExpenseServlet" method="post">
+								<table class="layui-table">
+									<tr>
+										<th colspan="2" align="center">
+											<span style="text-align:center">【新增工时记录】</span>
+										</th>
+									</tr>
+									<!-- <tr>
 									<th width=200px>
 										<span>客户联系方式</span>
 									</th>
@@ -393,68 +388,72 @@
 										<input type="text" name="ex_amount" id="ex_amount" class="layui-input">
 									</td>
 								</tr> -->
-								<tr>
-									<th>
-										<span>项目号码</span>
-									</th>
-									<td align="center">
-										<span>
-											<select name="kind" data-plugin="customselect">
-												<option value="衣服">衣服</option>
-												<option value="篮球">篮球 </option>
-												<option value="钢笔">钢笔</option>
-												<option value="空调">空调</option>
-											</select>
-										</span>
-									</td>
-					
-								</tr>
-								<tr>
-									<th>
-										<span>工作时长</span>
-									</th>
-									<td align="center">
-										<input type="text" name="cost" id="cost" class="layui-input">
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<span>日期</span>
-									</th>
-									<td align="center">
-										<input type="text" name="ex_time" id="ex_time" class="layui-input"
-											placeholder="YYYY-MM-DD">
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<span>备注</span>
-									</th>
-									<td align="center">
-										<input type="text" name="ex_note" id="ex_note" value="无" class="layui-input">
-									</td>
-								</tr>
-					
-								<tr>
-									<td colspan="2">
-										<input type="submit" value="确认" id="makeadd" class="btn btn-success"
-											onclick="return check()">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="button" value="取消" id="disadd" class="btn btn-danger"
-											onclick="back()">
-									</td>
-								</tr>
-							</table>
-						</form>
-					
-					
-					</div> <!-- container -->
-					{{end}}
+									<tr>
+										<th>
+											<span>项目号码</span>
+										</th>
+										<td align="center">
+											<span>
+												<select name="kind" data-plugin="customselect">
+													<option value="衣服">衣服</option>
+													<option value="篮球">篮球 </option>
+													<option value="钢笔">钢笔</option>
+													<option value="空调">空调</option>
+												</select>
+											</span>
+										</td>
+
+									</tr>
+									<tr>
+										<th>
+											<span>工作时长</span>
+										</th>
+										<td align="center">
+											<input type="text" name="cost" id="cost" class="layui-input">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<span>日期</span>
+										</th>
+										<td align="center">
+											<input type="text" name="ex_time" id="ex_time" class="layui-input"
+												placeholder="YYYY-MM-DD">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<span>备注</span>
+										</th>
+										<td align="center">
+											<input type="text" name="ex_note" id="ex_note" value="无"
+												class="layui-input">
+										</td>
+									</tr>
+
+									<tr>
+										<td colspan="2">
+											<input type="submit" value="确认" id="makeadd" class="btn btn-success"
+												onclick="return check()">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="button" value="取消" id="disadd" class="btn btn-danger"
+												onclick="back()">
+										</td>
+									</tr>
+								</table>
+							</form>
+
+
+						</div> <!-- container -->
+						{{end}}
 				</div> <!-- content -->
 
 

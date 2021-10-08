@@ -48,7 +48,7 @@
 			}
 		</script>
 		<meta charset="utf-8" />
-		<title>增加工时卡记录</title>
+		<title>增加订单记录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
 		<meta content="Coderthemes" name="author" />
@@ -117,7 +117,7 @@
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
-					
+
 							<li>
 								<a href="#">
 									<i class="mdi mdi-account-heart"></i>
@@ -127,7 +127,7 @@
 							<li class="menu-title">高级功能</li>
 							<li>
 								<a href="javascript: void(0);">
-									<i class="layui-icon layui-icon-auz"></i>   
+									<i class="layui-icon layui-icon-auz"></i>
 									<span> 管理功能 </span>
 									<span class="menu-arrow"></span>
 								</a>
@@ -161,6 +161,9 @@
 					<!-- Topbar Start -->
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">
@@ -201,6 +204,7 @@
 										<i class="fe-log-out"></i>
 										<span>Logout</span>
 									</a>
+
 								</div>
 							</li>
 
@@ -226,12 +230,12 @@
 							<table class="layui-table">
 								<tr>
 									<th colspan="2" align="center">
-										<span style="text-align:center">【新增工时记录】</span>
+										<span style="text-align:center">【文件保存路径】</span>
 									</th>
 								</tr>
-								<!-- <tr>
+								<tr>
 									<th width=200px>
-										<span>客户联系方式</span>
+										<span>文件名</span>
 									</th>
 									<td align="center">
 										<input type="text" name="phone" id="phone" class="layui-input">
@@ -239,51 +243,10 @@
 								</tr>
 								<tr>
 									<th>
-										<span>客户地址 </span>
+										<span>保存地址 </span>
 									</th>
 									<td align="center">
 										<input type="text" name="ex_amount" id="ex_amount" class="layui-input">
-									</td>
-								</tr> -->
-								<tr>
-									<th>
-										<span>项目号码</span>
-									</th>
-									<td align="center">
-										<span>
-											<select name="kind" data-plugin="customselect">
-												<option value="衣服">衣服</option>
-												<option value="篮球">篮球 </option>
-												<option value="钢笔">钢笔</option>
-												<option value="空调">空调</option>
-											</select>
-										</span>
-									</td>
-
-								</tr>
-								<tr>
-									<th>
-										<span>工作时长</span>
-									</th>
-									<td align="center">
-										<input type="text" name="cost" id="cost" class="layui-input">
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<span>日期</span>
-									</th>
-									<td align="center">
-										<input type="text" name="ex_time" id="ex_time" class="layui-input"
-											placeholder="YYYY-MM-DD">
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<span>备注</span>
-									</th>
-									<td align="center">
-										<input type="text" name="ex_note" id="ex_note" value="无" class="layui-input">
 									</td>
 								</tr>
 

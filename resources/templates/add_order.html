@@ -67,7 +67,6 @@
 
 			<!-- ========== Left Sidebar Start ========== -->
 			<div class="left-side-menu">
-
 				<div class="slimscroll-menu">
 
 					<!-- LOGO -->
@@ -82,13 +81,13 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
-
+					
 						<ul class="metismenu" id="side-menu">
-
+					
 							<li class="menu-title">基础功能</li>
-
+					
 							<li>
-								<a href="#">
+								<a href="main.html">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -101,48 +100,49 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
+										<a href="add_order.html" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+										<a href="order_info.html" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="#">
-									<i class="mdi mdi-account-heart"></i>
-									<span> 生成员工报告</span>
-								</a>
-							</li>
-
-
-							<li>
-								<a href="#">
+								<a href="timecard.html">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="change_method.html">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
-
-
-
-							<li class="menu-title">更多功能</li>
-
+					
 							<li>
-								<a href="#">
-									<i class="fe-map"></i>
-									<span> 财务管理 </span>
+								<a href="employee_report.html">
+									<i class="mdi mdi-account-heart"></i>
+									<span> 生成员工报告</span>
 								</a>
 							</li>
-
-
+							<li class="menu-title">高级功能</li>
+							<li>
+								<a href="javascript: void(0);">
+									<i class="fe-cpu"></i>
+									<span> 管理功能 </span>
+									<span class="menu-arrow"></span>
+								</a>
+								<ul class="nav-second-level" aria-expanded="false">
+									<li>
+										<a href="employee_info.html" onclick="return canuse()">维护员工信息</a>
+									</li>
+									<li>
+										<a href="admin_report.html" onclick="return canuse()">管理员工报告</a>
+									</li>
+								</ul>
+							</li>
 						</ul>
-
 					</div>
 					<!-- End Sidebar -->
 
@@ -272,8 +272,7 @@
 										<span>花费金额</span>
 									</th>
 									<td align="center">
-										<input type="text" name="cost" id="cost" class="layui-input"
-											>
+										<input type="text" name="cost" id="cost" class="layui-input">
 									</td>
 								</tr>
 								<tr>
