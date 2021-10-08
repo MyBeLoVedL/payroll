@@ -23,8 +23,8 @@ CREATE TABLE `employee_account` (
 CREATE TABLE `timecard` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `emp_id` bigint not null,
-  `start_date` datetime DEFAULT now(),
-  `committed` tinyint DEFAULT 0
+  `start_date` timestamp DEFAULT now() not null,
+  `committed` tinyint DEFAULT 0 not null
 );
 
 CREATE TABLE `timecard_record` (

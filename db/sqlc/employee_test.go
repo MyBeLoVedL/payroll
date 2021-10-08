@@ -92,7 +92,7 @@ func TestUpdateEmployee(t *testing.T) {
 }
 
 func TestAddTimecards(t *testing.T) {
-	err := queries.AddTimecard(context.Background(), 1)
+	_, err := queries.AddTimecard(context.Background(), 1)
 	check(err)
 }
 

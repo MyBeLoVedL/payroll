@@ -7,6 +7,7 @@ import (
 	"os"
 	db "payroll/db/sqlc"
 	"payroll/misc"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -69,12 +70,50 @@ func main() {
 		switch method {
 		case "pick_up":
 			db.UpdatePayment(method, session.User)
+			c.JSON(http.StatusOK, gin.H{
+				"error": err,
+			})
 		case "mail":
+			mail := c.PostForm("mail")
+			err = db.UpdatePaymentWIthMail(session.User, mail)
+			c.JSON(http.StatusOK, gin.H{
+				"error": err,
+			})
 		case "deposit":
+			bankName := c.PostForm("bankName")
+			bankAccount := c.PostForm("bankAccount")
+			err = db.UpdatePaymentWithBank(session.User, bankName, bankAccount)
+			c.JSON(http.StatusOK, gin.H{
+				"error": err,
+			})
+
 		}
 		c.JSON(http.StatusOK, gin.H{
 			"error":  err,
 			"method": method,
+		})
+
+	})
+	r.Any("/timecard", func(c *gin.Context) {
+		type timecardParam struct {
+			Charge int       `form:"charge"`
+			Hours  int       `form:"hours"`
+			Date   time.Time `form:"date" time_format:"2006-01-02"`
+		}
+
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+
+		var arg timecardParam
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		err = db.UpdateTimecard(session.User, arg.Charge, arg.Hours, arg.Date)
+		log.Printf("%v\n", err)
+		c.JSON(http.StatusOK, gin.H{
+			"error": err,
 		})
 	})
 

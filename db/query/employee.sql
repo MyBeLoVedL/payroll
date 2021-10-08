@@ -47,10 +47,15 @@ UPDATE employees SET deleted = 1 where id = ?;
 
 
 -- name: UpdateEmployee :exec
-UPDATE employees SET type = ?,mail = ?,social_security_number=?,standard_tax_deductions=?,other_deductions=?,phone_number = ?,salary_rate=?,hour_limit=? where id = ?;
+UPDATE employees SET type = ?,mail = ?,social_security_number=?,
+	standard_tax_deductions=?,other_deductions=?,phone_number = ?,
+	salary_rate=?,hour_limit=? where id = ?;
 
 
--- name: AddTimecard :exec
+-- name: SelectActiveTimecard :one
+SELECT * FROM timecard WHERE emp_id = ? and committed = 0;
+
+-- name: AddTimecard :execresult
 INSERT INTO timecard(emp_id) VALUES (?);
 
 
