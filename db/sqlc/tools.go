@@ -71,3 +71,9 @@ func AddOrder(ctx context.Context, arg AddOrderParams) error {
 	err := store.AddOrder(context.Background(), arg)
 	return err
 }
+
+func UpdateOrder(ctx context.Context, arg UpdateOrderParams) error {
+	store := NewStore(dbIns)
+	err := store.UpdateOrder(context.Background(), arg)
+	return err
+}

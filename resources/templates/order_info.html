@@ -3,9 +3,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="../layui/css/layui.css">
-		<script src="../layui/layui.js"></script>
-		<script type="text/javascript">
+		<link rel="stylesheet" href="/resources/layui/css/layui.css">
+		<script src="/resources/layui/layui.js"></script>
+		<script type="text/javascript"></scriptu
 			// function canuse() {
 			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
 			// 		if (phonenumber == "15809872335") {
@@ -56,19 +56,19 @@
 		<meta content="Coderthemes" name="author" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<!-- App favicon -->
-		<link rel="shortcut icon" href="../assets/images/favicon.ico">
+		<link rel="shortcut icon" href="/resources/assets/images/favicon.ico">
 
 		<!-- third party css -->
-		<link href="../css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
 		<!-- third party css end -->
 
 		<!-- App css -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="../css/icons.min.css" rel="stylesheet" type="text/css" />
-		<link href="../css/app.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/app.min.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<!-- Begin page -->
@@ -82,10 +82,10 @@
 					<!-- LOGO -->
 					<a href="MainServlet" class="logo text-center mb-4">
 						<span class="logo-lg">
-							<img src="../assets/images/logo.png" alt="" height="50">
+							<img src="/resources/assets/images/logo.png" alt="" height="50">
 						</span>
 						<span class="logo-sm">
-							<img src="../assets/images/logo-sm.png" alt="" height="24">
+							<img src="/resources/assets/images/logo-sm.png" alt="" height="24">
 						</span>
 					</a>
 
@@ -110,21 +110,21 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="add_order.html" onclick="return canuse()">新建订单</a>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="order_info.html" onclick="return canuse()">修改订单</a>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="timecard.html">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="change_method.html">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
@@ -179,7 +179,7 @@
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">
-									<img src="../assets/images/users/avatar-1.jpg" alt="user-image"
+									<img src="/resources/assets/images/users/avatar-1.jpg" alt="user-image"
 										class="rounded-circle">
 									<small class="pro-user-name ml-1">
 										{{.showUsername}}
@@ -227,7 +227,7 @@
 						<div class="app-search">
 							<form>
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="No Search..." disabled>
+									<input type="text" class="form-control" placeholder="No Search/resources." disabled>
 									<div class="input-group-append">
 
 									</div>
@@ -246,12 +246,19 @@
 											<过往订单查询>
 										</h4>
 										<p class="text-muted font-13 mb-4">
-										<form action="SearchExpenseServlet" method="post">
+										<form action="/selectOrder" method="get">
 
-											<span>客户联系方式</span>
+											<span>订单编号</span>
 
 											<br>
-											<span><input type="text" name="phonenumber" id="pn"
+											<span><input type="text" name="orderID" id="orderID"
+													class="form-control"></span>
+
+
+											<!-- <span>客户联系方式</span>
+
+											<br>
+											<span><input type="text" name="contact" id="pn"
 													class="form-control"></span>
 
 											<br>
@@ -260,7 +267,7 @@
 											<br>
 
 											<span>
-												<select name="kind" data-plugin="customselect">
+												<select name="productID" data-plugin="customselect">
 													<option value="null">全部</option>
 													<option value="服装">服装</option>
 													<option value="运动">运动</option>
@@ -274,15 +281,15 @@
 											<span>开始时间</span>
 
 											<br>
-											<span><input type="text" name="starttime" id="st" placeholder="YYYY-MM-DD"
+											<span><input type="text" name="startDate" id="st" placeholder="YYYY-MM-DD"
 													class="form-control"></span>
 
 											<br>
 											<span>截止时间</span>
 
 											<br>
-											<span><input type="text" name="endtime" id="et" placeholder="YYYY-MM-DD"
-													class="form-control"></span>
+											<span><input type="text" name="endDate" id="et" placeholder="YYYY-MM-DD"
+													class="form-control"></span> -->
 
 											<br>
 											<span><input type="submit" value="查询"
@@ -313,36 +320,46 @@
 														<c:forEach items="${alist}" var="out">
 															<form action="GetExpenseByID" method="post">
 																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
-																<tr>
-																	<td>
-																		<span>${out.name}</span>
 
-																	</td>
-																	<td>
-																		<span>${out.phone}</span>
-																	</td>
-																	<td>
-																		<span>${out.ex_amount}</span>
-																	</td>
-																	<td>
-																		<span>${out.kind}</span>
-																	</td>
-																	<td>
-																		<span>${out.ex_time}</span>
-																	</td>
-																	<td>
-																		<span>${out.ex_note}</span>
-																	</td>
-																	<td>
-																		<input type="submit" value="修改"
+
+																 {{range .Orders}}
+
+																 <tr>
+
+																	<input type="hidden" name="hiddenOrderID" value={{.ID}}>
+																	 <td>
+																		 <span>{{.Contact}}</span>
+																		 
+																		</td>
+																		<td>
+																			<span>{{.Address}}</span>
+																		</td>
+																		<td>
+																			<span>{{.ProductID}}</span>
+																		</td>
+																		<td>
+																			<span>{{.Amount}}</span>
+																		</td>
+																		<td>
+																			<span>{{.Date}}</span>
+																		</td>
+																		<td>
+																			<span>{{.Closed}}</span>
+																		</td>
+																		<td>
+																			<input type="submit" value="修改"
 																			class="btn btn-primary btn-sm">
-																		<input type="button" value="删除"
+																			<input type="button" value="删除"
 																			class="btn btn-danger btn-sm"
 																			onclick="deletes(this)">
-																		<input type="hidden" name="eid"
+																			<input type="hidden" name="eid"
 																			value="${out.eid}" id="eid">
-																	</td>
-																</tr>
+																		</td>
+																	</tr>
+																	
+																	{{end}}
+																	
+
 															</form>
 														</c:forEach>
 													</c:otherwise>
@@ -380,25 +397,25 @@
 		<!-- END wrapper -->
 
 		<!-- App js -->
-		<script src="../js/vendor.min.js"></script>
-		<script src="../js/app.min.js"></script>
+		<script src="/resources/js/vendor.min.js"></script>
+		<script src="/resources/js/app.min.js"></script>
 
 		<!-- third party js -->
-		<script src="../js/vendor/jquery.dataTables.js"></script>
-		<script src="../js/vendor/dataTables.bootstrap4.js"></script>
-		<script src="../js/vendor/dataTables.responsive.min.js"></script>
-		<script src="../js/vendor/responsive.bootstrap4.min.js"></script>
-		<script src="../js/vendor/dataTables.buttons.min.js"></script>
-		<script src="../js/vendor/buttons.bootstrap4.min.js"></script>
-		<script src="../js/vendor/buttons.html5.min.js"></script>
-		<script src="../js/vendor/buttons.flash.min.js"></script>
-		<script src="../js/vendor/buttons.print.min.js"></script>
-		<script src="../js/vendor/dataTables.keyTable.min.js"></script>
-		<script src="../js/vendor/dataTables.select.min.js"></script>
+		<script src="/resources/js/vendor/jquery.dataTables.js"></script>
+		<script src="/resources/js/vendor/dataTables.bootstrap4.js"></script>
+		<script src="/resources/js/vendor/dataTables.responsive.min.js"></script>
+		<script src="/resources/js/vendor/responsive.bootstrap4.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.buttons.min.js"></script>
+		<script src="/resources/js/vendor/buttons.bootstrap4.min.js"></script>
+		<script src="/resources/js/vendor/buttons.html5.min.js"></script>
+		<script src="/resources/js/vendor/buttons.flash.min.js"></script>
+		<script src="/resources/js/vendor/buttons.print.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.keyTable.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.select.min.js"></script>
 		<!-- third party js ends -->
 
 		<!-- demo app -->
-		<script src="../js/pages/datatables.init.js"></script>
+		<script src="/resources/js/pages/datatables.init.js"></script>
 		<!-- end demo js-->
 	</body>
 </html>

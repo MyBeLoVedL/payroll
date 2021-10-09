@@ -86,7 +86,24 @@ INSERT INTO order_info(order_id,product_id,amount)
   VALUES(?,?,?); 
 
 
-
 -- name: AddPurchaseOrder :execresult
 INSERT INTO purchase_order(emp_id,customer_contact,customer_address,date)
 VALUES(?,?,?,?);
+
+
+-- name: UpdateOrderInfo :exec
+UPDATE order_info SET product_id = ?,amount = ?  where order_id = ?;
+
+
+-- name: UpdatePurchaseOrder :exec
+UPDATE purchase_order SET customer_contact = ?,customer_address =? , date = ? WHERE id = ?;
+
+
+-- name: SelectOrderById :one
+select * from purchase_order where id = ?;
+
+-- name: SelectOrderInfoById :one
+select * from order_info where order_id = ?;
+
+
+

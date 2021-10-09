@@ -281,6 +281,35 @@ func (q *Queries) SelectEmployeeByMail(ctx context.Context, mail string) (Employ
 	return i, err
 }
 
+const selectOrderById = `-- name: SelectOrderById :one
+select id, emp_id, customer_contact, customer_address, date, closed from purchase_order where id = ?
+`
+
+func (q *Queries) SelectOrderById(ctx context.Context, id int64) (PurchaseOrder, error) {
+	row := q.db.QueryRowContext(ctx, selectOrderById, id)
+	var i PurchaseOrder
+	err := row.Scan(
+		&i.ID,
+		&i.EmpID,
+		&i.CustomerContact,
+		&i.CustomerAddress,
+		&i.Date,
+		&i.Closed,
+	)
+	return i, err
+}
+
+const selectOrderInfoById = `-- name: SelectOrderInfoById :one
+select order_id, product_id, amount from order_info where order_id = ?
+`
+
+func (q *Queries) SelectOrderInfoById(ctx context.Context, orderID int64) (OrderInfo, error) {
+	row := q.db.QueryRowContext(ctx, selectOrderInfoById, orderID)
+	var i OrderInfo
+	err := row.Scan(&i.OrderID, &i.ProductID, &i.Amount)
+	return i, err
+}
+
 const updateEmployee = `-- name: UpdateEmployee :exec
 UPDATE employees SET type = ?,mail = ?,social_security_number=?,
 	standard_tax_deductions=?,other_deductions=?,phone_number = ?,
@@ -311,6 +340,21 @@ func (q *Queries) UpdateEmployee(ctx context.Context, arg UpdateEmployeeParams) 
 		arg.HourLimit,
 		arg.ID,
 	)
+	return err
+}
+
+const updateOrderInfo = `-- name: UpdateOrderInfo :exec
+UPDATE order_info SET product_id = ?,amount = ?  where order_id = ?
+`
+
+type UpdateOrderInfoParams struct {
+	ProductID int64  `json:"product_id"`
+	Amount    string `json:"amount"`
+	OrderID   int64  `json:"order_id"`
+}
+
+func (q *Queries) UpdateOrderInfo(ctx context.Context, arg UpdateOrderInfoParams) error {
+	_, err := q.db.ExecContext(ctx, updateOrderInfo, arg.ProductID, arg.Amount, arg.OrderID)
 	return err
 }
 
@@ -355,5 +399,26 @@ type UpdatePaymentMethodWithMailParams struct {
 
 func (q *Queries) UpdatePaymentMethodWithMail(ctx context.Context, arg UpdatePaymentMethodWithMailParams) error {
 	_, err := q.db.ExecContext(ctx, updatePaymentMethodWithMail, arg.PaymentMethod, arg.Mail, arg.ID)
+	return err
+}
+
+const updatePurchaseOrder = `-- name: UpdatePurchaseOrder :exec
+UPDATE purchase_order SET customer_contact = ?,customer_address =? , date = ? WHERE id = ?
+`
+
+type UpdatePurchaseOrderParams struct {
+	CustomerContact string    `json:"customer_contact"`
+	CustomerAddress string    `json:"customer_address"`
+	Date            time.Time `json:"date"`
+	ID              int64     `json:"id"`
+}
+
+func (q *Queries) UpdatePurchaseOrder(ctx context.Context, arg UpdatePurchaseOrderParams) error {
+	_, err := q.db.ExecContext(ctx, updatePurchaseOrder,
+		arg.CustomerContact,
+		arg.CustomerAddress,
+		arg.Date,
+		arg.ID,
+	)
 	return err
 }

@@ -13,11 +13,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Login struct {
-	User     string `form:"user" json:"user" xml:"user"  binding:"required"`
-	Password string `form:"password" json:"password" xml:"password" binding:"required"`
-}
-
 var prefix string
 
 func main() {
@@ -31,6 +26,27 @@ func main() {
 	}
 	log.SetOutput(logFile)
 	r.Static("./resources", "./resources")
+
+	setRouter(r)
+
+	r.Run(":9999")
+}
+
+type Login struct {
+	User     string `form:"user" json:"user" xml:"user"  binding:"required"`
+	Password string `form:"password" json:"password" xml:"password" binding:"required"`
+}
+
+type Order struct {
+	ID        int64     `form:"empId"`
+	Contact   string    `form:"contact"`
+	Address   string    `form:"addres"`
+	Date      time.Time `form:"date" time_format:"2006-01-02"`
+	ProductID int64     `form:"productId"`
+	Amount    string    `form:"amount"`
+}
+
+func setRouter(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", nil)
 	})
@@ -47,7 +63,7 @@ func main() {
 		body, _ := ioutil.ReadAll(c.Request.Body)
 		log.Printf("%v : %v : %v\n", c.Request.Method, c.Request.RequestURI, string(body))
 		var info Login
-		if err = c.ShouldBindQuery(&info); err != nil {
+		if err := c.ShouldBindQuery(&info); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
@@ -200,5 +216,68 @@ func main() {
 
 	})
 
-	r.Run(":9999")
+	r.Any("/updateOrder", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "order_info.html", gin.H{
+			"Orders": []Order{},
+		})
+	})
+
+	r.Any("/selectOrder", func(c *gin.Context) {
+		type Arg struct {
+			OrderID   int64  `form:"orderID" binding:"required"`
+			Contact   string `form:"contact"`
+			ProductID int64  `form:"productID"`
+			StartDate string `form:"startDate"`
+			EndDate   string `form:"endDate"`
+		}
+		var arg Arg
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		log.Printf("select order %+v\n", arg)
+
+		order, _ := db.SelectOrderByID(arg.OrderID)
+
+		c.HTML(http.StatusOK, "order_info.html", gin.H{
+			"Orders": []db.Order{order},
+		})
+
+	})
+
+	r.Any("/updateOrderAction", func(c *gin.Context) {
+		type UpdateOrderParams struct {
+			Contact   string    `form:"contact"`
+			Address   string    `form:"address"`
+			Date      time.Time `form:"date" time_format:"2006-01-02"`
+			ProductID int64     `form:"productId"`
+			Amount    string    `form:"amount"`
+		}
+		var arg UpdateOrderParams
+		err := c.BindQuery(&arg)
+		log.Printf("%+v\n", arg)
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+		err = db.UpdateOrder(context.Background(), db.UpdateOrderParams{
+			ID:        session.User.ID,
+			Contact:   arg.Contact,
+			Address:   arg.Address,
+			Date:      arg.Date,
+			ProductID: arg.ProductID,
+			Amount:    arg.Amount,
+		})
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		c.HTML(http.StatusOK, "main.html", gin.H{
+			"OK": true,
+		})
+	})
+
 }

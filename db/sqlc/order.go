@@ -55,3 +55,69 @@ func (s *Store) AddOrder(ctx context.Context, arg AddOrderParams) error {
 	})
 	return err
 }
+
+func UpdateOrderInfo(orderID, productID int64, amount string) error {
+	return q.UpdateOrderInfo(context.Background(), UpdateOrderInfoParams{productID, amount, orderID})
+}
+
+func UpdatePurchaseOrder(orderID int64, contact, address string, date time.Time) error {
+	return q.UpdatePurchaseOrder(context.Background(), UpdatePurchaseOrderParams{contact, address, date, orderID})
+}
+
+type UpdateOrderParams struct {
+	ID        int64     `form:"empId"`
+	Contact   string    `form:"contact"`
+	Address   string    `form:"addres"`
+	Date      time.Time `form:"date" time_format:"2006-01-02"`
+	ProductID int64     `form:"productId"`
+	Amount    string    `form:"amount"`
+}
+
+func (s *Store) UpdateOrder(ctx context.Context, arg UpdateOrderParams) error {
+	var err error
+	err = s.execTrx(ctx, func(q *Queries) error {
+		err = UpdateOrderInfo(arg.ID, arg.ProductID, arg.Amount)
+		if err != nil {
+			return err
+		}
+
+		err = UpdatePurchaseOrder(arg.ID, arg.Contact, arg.Address, arg.Date)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+	return err
+}
+
+type Order struct {
+	ID        int64     `form:"empId"`
+	Contact   string    `form:"contact"`
+	Address   string    `form:"addres"`
+	Date      time.Time `form:"date" time_format:"2006-01-02"`
+	ProductID int64     `form:"productId"`
+	Amount    string    `form:"amount"`
+	Closed    int
+}
+
+func SelectOrderByID(id int64) (Order, error) {
+	pur, err := q.SelectOrderById(context.Background(), id)
+	if err != nil {
+		return Order{}, err
+	}
+	info, err := q.SelectOrderInfoById(context.Background(), id)
+	if err != nil {
+		return Order{}, err
+	}
+
+	return Order{
+		ID:        pur.ID,
+		Contact:   pur.CustomerContact,
+		Address:   pur.CustomerAddress,
+		Date:      pur.Date,
+		ProductID: info.ProductID,
+		Amount:    info.Amount,
+		Closed:    int(pur.Closed.Int32),
+	}, nil
+
+}

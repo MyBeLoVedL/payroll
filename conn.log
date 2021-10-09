@@ -92,3 +92,57 @@
 2021/10/09 06:56:11 GET : /loginForm?user=2&password=123456 : 
 2021/10/09 06:56:22 {Contact:17752254783 Address: Date:2021-10-04 00:00:00 -0400 EDT ProductID:1111 Amount:100}
 2021/10/09 07:00:41 {Contact:17752254783 Address: Date:2021-10-05 00:00:00 -0400 EDT ProductID:2222 Amount:10000}
+2021/10/09 07:08:12 <nil>
+2021/10/09 07:08:43 <nil>
+2021/10/09 07:10:39 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 07:18:12 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 07:19:40 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 07:52:06 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 08:15:13 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 08:15:21 <nil>
+2021/10/09 08:15:24 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
+2021/10/09 08:15:29 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
+2021/10/09 08:18:48 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 08:18:51 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
+2021/10/09 08:39:09 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 10:35:10 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 10:35:29 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
+2021/10/09 10:45:09 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 10:45:11 <nil>
+2021/10/09 10:45:46 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:06:08 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:06:14 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:06:43 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:16:31 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:16:38 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:21:45 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:21:54 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:23:18 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:23:24 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:23:29 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:23:56 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:23:57 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:24:00 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:24:02 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:24:05 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:24:07 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:25:25 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:25:28 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:25:32 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:06 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:35:11 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:14 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:15 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:24 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:25 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:27 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:28 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:35:57 GET : /loginForm?user=2&password=123456 : 
+2021/10/09 11:36:01 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:02 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:05 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:08 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:26 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:28 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:32 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/09 11:37:35 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
