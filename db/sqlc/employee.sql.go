@@ -46,6 +46,43 @@ func (q *Queries) AddEmployee(ctx context.Context, arg AddEmployeeParams) (sql.R
 	)
 }
 
+const addOrderInfo = `-- name: AddOrderInfo :exec
+INSERT INTO order_info(order_id,product_id,amount) 
+  VALUES(?,?,?)
+`
+
+type AddOrderInfoParams struct {
+	OrderID   int64  `json:"order_id"`
+	ProductID int64  `json:"product_id"`
+	Amount    string `json:"amount"`
+}
+
+func (q *Queries) AddOrderInfo(ctx context.Context, arg AddOrderInfoParams) error {
+	_, err := q.db.ExecContext(ctx, addOrderInfo, arg.OrderID, arg.ProductID, arg.Amount)
+	return err
+}
+
+const addPurchaseOrder = `-- name: AddPurchaseOrder :execresult
+INSERT INTO purchase_order(emp_id,customer_contact,customer_address,date)
+VALUES(?,?,?,?)
+`
+
+type AddPurchaseOrderParams struct {
+	EmpID           int64     `json:"emp_id"`
+	CustomerContact string    `json:"customer_contact"`
+	CustomerAddress string    `json:"customer_address"`
+	Date            time.Time `json:"date"`
+}
+
+func (q *Queries) AddPurchaseOrder(ctx context.Context, arg AddPurchaseOrderParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, addPurchaseOrder,
+		arg.EmpID,
+		arg.CustomerContact,
+		arg.CustomerAddress,
+		arg.Date,
+	)
+}
+
 const addTimecard = `-- name: AddTimecard :execresult
 INSERT INTO timecard(emp_id) VALUES (?)
 `
@@ -82,18 +119,6 @@ UPDATE employees SET deleted = 1 where id = ?
 func (q *Queries) DeleteEmployee(ctx context.Context, id int64) error {
 	_, err := q.db.ExecContext(ctx, deleteEmployee, id)
 	return err
-}
-
-const getHours = `-- name: GetHours :one
-SELECT sum(hours) FROM timecard_record 
-WHERE id = (SELECT id FROM timecard WHERE emp_id = ?)
-`
-
-func (q *Queries) GetHours(ctx context.Context, empID int64) (interface{}, error) {
-	row := q.db.QueryRowContext(ctx, getHours, empID)
-	var sum interface{}
-	err := row.Scan(&sum)
-	return sum, err
 }
 
 const getUser = `-- name: GetUser :one

@@ -25,7 +25,7 @@ func IfCommitted(id int64) bool {
 	if err != nil {
 		return false
 	}
-	return card.Committed == 1
+	return card.Committed.Int32 == 1
 }
 
 func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
@@ -42,7 +42,7 @@ func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
 			return err
 		}
 	} else {
-		if card.Committed == 1 {
+		if card.Committed.Int32 == 1 {
 
 		} else {
 			cardID = card.ID

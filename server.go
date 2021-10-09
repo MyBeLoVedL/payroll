@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -30,7 +31,6 @@ func main() {
 	}
 	log.SetOutput(logFile)
 	r.Static("./resources", "./resources")
-
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", nil)
 	})
@@ -147,6 +147,57 @@ func main() {
 			"Exceeded":     false,
 			"Projects":     db.GetProjects(),
 		})
+	})
+
+	r.Any("/showOrder", func(c *gin.Context) {
+
+		type Product struct {
+			ProductID   int
+			ProductName string
+		}
+
+		c.HTML(http.StatusOK, "add_order.html", gin.H{
+			"Products": []Product{
+				{1111, "RTX 3090"},
+				{2222, "GTX 1080"},
+				{3333, "Intel i9 9900k"},
+			},
+		})
+	})
+
+	r.GET("/order", func(c *gin.Context) {
+		type AddOrderParams struct {
+			Contact   string    `form:"contact"`
+			Address   string    `form:"address"`
+			Date      time.Time `form:"date" time_format:"2006-01-02"`
+			ProductID int64     `form:"productId"`
+			Amount    string    `form:"amount"`
+		}
+		var arg AddOrderParams
+		err := c.ShouldBindQuery(&arg)
+		log.Printf("%+v\n", arg)
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+		err = db.AddOrder(context.Background(), db.AddOrderParams{
+			EmpID:     session.User.ID,
+			Contact:   arg.Contact,
+			Address:   arg.Address,
+			Date:      arg.Date,
+			ProductID: arg.ProductID,
+			Amount:    arg.Amount,
+		})
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		c.HTML(http.StatusOK, "main.html", gin.H{
+			"OK": true,
+		})
+
 	})
 
 	r.Run(":9999")

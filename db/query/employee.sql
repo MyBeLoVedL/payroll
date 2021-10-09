@@ -79,3 +79,14 @@ INSERT INTO employee_account(id,bank_name,account_number)
 
 -- name: GetUser :one
 SELECT * FROM employees WHERE id = ?;
+
+
+-- name: AddOrderInfo :exec
+INSERT INTO order_info(order_id,product_id,amount) 
+  VALUES(?,?,?); 
+
+
+
+-- name: AddPurchaseOrder :execresult
+INSERT INTO purchase_order(emp_id,customer_contact,customer_address,date)
+VALUES(?,?,?,?);

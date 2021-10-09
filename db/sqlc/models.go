@@ -71,9 +71,9 @@ type EmployeeAccount struct {
 }
 
 type OrderInfo struct {
-	OrderID   sql.NullInt64 `json:"order_id"`
-	ProductID sql.NullInt64 `json:"product_id"`
-	Amount    sql.NullInt32 `json:"amount"`
+	OrderID   int64  `json:"order_id"`
+	ProductID int64  `json:"product_id"`
+	Amount    string `json:"amount"`
 }
 
 type Paycheck struct {
@@ -85,20 +85,19 @@ type Paycheck struct {
 }
 
 type PurchaseOrder struct {
-	ID              int64          `json:"id"`
-	EmpID           sql.NullInt64  `json:"emp_id"`
-	CustomerContact sql.NullString `json:"customer_contact"`
-	CustomerAddress sql.NullString `json:"customer_address"`
-	OrderInfoID     sql.NullInt64  `json:"order_info_id"`
-	Date            sql.NullTime   `json:"date"`
-	Status          sql.NullInt32  `json:"status"`
+	ID              int64         `json:"id"`
+	EmpID           int64         `json:"emp_id"`
+	CustomerContact string        `json:"customer_contact"`
+	CustomerAddress string        `json:"customer_address"`
+	Date            time.Time     `json:"date"`
+	Closed          sql.NullInt32 `json:"closed"`
 }
 
 type Timecard struct {
-	ID        int64     `json:"id"`
-	EmpID     int64     `json:"emp_id"`
-	StartDate time.Time `json:"start_date"`
-	Committed int32     `json:"committed"`
+	ID        int64         `json:"id"`
+	EmpID     int64         `json:"emp_id"`
+	StartDate sql.NullTime  `json:"start_date"`
+	Committed sql.NullInt32 `json:"committed"`
 }
 
 type TimecardRecord struct {

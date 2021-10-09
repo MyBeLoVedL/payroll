@@ -65,3 +65,9 @@ func UpdatePaymentWithBank(id int64, bank, account string) error {
 func GetUser(id int64) (Employee, error) {
 	return q.GetUser(context.Background(), id)
 }
+
+func AddOrder(ctx context.Context, arg AddOrderParams) error {
+	store := NewStore(dbIns)
+	err := store.AddOrder(context.Background(), arg)
+	return err
+}

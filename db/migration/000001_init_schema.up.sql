@@ -1,3 +1,4 @@
+
 CREATE TABLE `employees` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) DEFAULT "guest",
@@ -15,16 +16,16 @@ CREATE TABLE `employees` (
 );
 
 CREATE TABLE `employee_account` (
-  `id` bigint PRIMARY KEY,
+  `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `bank_name` varchar(255) NOT NULL,
   `account_number` varchar(255) NOT NULL
 );
 
 CREATE TABLE `timecard` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `emp_id` bigint not null,
-  `start_date` timestamp DEFAULT now() not null,
-  `committed` tinyint DEFAULT 0 not null
+  `emp_id` bigint NOT NULL,
+  `start_date` date DEFAULT now(),
+  `committed` tinyint DEFAULT 0
 );
 
 CREATE TABLE `timecard_record` (
@@ -36,19 +37,18 @@ CREATE TABLE `timecard_record` (
 );
 
 CREATE TABLE `order_info` (
-  `order_id` bigint,
-  `product_id` bigint,
-  `amount` int
+  `order_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `amount` decimal(10,3) NOT NULL
 );
 
 CREATE TABLE `purchase_order` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `emp_id` bigint,
-  `customer_contact` varchar(255),
-  `customer_address` varchar(255),
-  `order_info_id` bigint,
-  `date` timestamp,
-  `status` smallint
+  `emp_id` bigint NOT NULL,
+  `customer_contact` varchar(255) NOT NULL,
+  `customer_address` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL,
+  `closed` smallint DEFAULT 0
 );
 
 CREATE TABLE `paycheck` (
@@ -58,28 +58,18 @@ CREATE TABLE `paycheck` (
   `start_date` timestamp,
   `end_date` timestamp
 );
-ALTER TABLE
-  `timecard`
-ADD
-  FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
-ALTER TABLE
-  `timecard_record`
-ADD
-  FOREIGN KEY (`card_id`) REFERENCES `timecard` (`id`);
-ALTER TABLE
-  `order_info`
-ADD
-  FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`);
-ALTER TABLE
-  `purchase_order`
-ADD
-  FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
-ALTER TABLE
-  `paycheck`
-ADD
-  FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
-ALTER TABLE
-  `employee_account`
-ADD
-  FOREIGN KEY (`id`) REFERENCES `employees` (`id`);
+
+ALTER TABLE `timecard` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
+
+ALTER TABLE `timecard_record` ADD FOREIGN KEY (`card_id`) REFERENCES `timecard` (`id`);
+
+ALTER TABLE `order_info` ADD FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`);
+
+ALTER TABLE `purchase_order` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
+
+ALTER TABLE `paycheck` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
+
+ALTER TABLE `employee_account` ADD FOREIGN KEY (`id`) REFERENCES `employees` (`id`);
+
 CREATE INDEX `employees_index_0` ON `employees` (`id`, `password`);
+
