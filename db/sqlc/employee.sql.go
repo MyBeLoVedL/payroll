@@ -121,6 +121,24 @@ func (q *Queries) DeleteEmployee(ctx context.Context, id int64) error {
 	return err
 }
 
+const deleteOrderInfoById = `-- name: DeleteOrderInfoById :exec
+DELETE FROM order_info WHERE order_id = ?
+`
+
+func (q *Queries) DeleteOrderInfoById(ctx context.Context, orderID int64) error {
+	_, err := q.db.ExecContext(ctx, deleteOrderInfoById, orderID)
+	return err
+}
+
+const deletePurchaseOrderById = `-- name: DeletePurchaseOrderById :exec
+DELETE FROM purchase_order WHERE id = ?
+`
+
+func (q *Queries) DeletePurchaseOrderById(ctx context.Context, id int64) error {
+	_, err := q.db.ExecContext(ctx, deletePurchaseOrderById, id)
+	return err
+}
+
 const getUser = `-- name: GetUser :one
 SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted FROM employees WHERE id = ?
 `

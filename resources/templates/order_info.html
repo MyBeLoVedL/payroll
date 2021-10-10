@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/resources/layui/css/layui.css">
 		<script src="/resources/layui/layui.js"></script>
-		<script type="text/javascript"></scriptu
+		<script type="text/javascript">
 			// function canuse() {
 			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
 			// 		if (phonenumber == "15809872335") {
@@ -31,20 +31,19 @@
 					elem: '#et' //指定元素
 				});
 			});
-
 			function deletes(root) {
 				var flag = confirm("【确认删除？】");
 				if (flag) {
-
-					var outid = root.nextElementSibling.value;
+					var orderID = root.nextElementSibling.value;
+					console.log("orderID:"+ orderID);
 					var xml = new XMLHttpRequest();
-					xml.open("get", "DeleteExpenseServlet?eid=" + outid, true);
+					xml.open("get", "/deleteOrder?orderID="+orderID, true);
+					console.log("orderID+"+ orderID);
 					xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xml.send(null);
+					xml.send("orderID="+orderID);
 					xml.onreadystatechange = function() {
 						if (xml.readyState == 4) {
 							alert("【删除成功】");
-							location.href = "DisplayExpenseServlet";
 						}
 					}
 				}
@@ -97,7 +96,7 @@
 							<li class="menu-title">基础功能</li>
 					
 							<li>
-								<a href="main.html">
+								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -326,7 +325,7 @@
 
 																 <tr>
 
-																	<input type="hidden" name="hiddenOrderID" value={{.ID}}>
+																	
 																	 <td>
 																		 <span>{{.Contact}}</span>
 																		 
@@ -352,8 +351,7 @@
 																			<input type="button" value="删除"
 																			class="btn btn-danger btn-sm"
 																			onclick="deletes(this)">
-																			<input type="hidden" name="eid"
-																			value="${out.eid}" id="eid">
+																			<input type="hidden" name="orderID" value="{{.ID}}" id="orderID" />
 																		</td>
 																	</tr>
 																	

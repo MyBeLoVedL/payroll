@@ -121,3 +121,19 @@ func SelectOrderByID(id int64) (Order, error) {
 	}, nil
 
 }
+
+func DeleteOrder(orderID int64) error {
+	var err error
+
+	err = q.DeleteOrderInfoById(context.Background(), orderID)
+	if err != nil {
+		return err
+	}
+
+	err = q.DeletePurchaseOrderById(context.Background(), orderID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

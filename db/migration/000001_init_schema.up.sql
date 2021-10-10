@@ -24,7 +24,7 @@ CREATE TABLE `employee_account` (
 CREATE TABLE `timecard` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `emp_id` bigint NOT NULL,
-  `start_date` date DEFAULT now(),
+  `start_date` datetime DEFAULT now(),
   `committed` tinyint DEFAULT 0
 );
 

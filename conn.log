@@ -146,3 +146,66 @@
 2021/10/09 11:37:28 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
 2021/10/09 11:37:32 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
 2021/10/09 11:37:35 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 18:49:28 GET : /loginForm?user=2&password=123456 : 
+2021/10/10 20:30:21 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 20:30:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 20:31:07 {Contact:17752254783 Address:Acune Date:2021-10-07 00:00:00 +0800 CST ProductID:1111 Amount:10000}
+2021/10/10 20:31:50 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 20:48:11 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 20:58:50 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:01:12 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:01:17 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:09:22 GET : /loginForm?user=2&password=123456 : 
+2021/10/10 21:09:28 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:13:18 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:16:10 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:16:14 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:17:46 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:18:06 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:18:11 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:18:13 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
+2021/10/10 21:18:53 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:18:58 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:23:10 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:23:42 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
+2021/10/10 21:26:22 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:26:27 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:28:37 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:28:41 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:29:03 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:29:05 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:29:05 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:30:15 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:30:18 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:30:31 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:30:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:31:28 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:31:32 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:31:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:39:49 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:44:49 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:46:58 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:49:31 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:51:19 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:51:23 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:53:42 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:53:47 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:58:08 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:58:10 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:58:38 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 21:58:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 21:59:24 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:00:40 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:02:31 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 22:02:36 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:02:39 order ID {orderID:0}
+2021/10/10 22:07:37 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 22:07:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:07:46 order ID 1
+2021/10/10 22:08:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:08:46 order ID 1
+2021/10/10 22:13:22 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/10 22:13:44 {Contact:17752254783 Address:Pluto Date:2021-10-07 00:00:00 +0800 CST ProductID:1111 Amount:10000}
+2021/10/10 22:14:29 GET : /loginForm?user=1&password=123456 : 
+2021/10/10 22:14:50 {Contact:17752254783 Address:Avenue Date:0001-01-01 00:00:00 +0000 UTC ProductID:1111 Amount:10000}
+2021/10/10 22:15:13 {Contact:17752254783 Address:Avenue Date:2021-10-14 00:00:00 +0800 CST ProductID:1111 Amount:10000}

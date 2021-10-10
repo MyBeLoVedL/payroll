@@ -15,7 +15,7 @@ var dbIns *sql.DB
 
 func init() {
 	var err error
-	dbIns, err = sql.Open("mysql", "root:Lp262783@/payroll?parseTime=true")
+	dbIns, err = sql.Open("mysql", "lee:Lp262783@/payroll?parseTime=true")
 	if err != nil {
 		panic(err)
 	}

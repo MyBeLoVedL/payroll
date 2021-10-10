@@ -8,6 +8,7 @@ import (
 	"os"
 	db "payroll/db/sqlc"
 	"payroll/misc"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -48,7 +49,9 @@ type Order struct {
 
 func setRouter(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login.html", nil)
+		c.HTML(http.StatusOK, "login.html", gin.H{
+			"error": "No error",
+		})
 	})
 
 	r.GET("/cookie", func(c *gin.Context) {
@@ -88,7 +91,11 @@ func setRouter(r *gin.Engine) {
 	})
 
 	r.Any("/updatePay", func(c *gin.Context) {
-		method := c.PostForm("updatePay")
+		c.HTML(http.StatusOK, "change_method.html", nil)
+	})
+
+	r.Any("/updatePayAction", func(c *gin.Context) {
+		method := c.Query("updatePay")
 		sid, _ := c.Cookie("sid")
 		session, err := misc.GSS.Get(sid)
 		switch method {
@@ -118,6 +125,7 @@ func setRouter(r *gin.Engine) {
 		})
 
 	})
+
 	r.Any("/timecard", func(c *gin.Context) {
 		type timecardParam struct {
 			Charge int       `form:"charge"`
@@ -239,7 +247,6 @@ func setRouter(r *gin.Engine) {
 		log.Printf("select order %+v\n", arg)
 
 		order, _ := db.SelectOrderByID(arg.OrderID)
-
 		c.HTML(http.StatusOK, "order_info.html", gin.H{
 			"Orders": []db.Order{order},
 		})
@@ -277,6 +284,28 @@ func setRouter(r *gin.Engine) {
 
 		c.HTML(http.StatusOK, "main.html", gin.H{
 			"OK": true,
+		})
+	})
+
+	r.Any("/deleteOrder", func(c *gin.Context) {
+		// type delOrderArg struct {
+		// 	orderID int64 `form:"orderID" binding:"required"`
+		// }
+
+		// var arg delOrderArg
+		// err := c.BindQuery(&arg)
+		arg := c.Query("orderID")
+		id, err := strconv.Atoi(arg)
+		log.Printf("order ID %+v\n", arg)
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+		err = db.DeleteOrder(int64(id))
+		if err != nil {
+			c.AbortWithError(http.StatusBadRequest, err)
+		}
+		c.HTML(http.StatusOK, "order_info.html", gin.H{
+			"Orders": []Order{},
 		})
 	})
 

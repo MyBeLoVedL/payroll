@@ -106,4 +106,11 @@ select * from purchase_order where id = ?;
 select * from order_info where order_id = ?;
 
 
+-- name: DeletePurchaseOrderById :exec
+DELETE FROM purchase_order WHERE id = ?;
+
+-- name: DeleteOrderInfoById :exec
+DELETE FROM order_info WHERE order_id = ?;
+
+
 
