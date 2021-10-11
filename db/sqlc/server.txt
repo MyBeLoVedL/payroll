@@ -1,0 +1,87 @@
+
+	r.GET("/addEmployee", func(c *gin.Context) {
+		type AddArg struct {
+			etype    string `form:"etype" binding:"required"`
+			mail     string `form:"mail" binding:"required"`
+			security string `form:"security" binding:"required"`
+			tax      string `form:"tax" binding:"required"`
+			other    string `form:"other" binding:"required"`
+			phone    string `form:"phone" binding:"required"`
+			rate     string `form:"rate" binding:"required"`
+		}
+
+		var arg AddArg
+
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "add employee bind fails",
+			})
+		}
+
+		id, err := db.AddEmployee(arg.etype, arg.mail, arg.security, arg.tax, arg.other, arg.phone, arg.rate)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "add employee server error",
+			})
+
+		}
+		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
+			"ID":       id,
+			"Etype":    arg.etype,
+			"Mail":     arg.mail,
+			"Security": arg.security,
+			"Tax":      arg.tax,
+			"Other":    arg.other,
+			"Phone":    arg.phone,
+			"Rate":     arg.rate,
+		})
+	})
+
+	r.GET("/updateEmployee", func(c *gin.Context) {
+		// sid, _ := c.Cookie("sid")
+		// session, _ := misc.GSS.Get(sid)
+
+		idStr := c.Query("empID")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to update",
+			})
+		}
+
+		arg, err := db.SelectEmployee(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to delete",
+			})
+		}
+
+		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
+			"ID":       arg.ID,
+			"Etype":    arg.Type,
+			"Mail":     arg.Mail,
+			"Security": arg.SocialSecurityNumber,
+			"Tax":      arg.StandardTaxDeductions,
+			"Other":    arg.OtherDeductions,
+			"Phone":    arg.PhoneNumber,
+			"Rate":     arg.SalaryRate,
+		})
+	})
+
+	r.GET("/deleteEmployee", func(c *gin.Context) {
+		idStr := c.Query("empID")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to delete",
+			})
+		}
+		err = db.DeleteEmployee(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "delete employee failed",
+			})
+		}
+	})

@@ -32,3 +32,22 @@
 2021/10/11 04:21:27 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
 2021/10/11 04:21:27 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
 2021/10/11 04:21:34 {Contact:17752254783/ Address:Mars Date:2021-10-11 00:00:00 -0400 EDT ProductID:1111 Amount:12233.000}
+2021/10/11 18:45:24 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 18:45:29 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 19:04:51 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:17:36 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:20:25 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 19:20:25 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/11 19:20:29 GET : /loginForm?user=1&password=1234 : 
+2021/10/11 19:20:34 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:22:03 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 19:22:03 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/11 19:22:08 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:22:12 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 19:24:28 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:25:31 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:27:05 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:28:15 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:28:20 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:0 Valid:true}}
+2021/10/11 19:29:17 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 19:29:22 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:0 Valid:true}}

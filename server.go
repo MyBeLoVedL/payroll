@@ -428,6 +428,137 @@ func setRouter(r *gin.Engine) {
 		})
 	})
 
+	// ID                    int64                  `json:"id"`
+	// Name                  sql.NullString         `json:"name"`
+	// Password              sql.NullString         `json:"password"`
+	// Type                  EmployeesType          `json:"type"`
+	// Mail                  string                 `json:"mail"`
+	// SocialSecurityNumber  string                 `json:"social_security_number"`
+	// StandardTaxDeductions string                 `json:"standard_tax_deductions"`
+	// OtherDeductions       string                 `json:"other_deductions"`
+	// PhoneNumber           string                 `json:"phone_number"`
+	// SalaryRate            string                 `json:"salary_rate"`
+	// HourLimit             sql.NullInt32          `json:"hour_limit"`
+	// PaymentMethod         EmployeesPaymentMethod `json:"payment_method"`
+	// Deleted               sql.NullInt32          `json:"deleted"`
+
+	r.GET("/manageEmployee", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "employee_info.html", gin.H{})
+	})
+
+	r.GET("/searchEmployee", func(c *gin.Context) {
+		idStr := c.Query("empID")
+		if idStr == "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "empty employee id",
+			})
+		}
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "invalid emp id",
+			})
+		}
+		emp, err := db.SelectEmployee(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "No such employee in DB",
+			})
+		}
+		log.Printf("emp name : %+v\n", emp)
+		c.HTML(http.StatusOK, "employee_info.html", gin.H{
+			"Name": emp.Name.String,
+		})
+
+	})
+
+	r.GET("/addEmployee", func(c *gin.Context) {
+		type AddArg struct {
+			etype    string `form:"etype" binding:"required"`
+			mail     string `form:"mail" binding:"required"`
+			security string `form:"security" binding:"required"`
+			tax      string `form:"tax" binding:"required"`
+			other    string `form:"other" binding:"required"`
+			phone    string `form:"phone" binding:"required"`
+			rate     string `form:"rate" binding:"required"`
+		}
+
+		var arg AddArg
+
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "add employee bind fails",
+			})
+		}
+
+		id, err := db.AddEmployee(arg.etype, arg.mail, arg.security, arg.tax, arg.other, arg.phone, arg.rate)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "add employee server error",
+			})
+
+		}
+		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
+			"ID":       id,
+			"Etype":    arg.etype,
+			"Mail":     arg.mail,
+			"Security": arg.security,
+			"Tax":      arg.tax,
+			"Other":    arg.other,
+			"Phone":    arg.phone,
+			"Rate":     arg.rate,
+		})
+	})
+
+	r.GET("/updateEmployee", func(c *gin.Context) {
+		// sid, _ := c.Cookie("sid")
+		// session, _ := misc.GSS.Get(sid)
+
+		idStr := c.Query("empID")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to update",
+			})
+		}
+
+		arg, err := db.SelectEmployee(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to delete",
+			})
+		}
+
+		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
+			"ID":       arg.ID,
+			"Etype":    arg.Type,
+			"Mail":     arg.Mail,
+			"Security": arg.SocialSecurityNumber,
+			"Tax":      arg.StandardTaxDeductions,
+			"Other":    arg.OtherDeductions,
+			"Phone":    arg.PhoneNumber,
+			"Rate":     arg.SalaryRate,
+		})
+	})
+
+	r.GET("/deleteEmployee", func(c *gin.Context) {
+		idStr := c.Query("empID")
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such employee to delete",
+			})
+		}
+		err = db.DeleteEmployee(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "delete employee failed",
+			})
+		}
+	})
+
 }
 
 type Product struct {

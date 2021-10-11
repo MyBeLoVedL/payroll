@@ -3,18 +3,18 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="../layui/css/layui.css">
-		<script src="../layui/layui.js"></script>
+		<link rel="stylesheet" href="/resources/layui/css/layui.css">
+		<script src="/resources/layui/layui.js"></script>
 		<script type="text/javascript">
-			function canuse() {
-				var phonenumber = < %= (String) session.getAttribute("user") % >
-					if (phonenumber == "15809872335") {
-						return true;
-					} else {
-						alert("对不起，只有管理员可以使用该功能！");
-						return false;
-					}
-			}
+			// function canuse() {
+			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
+			// 		if (phonenumber == "15809872335") {
+			// 			return true;
+			// 		} else {
+			// 			alert("对不起，只有管理员可以使用该功能！");
+			// 			return false;
+			// 		}
+			// }
 			layui.use('laydate', function() {
 				var laydate = layui.laydate;
 
@@ -28,7 +28,6 @@
 			//执行一个laydate实例
 			laydate.render({
 			elem: '#et' //指定元素
-			});
 			});
 
 			function deletes(root) {
@@ -55,18 +54,18 @@
 		<meta content="Coderthemes" name="author" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<!-- App favicon -->
-		<link rel="shortcut icon" href="../assets/images/favicon.ico">
+		<link rel="shortcut icon" href="/resources/assets/images/favicon.ico">
 		<!-- third party css -->
-		<link href="../css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
-		<link href="../css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css" />
 		<!-- third party css end -->
 
 		<!-- App css -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="../css/icons.min.css" rel="stylesheet" type="text/css" />
-		<link href="../css/app.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/app.min.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<!-- Begin page -->
@@ -80,10 +79,10 @@
 					<!-- LOGO -->
 					<a href="MainServlet" class="logo text-center mb-4">
 						<span class="logo-lg">
-							<img src="../assets/images/logo.png" alt="" height="50">
+							<img src="/resources/assets/images/logo.png" alt="" height="50">
 						</span>
 						<span class="logo-sm">
-							<img src="../assets/images/logo-sm.png" alt="" height="24">
+							<img src="/resources/assets/images/logo-sm.png" alt="" height="24">
 						</span>
 					</a>
 
@@ -174,7 +173,7 @@
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">
-									<img src="../assets/images/users/avatar-1.jpg" alt="user-image"
+									<img src="/resources/assets/images/users/avatar-1.jpg" alt="user-image"
 										class="rounded-circle">
 									<small class="pro-user-name ml-1">
 										{{.showUsername}}
@@ -222,7 +221,7 @@
 						<div class="app-search">
 							<form>
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="No Search..." disabled>
+									<input type="text" class="form-control" placeholder="No Search/resources." disabled>
 									<div class="input-group-append">
 
 									</div>
@@ -241,14 +240,14 @@
 											<家庭支出信息查询>
 										</h4>
 										<p class="text-muted font-13 mb-4">
-										<form action="SearchExpenseServlet" method="post">
+										<form action="/searchEmployee" method="get">
 
 											<span>工号</span>
 											<br>
-											<span><input type="text" name="id" id="pn" class="form-control"></span>
-											<span>姓名</span>
+											<span><input type="text" name="empID" id="pn" class="form-control"></span>
+											<!-- <span>姓名</span>
 											<br>
-											<span><input type="text" name="id" id="pn" class="form-control"></span>
+											<span><input type="text" name="id" id="pn" class="form-control"></span> -->
 											<br>
 											<span><input type="submit" value="查询"
 													class="btn btn-block btn-primary"></span>
@@ -262,15 +261,15 @@
 												<tr>
 													<!-- <th>序号</th> -->
 												<th>姓名</th>
-												<th>联系方式</th>
+												<!-- <th>联系方式</th>
 												<th>邮寄地址</th>
 												<th>职员类型</th>
 												<th>薪资标准</th>
-												<th>社保账号</th>
+												<th>社保账号</th> -->
 												<!-- <th>标准税率</th>
 												<th>杂项扣款</th> -->
-												<th>工作时限</th>
-												<th>操作</th>
+												<!-- <th>工作时限</th> -->
+												<!-- <th>操作</th> -->
 												</tr>
 											</thead>
 											<tbody>
@@ -280,33 +279,11 @@
 													<c:otherwise>
 														<c:forEach items="${alist}" var="out">
 															<form action="#" method="post">
+
+
 																<tr>
 																	<td>
-																		<span>${out.name}</span>
-																	</td>
-																	<td>
-																		<span>${out.phone}</span>
-																	</td>
-																	<td>
-																		<span>${out.mail_address}</span>
-																	</td>
-																	<td>
-																		<span>${out.type}</span>
-																	</td>
-																	<td>
-																		<span>${out.salary_rate}</span>
-																	</td>
-																	<td>
-																		<span>${out.sec_number}</span>
-																	</td>
-																	<!-- <td>
-																		<span>${out.st_tax_rate}</span>
-																	</td>
-																	<td>
-																		<span>${out.other_deduct}</span>
-																	</td> -->
-																	<td>
-																		<span>${out.time_limit}</span>
+																		<span>{{.Name}}</span>
 																	</td>
 																	<td>
 																		<input type="submit" value="修改"
@@ -354,25 +331,25 @@
 		<!-- END wrapper -->
 
 		<!-- App js -->
-		<script src="../js/vendor.min.js"></script>
-		<script src="../js/app.min.js"></script>
+		<script src="/resources/js/vendor.min.js"></script>
+		<script src="/resources/js/app.min.js"></script>
 
 		<!-- third party js -->
-		<script src="js/vendor/jquery.dataTables.js"></script>
-		<script src="js/vendor/dataTables.bootstrap4.js"></script>
-		<script src="js/vendor/dataTables.responsive.min.js"></script>
-		<script src="../js/vendor/responsive.bootstrap4.min.js"></script>
-		<script src="../js/vendor/dataTables.buttons.min.js"></script>
-		<script src="../js/vendor/buttons.bootstrap4.min.js"></script>
-		<script src="../js/vendor/buttons.html5.min.js"></script>
-		<script src="../js/vendor/buttons.flash.min.js"></script>
-		<script src="../js/vendor/buttons.print.min.js"></script>
-		<script src="../js/vendor/dataTables.keyTable.min.js"></script>
-		<script src="../js/vendor/dataTables.select.min.js"></script>
+		<script src="/resources/js/vendor/jquery.dataTables.js"></script>
+		<script src="/resources/js/vendor/dataTables.bootstrap4.js"></script>
+		<script src="/resources/js/vendor/dataTables.responsive.min.js"></script>
+		<script src="/resources/js/vendor/responsive.bootstrap4.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.buttons.min.js"></script>
+		<script src="/resources/js/vendor/buttons.bootstrap4.min.js"></script>
+		<script src="/resources/js/vendor/buttons.html5.min.js"></script>
+		<script src="/resources/js/vendor/buttons.flash.min.js"></script>
+		<script src="/resources/js/vendor/buttons.print.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.keyTable.min.js"></script>
+		<script src="/resources/js/vendor/dataTables.select.min.js"></script>
 		<!-- third party js ends -->
 
 		<!-- demo app -->
-		<script src="../js/pages/datatables.init.js"></script>
+		<script src="/resources/js/pages/datatables.init.js"></script>
 		<!-- end demo js-->
 	</body>
 </html>
