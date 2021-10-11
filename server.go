@@ -428,20 +428,6 @@ func setRouter(r *gin.Engine) {
 		})
 	})
 
-	// ID                    int64                  `json:"id"`
-	// Name                  sql.NullString         `json:"name"`
-	// Password              sql.NullString         `json:"password"`
-	// Type                  EmployeesType          `json:"type"`
-	// Mail                  string                 `json:"mail"`
-	// SocialSecurityNumber  string                 `json:"social_security_number"`
-	// StandardTaxDeductions string                 `json:"standard_tax_deductions"`
-	// OtherDeductions       string                 `json:"other_deductions"`
-	// PhoneNumber           string                 `json:"phone_number"`
-	// SalaryRate            string                 `json:"salary_rate"`
-	// HourLimit             sql.NullInt32          `json:"hour_limit"`
-	// PaymentMethod         EmployeesPaymentMethod `json:"payment_method"`
-	// Deleted               sql.NullInt32          `json:"deleted"`
-
 	r.GET("/manageEmployee", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "employee_info.html", gin.H{})
 	})
@@ -467,20 +453,20 @@ func setRouter(r *gin.Engine) {
 		}
 		log.Printf("emp name : %+v\n", emp)
 		c.HTML(http.StatusOK, "employee_info.html", gin.H{
-			"Name": emp.Name.String,
+			"Name":  emp.Name.String,
+			"empID": emp.ID,
 		})
-
 	})
 
 	r.GET("/addEmployee", func(c *gin.Context) {
 		type AddArg struct {
-			etype    string `form:"etype" binding:"required"`
-			mail     string `form:"mail" binding:"required"`
-			security string `form:"security" binding:"required"`
-			tax      string `form:"tax" binding:"required"`
-			other    string `form:"other" binding:"required"`
-			phone    string `form:"phone" binding:"required"`
-			rate     string `form:"rate" binding:"required"`
+			Etype    string `form:"etype" binding:"required"`
+			Mail     string `form:"mail" binding:"required"`
+			Security string `form:"security" binding:"required"`
+			Tax      string `form:"tax" binding:"required"`
+			Other    string `form:"other" binding:"required"`
+			Phone    string `form:"phone" binding:"required"`
+			Rate     string `form:"rate" binding:"required"`
 		}
 
 		var arg AddArg
@@ -492,7 +478,7 @@ func setRouter(r *gin.Engine) {
 			})
 		}
 
-		id, err := db.AddEmployee(arg.etype, arg.mail, arg.security, arg.tax, arg.other, arg.phone, arg.rate)
+		_, err = db.AddEmployee(arg.Etype, arg.Mail, arg.Security, arg.Tax, arg.Other, arg.Phone, arg.Rate)
 
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
@@ -500,16 +486,16 @@ func setRouter(r *gin.Engine) {
 			})
 
 		}
-		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
-			"ID":       id,
-			"Etype":    arg.etype,
-			"Mail":     arg.mail,
-			"Security": arg.security,
-			"Tax":      arg.tax,
-			"Other":    arg.other,
-			"Phone":    arg.phone,
-			"Rate":     arg.rate,
-		})
+		// c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
+		// 	"ID":       id,
+		// 	"Etype":    arg.etype,
+		// 	"Mail":     arg.mail,
+		// 	"Security": arg.security,
+		// 	"Tax":      arg.tax,
+		// 	"Other":    arg.other,
+		// 	"Phone":    arg.phone,
+		// 	"Rate":     arg.rate,
+		// })
 	})
 
 	r.GET("/updateEmployee", func(c *gin.Context) {
