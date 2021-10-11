@@ -1,31 +1,34 @@
-2021/10/11 10:20:00 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 10:20:03 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
-2021/10/11 10:20:43 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 10:20:46 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
-2021/10/11 10:20:58 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
-2021/10/11 10:21:53 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
-2021/10/11 10:21:58 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
-2021/10/11 10:30:05 {Contact:17752254783 Address:Saturn Date:2021-10-13 00:00:00 +0800 CST ProductID:2222 Amount:12000}
-2021/10/11 10:30:57 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/11 10:31:00 order ID 3
-2021/10/11 10:31:15 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/11 10:31:17 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
-2021/10/11 10:31:36 <nil>
-2021/10/11 10:32:04 <nil>
-2021/10/11 11:02:14 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:07:01 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:12:22 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:12:26 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:12:26 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:12:35 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:17:40 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:24:32 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:25:55 name abcd account efg
-2021/10/11 11:27:42 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:28:11 name aaaa account bbbb
-2021/10/11 11:29:54 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:30:06 name aaaa account bbbb
-2021/10/11 11:31:28 GET : /loginForm?user=1&password=123456 : 
-2021/10/11 11:31:41 name aaaa account dddd
-2021/10/11 11:32:35 name aaaa account bbbb
-2021/10/11 11:38:00 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 03:52:04 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 03:52:08 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:52:08 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:52:14 {Contact:17752254783/ Address:Mm Date:2021-10-11 00:00:00 -0400 EDT ProductID:1111 Amount:12233.000}
+2021/10/11 03:53:47 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 03:53:49 <nil>
+2021/10/11 03:53:53 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:53:53 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:53:57 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:53:57 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:54:13 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:54:13 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:56:39 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 03:56:46 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:56:46 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:56:51 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:56:51 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:57:56 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 03:58:01 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 03:58:01 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 03:58:10 {Contact:17752254783/ Address:Hiitman Date:2021-10-11 00:00:00 -0400 EDT ProductID:1111 Amount:12233.000}
+2021/10/11 04:04:08 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 04:04:13 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 04:04:13 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 04:04:24 {Contact:17752254783/ Address:Mars Date:2021-10-11 00:00:00 -0400 EDT ProductID:1111 Amount:12233.000}
+2021/10/11 04:12:33 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 04:13:40 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 04:13:40 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 04:14:56 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 04:14:56 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 04:21:23 GET : /loginForm?user=2&password=123456 : 
+2021/10/11 04:21:27 select order {OrderID:7 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 04:21:27 Order {ID:7 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:2222 Amount:12233.000 Closed:0}
+2021/10/11 04:21:34 {Contact:17752254783/ Address:Mars Date:2021-10-11 00:00:00 -0400 EDT ProductID:1111 Amount:12233.000}

@@ -1,0 +1,84 @@
+Enum "employees_type_enum" {
+  "hour"
+  "salaried"
+  "commissioned"
+}
+
+Enum "employees_payment_method_enum" {
+  "pick_up"
+  "mail"
+  "deposit"
+}
+
+Table "employees" {
+  "id" bigint [pk,increment]
+  "name" varchar(255) [default: "guest"]
+  "password" varchar(255) [default: "123456"]
+  "type" employees_type_enum
+  "mail" varchar(255) [not null]
+  "social_security_number" varchar(255) [not null]
+  "standard_tax_deductions" decimal(4,2) [not null]
+  "other_deductions" decimal(10,2) [not null]
+  "phone_number" varchar(255) [not null]
+  "salary_rate" decimal(10,2) [not null]
+  "hour_limit" int [default: 99999999]
+  "payment_method" employees_payment_method_enum [default: "pick_up"]
+  "deleted" tinyint [default: 0]
+
+Indexes {
+  (id, password) [name: "employees_index_0"]
+}
+}
+
+Table "employee_account" {
+  "id" bigint [pk,increment]
+  "bank_name" varchar(255) [not null]
+  "account_number" varchar(255) [not null]
+ }
+
+Table "timecard" {
+  id bigint [pk,increment]
+  emp_id bigint [ref: > employees.id,not null]
+  start_date date [default: `now()`]
+  committed tinyint [default: 0]
+}
+
+
+Table "timecard_record"{
+  id  bigint [pk,increment]
+  charge_number bigint [not null]
+  card_id bigint [ref: > timecard.id,not null]
+  hours smallint [not null]
+  date date [not null]
+}
+
+
+Table order_info{
+  order_id bigint [ref: > purchase_order.id,not null]
+  product_id bigint [not null]
+  amount decimal(10,3) [not null]
+}
+
+Table purchase_order{
+  id bigint [pk,increment]
+  emp_id bigint [ref:  > employees.id,not null]
+  customer_contact varchar [not null] 
+  customer_address varchar  [not null]
+  date timestamp [not null]
+  closed smallint [default: 0]
+}
+
+
+
+Table paycheck{
+  id bigint [pk,increment]
+  emp_id bigint [ref: > employees.id]
+  amount decimal(10,2)
+  start_date timestamp
+  end_date timestamp
+}
+
+
+
+
+Ref:"employees"."id" < "employee_account"."id"

@@ -248,11 +248,6 @@ func setRouter(r *gin.Engine) {
 
 	r.Any("/showOrder", func(c *gin.Context) {
 
-		type Product struct {
-			ProductID   int
-			ProductName string
-		}
-
 		c.HTML(http.StatusOK, "add_order.html", gin.H{
 			"Products": []Product{
 				{1111, "RTX 3090"},
@@ -320,8 +315,18 @@ func setRouter(r *gin.Engine) {
 		log.Printf("select order %+v\n", arg)
 
 		order, _ := db.SelectOrderByID(arg.OrderID)
+		log.Printf("Order %+v\n", order)
 		c.HTML(http.StatusOK, "order_info.html", gin.H{
-			"Orders": []db.Order{order},
+			"ID":      order.ID,
+			"Contact": order.Contact,
+			"Address": order.Address,
+			"Amount":  order.Amount,
+			"Date":    order.Date.String(),
+			"Products": []Product{
+				{1111, "RTX 3090"},
+				{2222, "GTX 1080"},
+				{3333, "Intel i9 9900k"},
+			},
 		})
 
 	})
@@ -334,17 +339,28 @@ func setRouter(r *gin.Engine) {
 			ProductID int64     `form:"productId"`
 			Amount    string    `form:"amount"`
 		}
+
+		idStr := c.Query("orderID")
+		id, err := strconv.Atoi(idStr)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such order ID",
+			})
+		}
+
 		var arg UpdateOrderParams
-		err := c.BindQuery(&arg)
+		err = c.BindQuery(&arg)
 		log.Printf("%+v\n", arg)
 		if err != nil {
 			c.AbortWithError(http.StatusBadRequest, err)
 		}
 
-		sid, _ := c.Cookie("sid")
-		session, _ := misc.GSS.Get(sid)
+		// todo: verify order id belong to this user
+		// sid, _ := c.Cookie("sid")
+		// session, _ := misc.GSS.Get(sid)
 		err = db.UpdateOrder(context.Background(), db.UpdateOrderParams{
-			ID:        session.User.ID,
+			ID:        int64(id),
 			Contact:   arg.Contact,
 			Address:   arg.Address,
 			Date:      arg.Date,
@@ -382,4 +398,39 @@ func setRouter(r *gin.Engine) {
 		})
 	})
 
+	r.GET("/updateOldOrder", func(c *gin.Context) {
+		arg := c.Query("orderID")
+		id, err := strconv.Atoi(arg)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No such order",
+			})
+		}
+
+		order, err := db.SelectOrderByID(int64(id))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "No  order in DB",
+			})
+		}
+
+		c.HTML(http.StatusOK, "update_order.html", gin.H{
+			"ID":      id,
+			"Contact": order.Contact,
+			"Address": order.Address,
+			"Amount":  order.Amount,
+			"Date":    order.Date.String(),
+			"Products": []Product{
+				{1111, "RTX 3090"},
+				{2222, "GTX 1080"},
+				{3333, "Intel i9 9900k"},
+			},
+		})
+	})
+
+}
+
+type Product struct {
+	ProductID   int
+	ProductName string
 }
