@@ -237,7 +237,7 @@
 								<div class="card">
 									<div class="card-body">
 										<h4 class="header-title">
-											<家庭支出信息查询>
+											<员工信息查询>
 										</h4>
 										<p class="text-muted font-13 mb-4">
 										<form action="/searchEmployee" method="get">
@@ -269,7 +269,7 @@
 												<!-- <th>标准税率</th>
 												<th>杂项扣款</th> -->
 												<!-- <th>工作时限</th> -->
-												<!-- <th>操作</th> -->
+												<th>操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -278,9 +278,7 @@
 													</c:when>
 													<c:otherwise>
 														<c:forEach items="${alist}" var="out">
-															<form action="#" method="post">
-
-
+															<form action="/updateEmployee" method="get">
 																<tr>
 																	<td>
 																		<span>{{.Name}}</span>
@@ -291,8 +289,8 @@
 																		<input type="button" value="删除"
 																			class="btn btn-danger btn-sm"
 																			onclick="deletes(this)">
-																		<input type="hidden" name="eid"
-																			value="${out.eid}" id="eid">
+																		<input type="hidden" name="empID"
+																			value="{{.empID}}">
 																	</td>
 																</tr>
 															</form>

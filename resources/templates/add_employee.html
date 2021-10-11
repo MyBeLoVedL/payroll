@@ -248,14 +248,14 @@
           <!-- end Topbar -->
           <!-- Start Content-->
           <div class="container-fluid">
-            <form action="addExpenseServlet" method="post">
+            <form action="/addEmployee" method="get">
               <table class="layui-table">
                 <tr>
                   <th colspan="2" align="center">
                     <span style="text-align: center">【新增员工信息】</span>
                   </th>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <th width="200px">
                     <span>姓名</span>
                   </th>
@@ -280,13 +280,13 @@
                       class="layui-input"
                     />
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <th>
                     <span>联系方式</span>
                   </th>
                   <td align="center">
-                    <input type="text" name="sc" id="sc" class="layui-input" />
+                    <input type="text" name="phone" id="phone" class="layui-input" />
                   </td>
                 </tr>
                 <tr>
@@ -296,8 +296,8 @@
                   <td align="center">
                     <input
                       type="text"
-                      name="cost"
-                      id="cost"
+                      name="mail"
+                      id="mail"
                       class="layui-input"
                     />
                   </td>
@@ -308,7 +308,7 @@
                   </th>
                   <td align="center">
                     <span>
-                      <select name="type" data-plugin="customselect">
+                      <select name="etype" data-plugin="customselect">
                         <option value="hourly">hourly</option>
                         <option value="salaried">salaried</option>
                         <option value="commission">commission</option>
@@ -321,21 +321,7 @@
                     <span>标准薪资</span>
                   </th>
                   <td align="center">
-                    <input type="text" name="sc" id="sc" class="layui-input" />
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span>支付方式</span>
-                  </th>
-                  <td align="center">
-                    <span>
-                      <select name="type" data-plugin="customselect">
-                        <option value="paycheck">paycheck</option>
-                        <option value="mail">mail</option>
-                        <option value="deposit">deposit</option>
-                      </select>
-                    </span>
+                    <input type="text" name="rate" id="rate" class="layui-input" />
                   </td>
                 </tr>
                 <tr>
@@ -343,18 +329,25 @@
                     <span>社保账号</span>
                   </th>
                   <td align="center">
-                    <input type="text" name="sc" id="sc" class="layui-input" />
+                    <input type="text" name="security" id="security" class="layui-input" />
                   </td>
                 </tr>
                 <tr>
                   <th>
-                    <span>工作时限</span>
+                    <span>税额标准</span>
                   </th>
                   <td align="center">
-                    <input type="text" name="sc" id="sc" class="layui-input" />
+                    <input type="text" name="tax" id="tax" class="layui-input" />
                   </td>
                 </tr>
-
+				<tr>
+                  <th>
+                    <span>其他扣款</span>
+                  </th>
+                  <td align="center">
+                    <input type="text" name="other" id="other" class="layui-input" />
+                  </td>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <input
