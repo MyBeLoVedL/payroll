@@ -248,39 +248,39 @@
           <!-- end Topbar -->
           <!-- Start Content-->
           <div class="container-fluid">
-            <form action="/addEmployee" method="get">
+            <form action="/updateEmployee" method="get">
               <table class="layui-table">
                 <tr>
                   <th colspan="2" align="center">
-                    <span style="text-align: center">【新增员工信息】</span>
+                    <span style="text-align: center">【修改员工信息】</span>
                   </th>
                 </tr>
                 <!-- <tr>
-                  <th width="200px">
-                    <span>姓名</span>
-                  </th>
-                  <td align="center">
-                    <input
-                      type="text"
-                      name="phone"
-                      id="phone"
-                      class="layui-input"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <span>密码 </span>
-                  </th>
-                  <td align="center">
-                    <input
-                      type="text"
-                      name="ex_amount"
-                      id="ex_amount"
-                      class="layui-input"
-                    />
-                  </td>
-                </tr> -->
+					        <th width="200px">
+					          <span>姓名</span>
+					        </th>
+					        <td align="center">
+					          <input
+					            type="text"
+					            name="phone"
+					            id="phone"
+					            class="layui-input"
+					          />
+					        </td>
+					      </tr>
+					      <tr>
+					        <th>
+					          <span>密码 </span>
+					        </th>
+					        <td align="center">
+					          <input
+					            type="text"
+					            name="ex_amount"
+					            id="ex_amount"
+					            class="layui-input"
+					          />
+					        </td>
+					      </tr> -->
                 <tr>
                   <th>
                     <span>联系方式</span>
@@ -398,6 +398,7 @@
                       class="btn btn-danger"
                       onclick="back()"
                     />
+                    <input type="hidden" name="empID" value="{{.empID}}" />
                   </td>
                 </tr>
               </table>

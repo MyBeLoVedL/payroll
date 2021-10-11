@@ -51,3 +51,25 @@
 2021/10/11 19:28:20 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:0 Valid:true}}
 2021/10/11 19:29:17 GET : /loginForm?user=1&password=123456 : 
 2021/10/11 19:29:22 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:0 Valid:true}}
+2021/10/11 20:55:34 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 20:59:01 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 21:01:10 Server arg {Etype:hourly Mail:aaaa Security:cccc Tax:190000 Other:1111 Phone:1111 Rate:1000}
+2021/10/11 21:02:18 Server arg {Etype:hourly Mail:Avue Security:aaaa Tax:101010 Other:1010 Phone:122 Rate:10000}
+2021/10/11 21:05:49 Server arg {Etype:hourly Mail:Avue Security:aaaa Tax:0.12 Other:1010 Phone:122 Rate:10000}
+2021/10/11 21:06:27 Server arg {Etype:hourly Mail:Aaaa Security:aaaa Tax:0.14 Other:100 Phone:11111 Rate:1000}
+2021/10/11 21:07:59 Server arg {Etype:hourly Mail:aaa Security:aaaaa Tax:0.14 Other:10 Phone:111 Rate:1000}
+2021/10/11 21:08:09 Server arg {Etype:salaried Mail:aaa Security:aaaaa Tax:0.14 Other:10 Phone:111 Rate:1000}
+2021/10/11 21:10:19 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 21:10:48 Server arg {Etype:hourly Mail:aaa Security:cccc Tax:0.20 Other:9000 Phone:111 Rate:10000}
+2021/10/11 21:11:00 Server arg {Etype:commission Mail:aaa Security:cccc Tax:0.20 Other:9000 Phone:111 Rate:10000}
+2021/10/11 21:11:05 Server arg {Etype:salaried Mail:aaa Security:cccc Tax:0.20 Other:9000 Phone:111 Rate:10000}
+2021/10/11 21:13:42 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 21:14:06 Server arg {Etype:hour Mail:AAA Security:aaaaa Tax:0.15 Other:200 Phone:111 Rate:10000}
+2021/10/11 21:14:17 Server arg {Etype:commissioned Mail:ccc Security:aaaaa Tax:0.15 Other:200 Phone:222 Rate:10000}
+2021/10/11 22:08:29 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 22:08:52 Server arg {Etype:hour Mail:aaa Security:aaaaa Tax:0.12 Other:11 Phone:333 Rate:10000}
+2021/10/11 22:09:54 Server arg {Etype:commissioned Mail:ccc Security:ccccc Tax:0.12 Other:200 Phone:555 Rate:10000}
+2021/10/11 22:13:10 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 22:13:25 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:0 Valid:true}}
+2021/10/11 22:15:58 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 22:16:03 emp name : {ID:1 Name:{String:Guru Valid:true} Password:{String:123456 Valid:true} Type:salaried Mail:177@aa.com SocialSecurityNumber:087219606473186 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:53507004926 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:mail Deleted:{Int32:1 Valid:true}}

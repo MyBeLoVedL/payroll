@@ -478,24 +478,25 @@ func setRouter(r *gin.Engine) {
 			})
 		}
 
-		_, err = db.AddEmployee(arg.Etype, arg.Mail, arg.Security, arg.Tax, arg.Other, arg.Phone, arg.Rate)
+		log.Printf("Server arg %+v\n", arg)
+		id, err := db.AddEmployee(arg.Etype, arg.Mail, arg.Security, arg.Tax, arg.Other, arg.Phone, arg.Rate)
 
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "add employee server error",
+				"error": err,
 			})
 
 		}
-		// c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
-		// 	"ID":       id,
-		// 	"Etype":    arg.etype,
-		// 	"Mail":     arg.mail,
-		// 	"Security": arg.security,
-		// 	"Tax":      arg.tax,
-		// 	"Other":    arg.other,
-		// 	"Phone":    arg.phone,
-		// 	"Rate":     arg.rate,
-		// })
+		c.HTML(http.StatusOK, "new_employee.html", gin.H{
+			"EmpID":    id,
+			"Mail":     arg.Mail,
+			"Etype":    arg.Etype,
+			"Phone":    arg.Phone,
+			"Tax":      arg.Tax,
+			"Rate":     arg.Rate,
+			"Other":    arg.Other,
+			"Security": arg.Security,
+		})
 	})
 
 	r.GET("/updateEmployee", func(c *gin.Context) {
@@ -533,16 +534,67 @@ func setRouter(r *gin.Engine) {
 		idStr := c.Query("empID")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
+			log.Printf("delete error:%v\n", err.Error())
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": "No such employee to delete",
 			})
 		}
 		err = db.DeleteEmployee(int64(id))
 		if err != nil {
+			log.Printf("delete error:%v\n", err.Error())
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": "delete employee failed",
 			})
 		}
+	})
+
+	r.GET("/employeeReport", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+
+		reportType := c.Query("reportType")
+		if reportType == "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "missing report type",
+			})
+		}
+
+		switch reportType {
+		case "0":
+			hours, err := db.GetHoursByEmpID(session.User.ID)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "no hours found",
+				})
+			}
+			c.String(http.StatusOK, "You have worded %v\n", hours)
+		case "1":
+			charge := c.Query("charge")
+			if charge == "" {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "missing charge number",
+				})
+			}
+			num, err := strconv.Atoi(charge)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "invalid charge number",
+				})
+			}
+			hours, err := db.GetHoursByProject(session.User.ID, int64(num))
+			c.String(http.StatusOK, "You have worded %v on project %v\n", hours, charge)
+
+		case "2":
+		case "3":
+			hours, err := db.GetPayYearToDate(session.User.ID)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "no hours found",
+				})
+			}
+			c.String(http.StatusOK, "You have worded %v for this year\n", hours)
+		}
+
 	})
 
 }
