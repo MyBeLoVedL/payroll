@@ -20,6 +20,23 @@
 			// 	}
 			// }
 			//
+
+			function updatePay() {
+				var xml = new XMLHttpRequest();
+				xml.open("get", "/updatePickupPay", true);
+				xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xml.send();
+				xml.onreadystatechange = function() {
+					if (xml.readyState == 4) {
+							alert("【修改成功】");
+							location.href = "/resources/templates/main.html";
+						}
+					}
+			}
+			function redirect() {
+				alert("【修改成功】");
+				location.href = "/resources/templates/main.html"
+			}
 		</script>
 		<!-- App css -->
 		<link rel="stylesheet" href="../layui/css/layui.css">
@@ -78,13 +95,13 @@
 								</ul>
 							</li>
 							<li>
-								<a href="timecard.html">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="change_method.html">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
@@ -204,9 +221,9 @@
 											<选择支付方式>
 										</h4>
 										<br><br>
-										<a href="#" class="layui-btn">支票直取</a> <br><br>
+										<a href="#" class="layui-btn" onclick="updatePay()">支票直取</a> <br><br>
 										<a href="get_address.html" class="layui-btn layui-btn-normal">邮递到户</a> <br><br>
-										<form action="" method="post">
+										<form action="/updateMailPay" method="get">
 											<table class="layui-table">
 												<tr>
 													<th colspan="2" align="center">
@@ -218,13 +235,14 @@
 														<span>地址</span>
 													</th>
 													<td align="center">
-														<input type="text" name="phone" id="phone" class="layui-input">
+														<input type="text" name="mail" id="phone" class="layui-input">
 													</td>
 												</tr>
 												<tr>
 													<td colspan="2">
 														<input type="submit" value="确认" id="makeadd" class="btn btn-success"
-															onclick="return check()">
+															onclick="redirect()">
+														<!-- todo: check() 输入校验-->
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;

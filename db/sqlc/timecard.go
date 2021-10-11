@@ -57,3 +57,11 @@ func UpdateTimecard(id int64, chargeNumber, hours int, date time.Time) error {
 
 	return err
 }
+
+func SelectTimeCard(empID int64) (Timecard, error) {
+	card, err := q.SelectActiveTimecard(context.Background(), empID)
+	if err != nil {
+		return Timecard{}, err
+	}
+	return card, nil
+}

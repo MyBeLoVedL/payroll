@@ -94,39 +94,109 @@ func setRouter(r *gin.Engine) {
 		c.HTML(http.StatusOK, "change_method.html", nil)
 	})
 
-	r.Any("/updatePayAction", func(c *gin.Context) {
-		method := c.Query("updatePay")
+	r.GET("/updatePickupPay", func(c *gin.Context) {
 		sid, _ := c.Cookie("sid")
 		session, err := misc.GSS.Get(sid)
-		switch method {
-		case "pick_up":
-			db.UpdatePayment(method, session.User.ID)
-			c.JSON(http.StatusOK, gin.H{
-				"error": err,
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "No such session",
 			})
-		case "mail":
-			mail := c.PostForm("mail")
-			err = db.UpdatePaymentWIthMail(session.User.ID, mail)
-			c.JSON(http.StatusOK, gin.H{
-				"error": err,
-			})
-		case "deposit":
-			bankName := c.PostForm("bankName")
-			bankAccount := c.PostForm("bankAccount")
-			err = db.UpdatePaymentWithBank(session.User.ID, bankName, bankAccount)
-			c.JSON(http.StatusOK, gin.H{
-				"error": err,
-			})
-
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"error":  err,
-			"method": method,
-		})
+		db.UpdatePayment("pick_up", session.User.ID)
+	})
+
+	r.GET("/updateMailPay", func(c *gin.Context) {
+		mail := c.Query("mail")
+		// ! todo : error checking
+		sid, _ := c.Cookie("sid")
+		session, err := misc.GSS.Get(sid)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "No such session",
+			})
+		}
+		db.UpdatePaymentWIthMail(session.User.ID, mail)
+	})
+
+	r.GET("/updateDepositPay", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, err := misc.GSS.Get(sid)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"err": "No such session",
+			})
+		}
+		bankName := c.Query("bankName")
+		bankAccount := c.Query("bankAccount")
+		log.Printf("name %v account %v\n", bankName, bankAccount)
+		err = db.UpdatePaymentWithBank(session.User.ID, bankName, bankAccount)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"errror": err.Error(),
+			})
+		}
 
 	})
 
+	// r.Any("/updatePayAction", func(c *gin.Context) {
+	// 	method := c.Query("updatePay")
+	// 	sid, _ := c.Cookie("sid")
+	// 	session, err := misc.GSS.Get(sid)
+	// 	switch method {
+	// 	case "pick_up":
+	// 		db.UpdatePayment(method, session.User.ID)
+	// 		c.JSON(http.StatusOK, gin.H{
+	// 			"error": err,
+	// 		})
+	// 	case "mail":
+	// 		mail := c.PostForm("mail")
+	// 		err = db.UpdatePaymentWIthMail(session.User.ID, mail)
+	// 		c.JSON(http.StatusOK, gin.H{
+	// 			"error": err,
+	// 		})
+	// 	case "deposit":
+	// 		bankName := c.PostForm("bankName")
+	// 		bankAccount := c.PostForm("bankAccount")
+	// 		err = db.UpdatePaymentWithBank(session.User.ID, bankName, bankAccount)
+	// 		c.JSON(http.StatusOK, gin.H{
+	// 			"error": err,
+	// 		})
+
+	// 	}
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"error":  err,
+	// 		"method": method,
+	// 	})
+
+	// })
+
+	// r.Any("/timecard", func(c *gin.Context) {
+	// 	sid, _ := c.Cookie("sid")
+	// 	session, _ := misc.GSS.Get(sid)
+	// 	card, err := db.SelectTimeCard(session.User.ID)
+	// 	if err != nil {
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"error": "No matched timecard",
+	// 		})
+	// 		return
+	// 	}
+	// 	time := card.StartDate.Time.String()
+	// 	var com string
+	// 	if card.Committed.Int32 == 0 {
+	// 		com = "not committed"
+	// 	} else {
+	// 		com = "committed"
+	// 	}
+	// 	c.HTML(http.StatusOK, "timecard.html", gin.H{
+	// 		"ID":        card.ID,
+	// 		"StartDate": time,
+	// 		"Committed": com,
+	// 	})
+
+	// })
+
 	r.Any("/timecard", func(c *gin.Context) {
+
 		type timecardParam struct {
 			Charge int       `form:"charge"`
 			Hours  int       `form:"hours"`
@@ -138,7 +208,7 @@ func setRouter(r *gin.Engine) {
 
 		if db.IfCommitted(session.User.ID) {
 			c.HTML(http.StatusOK, "timecard.html", gin.H{
-				"Committed":    true,
+				"Committed":    false,
 				"showUsername": session.User.Name,
 				"prefix":       prefix,
 			})
@@ -147,20 +217,23 @@ func setRouter(r *gin.Engine) {
 		var arg timecardParam
 		err := c.BindQuery(&arg)
 		if err != nil {
-			c.AbortWithError(http.StatusBadRequest, err)
-		}
-
-		hours, _ := db.GetHours(session.User.ID)
-		if arg.Hours > 24 || hours > int(session.User.HourLimit.Int32) {
-			log.Printf("invalid hours %v\n", hours)
-			c.HTML(http.StatusOK, "timecard.html", gin.H{
-				"Committed":    false,
-				"showUsername": session.User.Name,
-				"prefix":       prefix,
-				"Exceeded":     true,
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err,
 			})
 			return
 		}
+
+		// hours, _ := db.GetHours(session.User.ID)
+		// if arg.Hours > 24 || hours > int(session.User.HourLimit.Int32) {
+		// 	log.Printf("invalid hours %v\n", hours)
+		// 	c.HTML(http.StatusOK, "timecard.html", gin.H{
+		// 		"Committed":    false,
+		// 		"showUsername": session.User.Name,
+		// 		"prefix":       prefix,
+		// 		"Exceeded":     true,
+		// 	})
+		// 	return
+		// }
 
 		err = db.UpdateTimecard(session.User.ID, arg.Charge, arg.Hours, arg.Date)
 		log.Printf("%v\n", err)

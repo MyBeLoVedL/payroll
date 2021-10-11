@@ -291,9 +291,8 @@
 
 												<tr>
 													<th>序号</th>
-													<th>项目号码</th>
-													<th>工作时长</th>
 													<th>登记日期</th>
+													<th>是否已提交</th>
 													<!-- <th>花费金额</th>
 													<th>日期</th>
 													<th>订单状态</th> -->
@@ -310,23 +309,14 @@
 																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
 																<tr>
 																	<td>
-																		<span>${out.no}</span>
+																		<span>{{.ID}}</span>
 																	</td>
 																	<td>
-																		<span>${out.charge_number}</span>
+																		<span>{{.StartData}}</span>
 
 																	</td>
 																	<td>
-																		<span>${out.hour}</span>
-																	</td>
-																	<!-- <td>
-																		<span>${out.ex_amount}</span>
-																	</td>
-																	<td>
-																		<span>${out.ex_time}</span>
-																	</td> -->
-																	<td>
-																		<span>${out.date}</span>
+																		<span>{{.Committed}}</span>
 																	</td>
 																	<td>
 																		<input type="submit" value="修改"

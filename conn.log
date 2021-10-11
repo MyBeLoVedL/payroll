@@ -1,211 +1,31 @@
-2021/10/08 01:04:58 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 01:05:06 inssert ress :<nil>
-2021/10/08 01:05:06 <nil>
-2021/10/08 01:05:32 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 01:05:36 sql: Scan error on column index 2, name "start_date": unsupported Scan, storing driver.Value type []uint8 into type *time.Time
-2021/10/08 01:13:19 Error 1452: Cannot add or update a child row: a foreign key constraint fails (`payroll`.`timecard`, CONSTRAINT `timecard_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`))
-2021/10/08 01:13:51 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 01:13:56 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 01:14:45 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 01:14:52 GET : /loginForm?user=1&password=new+passsword : 
-2021/10/08 01:15:04 GET : /loginForm?user=1&password=new+password : 
-2021/10/08 01:15:10 sql: Scan error on column index 2, name "start_date": unsupported Scan, storing driver.Value type []uint8 into type *time.Time
-2021/10/08 01:17:26 GET : /loginForm?user=1&password=new+password : 
-2021/10/08 01:17:31 inssert ress :<nil>
-2021/10/08 01:17:31 <nil>
-2021/10/08 01:17:45 inssert ress :<nil>
-2021/10/08 01:17:45 <nil>
-2021/10/08 05:46:22 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 05:47:50 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 05:48:07 inssert ress :<nil>
-2021/10/08 05:48:07 <nil>
-2021/10/08 05:50:45 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 06:30:51 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 10:25:37 GET : /loginForm?user=1&password=123456 : 
-2021/10/08 10:25:42 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:01:55 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:02:08 invalid hours 13
-2021/10/08 11:03:52 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:02 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:03 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:04 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:04 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:04 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:05 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:05 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:05 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:05:06 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:07:05 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:08:44 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:08:45 <nil>
-2021/10/08 11:10:03 <nil>
-2021/10/08 11:12:38 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:12:40 <nil>
-2021/10/08 11:14:28 <nil>
-2021/10/08 11:22:57 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:22:59 <nil>
-2021/10/08 11:25:59 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:26:00 <nil>
-2021/10/08 11:26:08 <nil>
-2021/10/08 11:26:09 <nil>
-2021/10/08 11:27:44 <nil>
-2021/10/08 11:28:55 <nil>
-2021/10/08 11:33:41 <nil>
-2021/10/08 11:33:42 <nil>
-2021/10/08 11:33:44 <nil>
-2021/10/08 11:33:48 <nil>
-2021/10/08 11:33:58 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 11:34:00 <nil>
-2021/10/08 11:37:03 <nil>
-2021/10/08 11:37:03 <nil>
-2021/10/08 11:37:03 <nil>
-2021/10/08 11:37:03 <nil>
-2021/10/08 11:37:03 <nil>
-2021/10/08 11:37:04 <nil>
-2021/10/08 11:37:04 <nil>
-2021/10/08 23:03:22 GET : /loginForm?user=2&password=123456 : 
-2021/10/08 23:03:27 <nil>
-2021/10/08 23:03:36 <nil>
-2021/10/09 00:15:25 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 00:15:46 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 00:15:53 GET : /loginForm?user=1&password=123456 : 
-2021/10/09 00:15:55 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
-2021/10/09 00:18:02 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 00:18:03 <nil>
-2021/10/09 00:20:58 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 00:20:59 <nil>
-2021/10/09 00:21:51 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 00:22:19 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:33:33 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:49:20 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:51:08 {contact: address: date:{wall:0 ext:0 loc:<nil>} productID:0 amount:}
-2021/10/09 06:51:30 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:51:43 {contact: address: date:{wall:0 ext:0 loc:<nil>} productID:0 amount:}
-2021/10/09 06:54:28 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:54:37 {Contact:17752254783 Address: Date:2021-10-10 00:00:00 -0400 EDT ProductID:1111 Amount:}
-2021/10/09 06:56:11 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 06:56:22 {Contact:17752254783 Address: Date:2021-10-04 00:00:00 -0400 EDT ProductID:1111 Amount:100}
-2021/10/09 07:00:41 {Contact:17752254783 Address: Date:2021-10-05 00:00:00 -0400 EDT ProductID:2222 Amount:10000}
-2021/10/09 07:08:12 <nil>
-2021/10/09 07:08:43 <nil>
-2021/10/09 07:10:39 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 07:18:12 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 07:19:40 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 07:52:06 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 08:15:13 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 08:15:21 <nil>
-2021/10/09 08:15:24 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
-2021/10/09 08:15:29 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
-2021/10/09 08:18:48 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 08:18:51 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
-2021/10/09 08:39:09 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 10:35:10 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 10:35:29 {Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount:}
-2021/10/09 10:45:09 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 10:45:11 <nil>
-2021/10/09 10:45:46 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:06:08 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:06:14 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:06:43 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:16:31 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:16:38 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:21:45 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:21:54 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:23:18 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:23:24 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:23:29 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:23:56 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:23:57 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:24:00 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:24:02 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:24:05 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:24:07 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:25:25 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:25:28 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:25:32 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:06 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:35:11 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:14 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:15 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:24 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:25 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:27 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:28 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:35:57 GET : /loginForm?user=2&password=123456 : 
-2021/10/09 11:36:01 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:02 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:05 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:08 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:26 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:28 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:32 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/09 11:37:35 select order {OrderID:6 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 18:49:28 GET : /loginForm?user=2&password=123456 : 
-2021/10/10 20:30:21 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 20:30:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 20:31:07 {Contact:17752254783 Address:Acune Date:2021-10-07 00:00:00 +0800 CST ProductID:1111 Amount:10000}
-2021/10/10 20:31:50 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 20:48:11 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 20:58:50 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:01:12 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:01:17 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:09:22 GET : /loginForm?user=2&password=123456 : 
-2021/10/10 21:09:28 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:13:18 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:16:10 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:16:14 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:17:46 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:18:06 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:18:11 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:18:13 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
-2021/10/10 21:18:53 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:18:58 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:23:10 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:23:42 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
-2021/10/10 21:26:22 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:26:27 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:28:37 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:28:41 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:29:03 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:29:05 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:29:05 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:30:15 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:30:18 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:30:31 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:30:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:31:28 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:31:32 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:31:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:39:49 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:44:49 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:46:58 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:49:31 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:51:19 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:51:23 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:53:42 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:53:47 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:58:08 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:58:10 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:58:38 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 21:58:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 21:59:24 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:00:40 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:02:31 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 22:02:36 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:02:39 order ID {orderID:0}
-2021/10/10 22:07:37 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 22:07:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:07:46 order ID 1
-2021/10/10 22:08:44 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:08:46 order ID 1
-2021/10/10 22:13:22 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
-2021/10/10 22:13:44 {Contact:17752254783 Address:Pluto Date:2021-10-07 00:00:00 +0800 CST ProductID:1111 Amount:10000}
-2021/10/10 22:14:29 GET : /loginForm?user=1&password=123456 : 
-2021/10/10 22:14:50 {Contact:17752254783 Address:Avenue Date:0001-01-01 00:00:00 +0000 UTC ProductID:1111 Amount:10000}
-2021/10/10 22:15:13 {Contact:17752254783 Address:Avenue Date:2021-10-14 00:00:00 +0800 CST ProductID:1111 Amount:10000}
+2021/10/11 10:20:00 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 10:20:03 sql: Scan error on column index 0, name "sum(hours)": converting NULL to int is unsupported
+2021/10/11 10:20:43 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 10:20:46 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 10:20:58 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 10:21:53 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 10:21:58 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 10:30:05 {Contact:17752254783 Address:Saturn Date:2021-10-13 00:00:00 +0800 CST ProductID:2222 Amount:12000}
+2021/10/11 10:30:57 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 10:31:00 order ID 3
+2021/10/11 10:31:15 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/11 10:31:17 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/11 10:31:36 <nil>
+2021/10/11 10:32:04 <nil>
+2021/10/11 11:02:14 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:07:01 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:12:22 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:12:26 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:12:26 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:12:35 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:17:40 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:24:32 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:25:55 name abcd account efg
+2021/10/11 11:27:42 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:28:11 name aaaa account bbbb
+2021/10/11 11:29:54 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:30:06 name aaaa account bbbb
+2021/10/11 11:31:28 GET : /loginForm?user=1&password=123456 : 
+2021/10/11 11:31:41 name aaaa account dddd
+2021/10/11 11:32:35 name aaaa account bbbb
+2021/10/11 11:38:00 GET : /loginForm?user=1&password=123456 : 

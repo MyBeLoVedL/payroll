@@ -20,6 +20,23 @@
 			// 	}
 			// }
 			//
+				function updatePay() {
+					var xml = new XMLHttpRequest();
+					xml.open("get", "/updatePickupPay", true);
+					xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xml.send();
+					xml.onreadystatechange = function() {
+						if (xml.readyState == 4) {
+							alert("【修改成功】");
+							location.href = "/resources/templates/main.html";
+						}
+					}
+				}
+
+				function redirect() {
+					alert("【修改成功】");
+					location.href = "/resources/templates/main.html";
+				}
 		</script>
 		<!-- App css -->
 		<link rel="stylesheet" href="../layui/css/layui.css">
@@ -78,13 +95,13 @@
 								</ul>
 							</li>
 							<li>
-								<a href="timecard.html">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="change_method.html">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
@@ -204,10 +221,10 @@
 											<选择支付方式>
 										</h4>
 										<br><br>
-										<a href="#" class="layui-btn">支票直取</a> <br><br>
+										<a href="#" class="layui-btn" onclick="updatePay()">支票直取</a> <br><br>
 										<a href="get_address.html" class="layui-btn layui-btn-normal">邮递到户</a> <br><br>
 										<a href="get_bank_account.html" class="layui-btn layui-btn-warm">银行储蓄</a>
-										<form action="" method="post">
+										<form action="/updateDepositPay" method="get">
 											<table class="layui-table">
 												<tr>
 													<th colspan="2" align="center">
@@ -219,7 +236,7 @@
 														<span>开户银行</span>
 													</th>
 													<td align="center">
-														<input type="text" name="bank_name" id="bank_name" class="layui-input">
+														<input type="text" name="bankName" id="bank_name" class="layui-input">
 													</td>
 												</tr>
 												<tr>
@@ -227,13 +244,13 @@
 														<span>账户名称</span>
 													</th>
 													<td align="center">
-														<input type="text" name="account" id="account" class="layui-input">
+														<input type="text" name="bankAccount" id="account" class="layui-input">
 													</td>
 												</tr>
 												<tr>
 													<td colspan="2">
 														<input type="submit" value="确认" id="makeadd" class="btn btn-success"
-															onclick="return check()">
+															onclick="redirect()">
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
