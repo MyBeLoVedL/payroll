@@ -80,7 +80,6 @@ func setRouter(r *gin.Engine) {
 
 			//* send session id to client here
 			sid := misc.GSS.AddSession(&emp)
-
 			c.SetCookie("sid", sid, 0, "", "", false, false)
 			c.HTML(http.StatusOK, "main.html", gin.H{
 				"showUsername": info.User,
@@ -372,6 +371,7 @@ func setRouter(r *gin.Engine) {
 			c.HTML(http.StatusOK, "error_page.html", gin.H{
 				"Msg": "您并非管理员，无法进行此项操作",
 			})
+			return
 		}
 		c.HTML(http.StatusOK, "employee_info.html", gin.H{})
 	})
@@ -495,6 +495,13 @@ func setRouter(r *gin.Engine) {
 	r.GET("/employeeReport", func(c *gin.Context) {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
+
+		if session.User.Root.Int32 != 1 {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "您并非管理员，无法进行此项操作",
+			})
+			return
+		}
 
 		hours, _ := db.GetHoursByEmpID(session.User.ID)
 
