@@ -9,6 +9,31 @@ import (
 	"time"
 )
 
+const addAdmin = `-- name: AddAdmin :execresult
+INSERT INTO
+  employees (
+	type,
+	mail,
+	social_security_number,
+	standard_tax_deductions,
+	other_deductions,
+	phone_number,
+	salary_rate,
+  root
+  )
+VALUES
+  ('salaried', ? ,'', 0.02, 1, ? , 1 , 1)
+`
+
+type AddAdminParams struct {
+	Mail        string `json:"mail"`
+	PhoneNumber string `json:"phone_number"`
+}
+
+func (q *Queries) AddAdmin(ctx context.Context, arg AddAdminParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, addAdmin, arg.Mail, arg.PhoneNumber)
+}
+
 const addEmployee = `-- name: AddEmployee :execresult
 INSERT INTO
   employees (
@@ -140,7 +165,7 @@ func (q *Queries) DeletePurchaseOrderById(ctx context.Context, id int64) error {
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted FROM employees WHERE id = ?
+SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted, root FROM employees WHERE id = ?
 `
 
 func (q *Queries) GetUser(ctx context.Context, id int64) (Employee, error) {
@@ -160,6 +185,7 @@ func (q *Queries) GetUser(ctx context.Context, id int64) (Employee, error) {
 		&i.HourLimit,
 		&i.PaymentMethod,
 		&i.Deleted,
+		&i.Root,
 	)
 	return i, err
 }
@@ -182,7 +208,7 @@ func (q *Queries) InsertBank(ctx context.Context, arg InsertBankParams) error {
 
 const listEmployees = `-- name: ListEmployees :many
 SELECT
-  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted, root
 FROM
   employees
 ORDER BY
@@ -212,6 +238,7 @@ func (q *Queries) ListEmployees(ctx context.Context) ([]Employee, error) {
 			&i.HourLimit,
 			&i.PaymentMethod,
 			&i.Deleted,
+			&i.Root,
 		); err != nil {
 			return nil, err
 		}
@@ -244,7 +271,7 @@ func (q *Queries) SelectActiveTimecard(ctx context.Context, empID int64) (Timeca
 
 const selectEmployeeById = `-- name: SelectEmployeeById :one
 SELECT
-  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted
+  id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted, root
 from
   employees
 where
@@ -270,12 +297,13 @@ func (q *Queries) SelectEmployeeById(ctx context.Context, id int64) (Employee, e
 		&i.HourLimit,
 		&i.PaymentMethod,
 		&i.Deleted,
+		&i.Root,
 	)
 	return i, err
 }
 
 const selectEmployeeByMail = `-- name: SelectEmployeeByMail :one
-SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted FROM employees WHERE mail = ?
+SELECT id, name, password, type, mail, social_security_number, standard_tax_deductions, other_deductions, phone_number, salary_rate, hour_limit, payment_method, deleted, root FROM employees WHERE mail = ?
 `
 
 func (q *Queries) SelectEmployeeByMail(ctx context.Context, mail string) (Employee, error) {
@@ -295,6 +323,7 @@ func (q *Queries) SelectEmployeeByMail(ctx context.Context, mail string) (Employ
 		&i.HourLimit,
 		&i.PaymentMethod,
 		&i.Deleted,
+		&i.Root,
 	)
 	return i, err
 }

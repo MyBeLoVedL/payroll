@@ -49,6 +49,11 @@
 					}
 				}
 			}
+
+			function check() {
+				alert("添加工时记录成功！！点击返回主菜单...");
+				location.href = "/resources/templates/main.html";
+			}
 		</script>
 		<title>维护工时卡</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,7 +133,7 @@
 							</li>
 					
 							<li>
-								<a href="employee_report.html">
+								<a href="/employeeReport">
 									<i class="mdi mdi-account-heart"></i>
 									<span> 生成员工报告</span>
 								</a>
@@ -142,10 +147,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="employee_info.html" onclick="return canuse()">维护员工信息</a>
+										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="admin_report.html" onclick="return canuse()">管理员工报告</a>
+										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
@@ -426,7 +431,7 @@
 									<tr>
 										<td colspan="2">
 											<input type="submit" value="确认" id="makeadd" class="btn btn-success"
-												onclick="return check()">
+												onclick="check()">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

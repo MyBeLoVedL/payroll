@@ -62,6 +62,7 @@ type Employee struct {
 	HourLimit             sql.NullInt32          `json:"hour_limit"`
 	PaymentMethod         EmployeesPaymentMethod `json:"payment_method"`
 	Deleted               sql.NullInt32          `json:"deleted"`
+	Root                  sql.NullInt32          `json:"root"`
 }
 
 type EmployeeAccount struct {

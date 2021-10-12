@@ -11,7 +11,8 @@ CREATE TABLE `employees` (
   `salary_rate` decimal(10,2) NOT NULL,
   `hour_limit` int DEFAULT 99999999,
   `payment_method` ENUM ('pick_up', 'mail', 'deposit') DEFAULT "pick_up",
-  `deleted` tinyint DEFAULT 0
+  `deleted` tinyint DEFAULT 0,
+  `root` tinyint DEFAULT 0
 );
 
 CREATE TABLE `employee_account` (
@@ -23,7 +24,7 @@ CREATE TABLE `employee_account` (
 CREATE TABLE `timecard` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `emp_id` bigint NOT NULL,
-  `start_date` date DEFAULT now(),
+  `start_date` timestamp DEFAULT now(),
   `committed` tinyint DEFAULT 0
 );
 

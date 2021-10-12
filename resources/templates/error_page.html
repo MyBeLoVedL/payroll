@@ -6,51 +6,11 @@
 		<link rel="stylesheet" href="/resources/layui/css/layui.css">
 		<script src="/resources/layui/layui.js"></script>
 		<script type="text/javascript">
-			// function canuse() {
-			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
-			// 		if (phonenumber == "15809872335") {
-			// 			return true;
-			// 		} else {
-			// 			alert("对不起，只有管理员可以使用该功能！");
-			// 			return false;
-			// 		}
-			// }
-			layui.use('laydate', function() {
-				var laydate = layui.laydate;
-
-				//执行一个laydate实例
-				laydate.render({
-					elem: '#st' //指定元素
-				});
-			});
-			layui.use('laydate', function() {
-				var laydate = layui.laydate;
-
-				//执行一个laydate实例
-				laydate.render({
-					elem: '#et' //指定元素
-				});
-			});
-
-			// function deletes(root) {
-			// 	var flag = confirm("【确认删除？】");
-			// 	if (flag) {
-
-			// 		var outid = root.nextElementSibling.value;
-			// 		var xml = new XMLHttpRequest();
-			// 		xml.open("get", "DeleteExpenseServlet?eid=" + outid, true);
-			// 		xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// 		xml.send(null);
-			// 		xml.onreadystatechange = function() {
-			// 			if (xml.readyState == 4) {
-			// 				alert("【删除成功】");
-			// 				location.href = "DisplayExpenseServlet";
-			// 			}
-			// 		}
-			// 	}
-			// }
+			function goBack() {
+			  window.history.go(-1);
+			}
 		</script>
-		<title>生成员工报告</title>
+		<title>错误信息提示</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
 		<meta content="Coderthemes" name="author" />
@@ -80,7 +40,7 @@
 				<div class="slimscroll-menu">
 
 					<!-- LOGO -->
-					<a href="MainServlet" class="logo text-center mb-4">
+					<a href="#" class="logo text-center mb-4">
 						<span class="logo-lg">
 							<img src="/resources/assets/images/logo.png" alt="" height="50">
 						</span>
@@ -91,8 +51,11 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
+					
 						<ul class="metismenu" id="side-menu">
+					
 							<li class="menu-title">基础功能</li>
+					
 							<li>
 								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
@@ -126,9 +89,9 @@
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
-
+					
 							<li>
-								<a href="/employeeReport">
+								<a href="employee_report.html">
 									<i class="mdi mdi-account-heart"></i>
 									<span> 生成员工报告</span>
 								</a>
@@ -142,19 +105,22 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
+										<a href="employee_info.html" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
+										<a href="admin_report.html" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</div>
 					<!-- End Sidebar -->
+
 					<div class="clearfix"></div>
+
 				</div>
 				<!-- Sidebar -left -->
+
 			</div>
 			<!-- Left Sidebar End -->
 			<!-- ============================================================== -->
@@ -167,6 +133,9 @@
 					<!-- Topbar Start -->
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+
+
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">
@@ -210,6 +179,7 @@
 
 								</div>
 							</li>
+
 						</ul>
 						<button class="button-menu-mobile open-left disable-btn">
 							<i class="fe-menu"></i>
@@ -219,6 +189,7 @@
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="No Search/resources." disabled>
 									<div class="input-group-append">
+
 									</div>
 								</div>
 							</form>
@@ -227,151 +198,39 @@
 					<!-- end Topbar -->
 					<!-- Start Content-->
 					<div class="container-fluid">
-
-						<!-- start page title -->
-						<div class="row">
-							<div class="col-12">
-								<div class="page-title-box">
-									<div class="page-title-right">
-										<!-- <ol class="breadcrumb m-0">
-					                                            <li class="breadcrumb-item"><a href="#">Daily</a></li>
-					                                            <li class="breadcrumb-item active">Life</li>
-					                                        </ol> -->
-									</div>
-									<h4 class="page-title">年度工作统计</h4>
-								</div>
-							</div>
-						</div>
-						<!-- end page title -->
-
-						<div class="row">
-							<div class="col-xl-3 col-lg-6">
-								<div class="card widget-flat">
-									<div class="card-body p-0">
-										<div class="p-3 pb-0">
-											<div class="float-right">
-												<!-- <i class="mdi mdi-cart text-primary widget-icon"></i> -->
-												<i class="layui-icon layui-icon-time"
-													style="font-size: 35px; color: #1E9FFF;"></i>
-											</div>
-											<h5 class="text-muted font-weight-normal mt-0">总工作时长</h5>
-											<h3 class="mt-2">{{.Hours}}</h3>
-										</div>
-										<div id="sparkline1"></div>
-									</div> <!-- end card-body-->
-								</div> <!-- end card-->
-							</div> <!-- end col-->
-
-							<div class="col-xl-3 col-lg-6">
-								<div class="card widget-flat">
-									<div class="card-body p-0">
-										<div class="p-3 pb-0">
-											<div class="float-right">
-												<i class="mdi mdi-currency-usd text-danger widget-icon"></i>
-											</div>
-											<h5 class="text-muted font-weight-normal mt-0">年初至今工资</h5>
-											<h3 class="mt-2">{{.PayYear}}</h3>
-										</div>
-										<div id="sparkline2"></div>
-									</div> <!-- end card-body-->
-								</div> <!-- end card-->
-							</div> <!-- end col-->
-
-							<div class="col-xl-3 col-lg-6">
-								<div class="card widget-flat">
-									<div class="card-body p-0">
-										<div class="p-3 pb-0">
-											<div class="float-right">
-												<i class="layui-icon layui-icon-home"
-													style="font-size: 35px; color: #1E9FFF;"></i>
-											</div>
-											<h5 class="text-muted font-weight-normal mt-0">病假 / 休假天数</h5>
-											<h3 class="mt-2">{{.Vacation}}</h3>
-										</div>
-										<div id="sparkline4">
-										</div>
-
-									</div> <!-- end card-body-->
-								</div> <!-- end card-->
-							</div> <!-- end col-->
-						</div>
-						<!-- end row -->
-						<div class="row">
-							<div class="col-12" style="border: 0;">
-								<div class="card" style="border: 0;">
-									<div class="card-body" >
-										<form action="/chargeProject" method="get">
-										<span>【分项目统计工时】</span>
-										<br><br>
-										<span>
-											<select name="chargeNumber" data-plugin="customselect" >
-												{{range .Projects}}
-													<option value={{.ChargeNumber}}>{{.ProjectName}}</option>
-												{{end}}
-											</select>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<button class="layui-btn" lay-submit>查询</button>
-										</span>
-											<br>
-											<!-- <input type="submit" value="查询" style="width:200px"
-													class="btn btn-block btn-primary" /> -->
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="header-title">项目总工时统计</h4>
-
-										<div class="table-responsive mt-3">
-											<table class="table table-hover table-centered mb-0">
-												<thead>
-													<tr>
-														<th>项目号码</th>
-														<th>总工时</th>
-													</tr>
-												</thead>
-
-
-												<tbody>
-													<c:forEach items="${alist}" var="show">
-														{{range .Records}}
-														<tr>
-															<td>
-																<span>{{.ProjectName}}</span>
-															</td>
-															<td>
-																<span>{{.ProjectHours}}</span>
-															</td>
-														</tr>
-														{{end}}
-													</c:forEach>
-												</tbody>
-											</table>
-
-										</div>
-									</div>
-								</div>
-							</div>
+										<h4 class="header-title">
+											！！！！出错了！！！！
+										</h4>
+										<p class="text-muted font-13 mb-4">
+										<form action="/resources/templates/main.html" method="get">
+											<span>{{.Msg}}</span>
+											<br><br>
+											<input type="button" value="返回"
+											class="btn btn-primary btn-sm" onclick="goBack()">
+											<input type="submit" value="取消"
+											class="btn btn-danger btn-sm">
+									</div> <!-- end card body-->
+								</div> <!-- end card -->
+							</div><!-- end col-->
 						</div>
-						<!-- end row -->
+						<!-- end row-->
+
+
+
 					</div> <!-- container -->
 
 				</div> <!-- content -->
-				<!-- container -->
-
-			</div> <!-- content -->
 
 
-		</div>
+			</div>
 
-		<!-- ============================================================== -->
-		<!-- End Page content -->
-		<!-- ============================================================== -->
+			<!-- ============================================================== -->
+			<!-- End Page content -->
+			<!-- ============================================================== -->
 
 
 		</div>
@@ -382,9 +241,9 @@
 		<script src="/resources/js/app.min.js"></script>
 
 		<!-- third party js -->
-		<script src="js/vendor/jquery.dataTables.js"></script>
-		<script src="js/vendor/dataTables.bootstrap4.js"></script>
-		<script src="js/vendor/dataTables.responsive.min.js"></script>
+		<script src="/resources/js/vendor/jquery.dataTables.js"></script>
+		<script src="/resources/js/vendor/dataTables.bootstrap4.js"></script>
+		<script src="/resources/js/vendor/dataTables.responsive.min.js"></script>
 		<script src="/resources/js/vendor/responsive.bootstrap4.min.js"></script>
 		<script src="/resources/js/vendor/dataTables.buttons.min.js"></script>
 		<script src="/resources/js/vendor/buttons.bootstrap4.min.js"></script>
