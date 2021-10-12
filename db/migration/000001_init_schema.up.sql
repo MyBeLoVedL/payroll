@@ -1,7 +1,7 @@
 CREATE TABLE `employees` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT "guest",
-  `password` varchar(255) DEFAULT "123456",
+  `name` varchar(255) NOT NULL DEFAULT "guest",
+  `password` varchar(255) NOT NULL DEFAULT "123456",
   `type` ENUM ('hour', 'salaried', 'commissioned'),
   `mail` varchar(255) NOT NULL,
   `social_security_number` varchar(255) NOT NULL,

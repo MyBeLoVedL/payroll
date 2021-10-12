@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"log"
 	"strconv"
 )
@@ -35,4 +36,12 @@ func GetPayYearToDate(empID int64) (float64, error) {
 		return 0, err
 	}
 	return amount, nil
+}
+
+func GetIDByName(name string) ([]int64, error) {
+	ids, err := q.GetIDByName(context.Background(), name)
+	if err != nil {
+		return nil, err
+	}
+	return ids, nil
 }

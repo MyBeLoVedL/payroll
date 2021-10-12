@@ -42,7 +42,7 @@ func ValidateUser(idOrMail string, passwd string) (int64, error) {
 		}
 	}
 
-	if res.Password.String != passwd {
+	if res.Password != passwd {
 		return 0, errors.New("invalid password")
 	}
 	return int64(id), nil

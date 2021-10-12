@@ -50,8 +50,8 @@ func (e *EmployeesType) Scan(src interface{}) error {
 
 type Employee struct {
 	ID                    int64                  `json:"id"`
-	Name                  sql.NullString         `json:"name"`
-	Password              sql.NullString         `json:"password"`
+	Name                  string                 `json:"name"`
+	Password              string                 `json:"password"`
 	Type                  EmployeesType          `json:"type"`
 	Mail                  string                 `json:"mail"`
 	SocialSecurityNumber  string                 `json:"social_security_number"`
