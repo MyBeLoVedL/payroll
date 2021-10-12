@@ -28,7 +28,6 @@ func GetPayYearToDate(empID int64) (float64, error) {
 	var hours string
 	err := dbIns.QueryRow("select sum(amount) from paycheck where emp_id = ? and year(end_date) >= year(now());", empID).Scan(&hours)
 	if err != nil {
-		log.Fatal(err)
 		return 0, err
 	}
 	amount, err := strconv.ParseFloat(hours, 64)

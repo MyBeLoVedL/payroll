@@ -552,19 +552,9 @@ func setRouter(r *gin.Engine) {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
 
-		hours, err := db.GetHoursByEmpID(session.User.ID)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "no hours found",
-			})
-		}
+		hours, _ := db.GetHoursByEmpID(session.User.ID)
 
-		payYear, err := db.GetPayYearToDate(session.User.ID)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "no hours found",
-			})
-		}
+		payYear, _ := db.GetPayYearToDate(session.User.ID)
 
 		c.HTML(http.StatusOK, "employee_report.html", gin.H{
 			"Hours":    hours,
@@ -579,19 +569,9 @@ func setRouter(r *gin.Engine) {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
 
-		hours, err := db.GetHoursByEmpID(session.User.ID)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "no hours found",
-			})
-		}
+		hours, _ := db.GetHoursByEmpID(session.User.ID)
 
-		payYear, err := db.GetPayYearToDate(session.User.ID)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "no hours found",
-			})
-		}
+		payYear, _ := db.GetPayYearToDate(session.User.ID)
 
 		charge := c.Query("chargeNumber")
 		if charge == "" {

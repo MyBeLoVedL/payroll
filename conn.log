@@ -125,3 +125,41 @@
 2021/10/12 10:55:20 empID 1 charge 2022
 2021/10/12 10:55:23 empID 1 charge 2023
 2021/10/12 10:55:26 empID 1 charge 2024
+2021/10/12 05:10:32 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 05:11:07 {Contact:17752254783 Address:Earth Date:2021-10-12 00:00:00 -0400 EDT ProductID:1111 Amount:100}
+2021/10/12 05:11:13 select order {OrderID:0 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 05:11:13 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/12 05:12:01 select order {OrderID:8 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 05:12:01 Order {ID:8 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:1111 Amount:100.000 Closed:0}
+2021/10/12 05:12:19 <nil>
+2021/10/12 05:12:24 select order {OrderID:8 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 05:12:24 Order {ID:8 Contact:17752254783 Address:Earth Date:2021-10-12 04:00:00 +0000 UTC ProductID:1111 Amount:100.000 Closed:0}
+2021/10/12 05:12:35 {Contact:17752254783/ Address:Jupiter Date:2021-10-12 00:00:00 -0400 EDT ProductID:1111 Amount:100.000}
+2021/10/12 05:12:39 select order {OrderID:8 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 05:12:39 Order {ID:8 Contact:17752254783/ Address:Jupiter Date:2021-10-12 04:00:00 +0000 UTC ProductID:1111 Amount:100.000 Closed:0}
+2021/10/12 05:12:51 <nil>
+2021/10/12 05:13:07 <nil>
+2021/10/12 05:13:10 <nil>
+2021/10/12 05:13:11 <nil>
+2021/10/12 05:13:31 <nil>
+2021/10/12 05:16:28 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 05:16:29 sql: Scan error on column index 0, name "sum(amount)": converting NULL to string is unsupported
+2021/10/12 05:17:00 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 05:17:01 sql: Scan error on column index 0, name "sum(amount)": converting NULL to string is unsupported
+2021/10/12 05:20:26 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:20:28 sql: Scan error on column index 0, name "sum(amount)": converting NULL to string is unsupported
+2021/10/12 05:23:08 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:25:51 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:26:09 empID 1 charge 2022
+2021/10/12 05:26:52 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:26:57 empID 1 charge 2022
+2021/10/12 05:27:00 empID 1 charge 2024
+2021/10/12 05:27:05 <nil>
+2021/10/12 05:27:30 emp name : {ID:1 Name:{String:guest Valid:true} Password:{String:123456 Valid:true} Type:commissioned Mail:1140030775@gmail.com SocialSecurityNumber:145478756332814 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:50863951712 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true}}
+2021/10/12 05:28:15 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:31:08 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:31:14 <nil>
+2021/10/12 05:31:30 <nil>
+2021/10/12 05:31:34 <nil>
+2021/10/12 05:31:47 <nil>
+2021/10/12 05:31:55 empID 1 charge 2011
