@@ -27,10 +27,10 @@
 				xml.send();
 				xml.onreadystatechange = function() {
 					if (xml.readyState == 4) {
-							alert("【修改成功】");
-							location.href = "/resources/templates/main.html";
-						}
+						alert("【修改成功】");
+						location.href = "/resources/templates/main.html";
 					}
+				}
 			}
 		</script>
 		<!-- App css -->
@@ -63,11 +63,8 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
-
 						<ul class="metismenu" id="side-menu">
-
 							<li class="menu-title">基础功能</li>
-
 							<li>
 								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
@@ -82,10 +79,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="add_order.html" onclick="return canuse()">新建订单</a>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="order_info.html" onclick="return canuse()">修改订单</a>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
@@ -217,8 +214,10 @@
 										</h4>
 										<br><br>
 										<a href="#" class="layui-btn" onclick="updatePay()">支票直取</a> <br><br>
-										<a href="/resources/templates/get_address.html" class="layui-btn layui-btn-normal">邮递到户</a> <br><br>
-										<a href="/resources/templates/get_bank_account.html" class="layui-btn layui-btn-warm">银行储蓄</a>
+										<a href="/resources/templates/get_address.html"
+											class="layui-btn layui-btn-normal">邮递到户</a> <br><br>
+										<a href="/resources/templates/get_bank_account.html"
+											class="layui-btn layui-btn-warm">银行储蓄</a>
 									</div> <!-- end card body-->
 								</div> <!-- end card -->
 							</div><!-- end col-->

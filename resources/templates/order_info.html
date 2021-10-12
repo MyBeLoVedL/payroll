@@ -16,13 +16,14 @@
 			// 		}
 			// }
 			layui.use('laydate', function() {
-				var laydate = layui.laydate;
+					var laydate = layui.laydate;
 
-				//执行一个laydate实例
-				laydate.render({
-					elem: '#st' //指定元素
-				});
-			});
+					//执行一个laydate实例
+					laydate.render({
+						elem: '#st' //指定元素
+					});
+				}
+			};
 			layui.use('laydate', function() {
 				var laydate = layui.laydate;
 
@@ -31,16 +32,17 @@
 					elem: '#et' //指定元素
 				});
 			});
+
 			function deletes(root) {
 				var flag = confirm("【确认删除？】");
 				if (flag) {
 					var orderID = root.nextElementSibling.value;
-					console.log("orderID:"+ orderID);
+					console.log("orderID:" + orderID);
 					var xml = new XMLHttpRequest();
-					xml.open("get", "/deleteOrder?orderID="+orderID, true);
-					console.log("orderID+"+ orderID);
+					xml.open("get", "/deleteOrder?orderID=" + orderID, true);
+					console.log("orderID+" + orderID);
 					xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xml.send("orderID="+orderID);
+					xml.send("orderID=" + orderID);
 					xml.onreadystatechange = function() {
 						if (xml.readyState == 4) {
 							alert("【删除成功】");
@@ -90,11 +92,8 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
-					
 						<ul class="metismenu" id="side-menu">
-					
 							<li class="menu-title">基础功能</li>
-					
 							<li>
 								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
@@ -128,7 +127,7 @@
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
-					
+
 							<li>
 								<a href="/employeeReport">
 									<i class="mdi mdi-account-heart"></i>
@@ -138,7 +137,7 @@
 							<li class="menu-title">高级功能</li>
 							<li>
 								<a href="javascript: void(0);">
-									<i class="fe-cpu"></i>
+									<i class="layui-icon layui-icon-auz"></i>
 									<span> 管理功能 </span>
 									<span class="menu-arrow"></span>
 								</a>
@@ -321,42 +320,43 @@
 																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
 
 
-																 <tr>
+																<tr>
 
-																	 <td>
-																		 <span>{{.Contact}}</span>
-																		 
-																		</td>
-																		<td>
-																			<span>{{.Address}}</span>
-																		</td>
-																		<td>
-																			<span>{{.ProductID}}</span>
-																		</td>
-																		<td>
-																			<span>{{.Amount}}</span>
-																		</td>
-																		<td>
-																			<span>{{.Date}}</span>
-																		</td>
-																		<td>
-																			<span>{{.Closed}}</span>
-																		</td>
+																	<td>
+																		<span>{{.Contact}}</span>
 
-																		
-																		<td>
-																			<input type="submit" value="修改"
+																	</td>
+																	<td>
+																		<span>{{.Address}}</span>
+																	</td>
+																	<td>
+																		<span>{{.ProductID}}</span>
+																	</td>
+																	<td>
+																		<span>{{.Amount}}</span>
+																	</td>
+																	<td>
+																		<span>{{.Date}}</span>
+																	</td>
+																	<td>
+																		<span>{{.Closed}}</span>
+																	</td>
+
+
+																	<td>
+																		<input type="submit" value="修改"
 																			class="btn btn-primary btn-sm">
-																			<input type="button" value="删除"
+																		<input type="button" value="删除"
 																			class="btn btn-danger btn-sm"
 																			onclick="deletes(this)">
-																			
-																			<td>
-																				<input type="hidden" name="orderID" value={{.ID}} id="orderID" />
-																			</td>
-																		</td>
-																	</tr>
-																	
+
+																	<td>
+																		<input type="hidden" name="orderID"
+																			value={{.ID}} id="orderID" />
+																	</td>
+																	</td>
+																</tr>
+
 
 															</form>
 														</c:forEach>

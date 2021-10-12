@@ -28,11 +28,12 @@
 				xml.send();
 				xml.onreadystatechange = function() {
 					if (xml.readyState == 4) {
-							alert("【修改成功】");
-							location.href = "/resources/templates/main.html";
-						}
+						alert("【修改成功】");
+						location.href = "/resources/templates/main.html";
 					}
+				}
 			}
+
 			function redirect() {
 				alert("【修改成功】");
 				location.href = "https://baidu.com";
@@ -68,11 +69,8 @@
 
 					<!--- Sidemenu -->
 					<div id="sidebar-menu">
-
 						<ul class="metismenu" id="side-menu">
-
 							<li class="menu-title">基础功能</li>
-
 							<li>
 								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
@@ -87,10 +85,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="add_order.html" onclick="return canuse()">新建订单</a>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="order_info.html" onclick="return canuse()">修改订单</a>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
@@ -116,7 +114,7 @@
 							<li class="menu-title">高级功能</li>
 							<li>
 								<a href="javascript: void(0);">
-									<i class="fe-cpu"></i>
+									<i class="layui-icon layui-icon-auz"></i>
 									<span> 管理功能 </span>
 									<span class="menu-arrow"></span>
 								</a>
@@ -240,17 +238,20 @@
 												</tr>
 												<tr>
 													<td colspan="2">
-														<input type="submit" value="确认" id="makeadd" class="btn btn-success"
-															onclick="redirect()">
+														<input type="submit" value="确认" id="makeadd"
+															class="btn btn-success" onclick="redirect()">
 														<!-- todo: check() 输入校验-->
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<input type="button" value="取消" id="disadd" class="btn btn-danger"
-															onclick="back()">
+														<input type="button" value="取消" id="disadd"
+															class="btn btn-danger" onclick="back()">
 													</td>
 												</tr>
 											</table>

@@ -3,52 +3,43 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title>家庭经济管理系统</title>
+		<title>系统首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- <meta content <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">> -->
+		<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+		<meta content="Coderthemes" name="author" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- App favicon -->
+		<link rel="shortcut icon" href="/resources/assets/images/favicon.ico">
+		<script type="text/javascript">
+			// function canuse(){
+			// 	var phonenumber = <%=(String)session.getAttribute("user") %>
+			// 	if(phonenumber=="15809872335"){
+			// 		return true;
+			// 	}else{
+			// 		alert("对不起，只有管理员可以使用该功能！");
+			// 		return false;
+			// 	}
+			// }
+			//
+		</script>
+		<!-- App css -->
+		<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/app.min.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			.card-body>ul {
+				list-style: none;
+			}
 
-		<html lang="en">
-
-			<head>
-				<meta charset="utf-8" />
-				<title>系统首页</title>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-					name="description" />
-				<meta content="Coderthemes" name="author" />
-				<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-				<!-- App favicon -->
-				<link rel="shortcut icon" href="/resources/assets/images/favicon.ico">
-				<script type="text/javascript">
-					// function canuse(){
-					// 	var phonenumber = <%=(String)session.getAttribute("user") %>
-					// 	if(phonenumber=="15809872335"){
-					// 		return true;
-					// 	}else{
-					// 		alert("对不起，只有管理员可以使用该功能！");
-					// 		return false;
-					// 	}
-					// }
-					//
-				</script>
-				<!-- App css -->
-				<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-				<link href="/resources/css/icons.min.css" rel="stylesheet" type="text/css" />
-				<link href="/resources/css/app.min.css" rel="stylesheet" type="text/css" />
-				<style type="text/css">
-					.card-body>ul {
-						list-style: none;
-					}
-
-					.card-body>ul>li {
-						position: absolute;
-						left: 200px;
-						top: 100px;
-						width: 100%;
-						height: 484px;
-					}
-				</style>
-			</head>
+			.card-body>ul>li {
+				position: absolute;
+				left: 200px;
+				top: 100px;
+				width: 100%;
+				height: 484px;
+			}
+		</style>
+	</head>
 
 	<body>
 
@@ -117,7 +108,7 @@
 							<li class="menu-title">高级功能</li>
 							<li>
 								<a href="javascript: void(0);">
-									<i class="fe-cpu"></i>
+									<i class="layui-icon layui-icon-auz"></i>   
 									<span> 管理功能 </span>
 									<span class="menu-arrow"></span>
 								</a>
@@ -188,7 +179,7 @@
 									<div class="dropdown-divider"></div>
 
 									<!-- item-->
-									<a href="LogoutServlet" class="dropdown-item notify-item">
+									<a href="#" class="dropdown-item notify-item">
 										<i class="fe-log-out"></i>
 										<span>Logout</span>
 									</a>
@@ -245,22 +236,6 @@
 								</div>
 							</div>
 						</div>
-						<form action="/updatePay" method="post">
-							<div>
-								<label for="updatePay">Update Payment Method</label>
-								<select name="updatePay" id="updatePay">
-									<option value="pick_up">pickup</option>
-									<option value="mail">mail</option>
-									<option value="deposit">deposit</option>
-								</select>
-
-								<p></p>
-
-								<button type="submit">
-									submit
-								</button>
-							</div>
-						</form>
 					</div>
 					<script type="application/javascript">
 						main();
@@ -273,7 +248,7 @@
 							var timer;
 
 							for (var i = 0; i < li.length; i++) {
-								console.log(i, j);
+								// console.log(i, j);
 								if (i == j) {
 									li[i].style.opacity = '1';
 									continue;
@@ -315,20 +290,6 @@
 							timer = setInterval(startRoll, 3500);
 						}
 					</script>
-
-
-
-
-					<!-- <div id="record-map">
-						<ul>
-							<li><img src="img/banner1.jpg"/></li>
-							<li><img src="img/banner2.jpg"/></li>
-							<li><img src="img/banner3.jpg"/></li>
-							<li><img src="img/banner4.jpg"/></li>
-							<li><img src="img/banner5.jpg"/></li>
-							<li><img src="img/banner6.jpg"/></li>
-						</ul>
-					</div> -->
 					<!-- Footer Start -->
 					<footer class="footer">
 						<div class="container-fluid">

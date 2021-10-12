@@ -22,12 +22,13 @@
 				laydate.render({
 					elem: '#st' //指定元素
 				});
-			});
-			var laydate = layui.laydate;
 
-			//执行一个laydate实例
-			laydate.render({
-			elem: '#et' //指定元素
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#et' //指定元素
+				});
 			});
 
 			function deletes(root) {
@@ -90,7 +91,7 @@
 						<ul class="metismenu" id="side-menu">
 							<li class="menu-title">基础功能</li>
 							<li>
-								<a href="#">
+								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -103,28 +104,28 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
 
 							<li>
-								<a href="#">
+								<a href="/employeeReport">
 									<i class="mdi mdi-account-heart"></i>
 									<span> 生成员工报告</span>
 								</a>
@@ -138,10 +139,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="#" onclick="return canuse()">维护员工信息</a>
+										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="#" onclick="return canuse()">管理员工报告</a>
+										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
@@ -166,9 +167,6 @@
 					<!-- Topbar Start -->
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
-
-
-
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">
@@ -259,16 +257,16 @@
 											<thead>
 												<tr>
 													<!-- <th>序号</th> -->
-												<th>姓名</th>
-												<!-- <th>联系方式</th>
+													<th>姓名</th>
+													<!-- <th>联系方式</th>
 												<th>邮寄地址</th>
 												<th>职员类型</th>
 												<th>薪资标准</th>
 												<th>社保账号</th> -->
-												<!-- <th>标准税率</th>
+													<!-- <th>标准税率</th>
 												<th>杂项扣款</th> -->
-												<!-- <th>工作时限</th> -->
-												<th>操作</th>
+													<!-- <th>工作时限</th> -->
+													<th>操作</th>
 												</tr>
 											</thead>
 											<tbody>

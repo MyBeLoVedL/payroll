@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+		var myDate = new Date();
+		var myTime = myDate.toLocaleTimeString();
+		console.log(myTime);
+			// timecard 
+			function check() {
+				var kind = document.getElementById("kind").value;
+				var hours = document.getElementById("hours").value;
+				var date = document.getElementById("date").value;
+				if (kind == "" || hours == "" || date == "") {
+					alert("信息填充不全！");
+					return false;
+				}
+				if (isNaN(hours) || hours <= 0 || hours > 8) {
+					alert("工作时长输入有误！");
+					return false;
+				}
+				// todo 合理的时间范围
+				return true;
+			}
+			
+			// employee_info
+			function check() {
+				var phone = document.getElementById("phone").value;
+				var mail = document.getElementById("mail").value;
+				var etype = document.getElementById("etype").value;
+				var rate = document.getElementById("rate").value;
+				var security = document.getElementById("security").value;
+				var tax = document.getElementById("tax").value;
+				var other = document.getElementById("other").value;
+				if (phone == "" || mail == "" || etype == "" || rate == "" || 
+					security == "" || tax == "" || other == "") {
+					alert("信息填充不全！");
+					return false;
+				}
+				if (isNaN(phone) || phone.length != 11) {
+					alert("联系方式输入有误！");
+					return false;
+				}
+				if (isNaN(rate) || rate < 0 || rate > 10000000000) {
+					alert("标准薪资输入有误！");
+					return false;
+				}
+				if (isNaN(tax) || tax < 0 || tax > 1) {
+					alert("税额标准输入有误！请输入0~100%之间的比例");
+					return false;
+				}
+				if (isNaN(other) || other < 0 || other > 10000000000) {
+					alert("其他扣款输入有误");
+					return false;
+				}
+				return true;
+			}
+			
+			// order
+			function check() {
+				var phone = document.getElementById("phone").value;
+				var address = document.getElementById("address").value;
+				var product = document.getElementById("product").value;
+				var amount = document.getElementById("amount").value;
+				var date = document.getElementById("ex_time").value;
+				var myDate = new Date();
+				var myTime = myDate.toLocaleTimeString();
+				console.log(myTime);
+				if (phone == "" || address == "" || product == "" || amount == "" || date == "") {
+					alert("信息填充不全！");
+					return false;
+				}
+				if (isNaN(phone) || phone.length != 11) {
+					alert("联系方式输入有误！");
+					return false;
+				}
+				if (isNaN(amount)) {
+					alert("花费金额输入有误！");
+					return false;
+				}
+				
+				return true;
+			}
+ 			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -85,7 +85,7 @@
 						<ul class="metismenu" id="side-menu">
 							<li class="menu-title">基础功能</li>
 							<li>
-								<a href="#">
+								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -98,28 +98,28 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="MakeUser.jsp" onclick="return canuse()">新建订单</a>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
 									</li>
 									<li>
-										<a href="getUserServlet" onclick="return canuse()">修改订单</a>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/timecard">
 									<i class="fe-type"></i>
 									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
 									<span> 选择支付方式 </span>
 								</a>
 							</li>
 
 							<li>
-								<a href="#">
+								<a href="/employeeReport">
 									<i class="mdi mdi-account-heart"></i>
 									<span> 生成员工报告</span>
 								</a>
@@ -133,10 +133,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="#" onclick="return canuse()">维护员工信息</a>
+										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="#" onclick="return canuse()">管理员工报告</a>
+										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
@@ -226,7 +226,7 @@
 					<!-- end Topbar -->
 					<!-- Start Content-->
 					<div class="container-fluid">
-						<form action="addExpenseServlet" method="post">
+						<form action="#" method="post">
 							<table class="layui-table">
 								<tr>
 									<th colspan="2" align="center">

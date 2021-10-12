@@ -22,13 +22,13 @@
 				laydate.render({
 					elem: '#st' //指定元素
 				});
-			});
-			var laydate = layui.laydate;
 
-			//执行一个laydate实例
-			laydate.render({
-			elem: '#et' //指定元素
-			});
+				var laydate = layui.laydate;
+
+				//执行一个laydate实例
+				laydate.render({
+					elem: '#et' //指定元素
+				});
 			});
 
 			function deletes(root) {
@@ -90,30 +90,45 @@
 						<ul class="metismenu" id="side-menu">
 							<li class="menu-title">基础功能</li>
 							<li>
-								<a href="MainServlet">
+								<a href="/resources/templates/main.html">
 									<i class="fe-airplay"></i>
-									<span> 家庭主页 </span>
+									<span> 个人主页 </span>
 								</a>
 							</li>
 							<li>
-								<a href="DisplayUserServlet">
-									<i class="mdi mdi-account-heart"></i>
-									<span> 个人信息 </span>
+								<a href="javascript: void(0);">
+									<i class="fe-cpu"></i>
+									<span> 维护购买订单 </span>
+									<span class="menu-arrow"></span>
 								</a>
+								<ul class="nav-second-level" aria-expanded="false">
+									<li>
+										<a href="/showOrder" onclick="return canuse()">新建订单</a>
+									</li>
+									<li>
+										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
+									</li>
+								</ul>
 							</li>
 							<li>
-								<a href="DisplayIncomeServlet">
+								<a href="/timecard">
 									<i class="fe-type"></i>
-									<span> 收入信息 </span>
+									<span> 维护工时卡 </span>
 								</a>
 							</li>
 							<li>
-								<a href="DisplayExpenseServlet">
+								<a href="/updatePay">
 									<i class="fe-bar-chart-2"></i>
-									<span> 支出信息 </span>
+									<span> 选择支付方式 </span>
 								</a>
 							</li>
-							<li class="menu-title">更多功能</li>
+					
+							<li>
+								<a href="/employeeReport">
+									<i class="mdi mdi-account-heart"></i>
+									<span> 生成员工报告</span>
+								</a>
+							</li>
 							<li class="menu-title">高级功能</li>
 							<li>
 								<a href="javascript: void(0);">
@@ -123,10 +138,10 @@
 								</a>
 								<ul class="nav-second-level" aria-expanded="false">
 									<li>
-										<a href="#" onclick="return canuse()">维护员工信息</a>
+										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="#" onclick="return canuse()">管理员工报告</a>
+										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
@@ -151,9 +166,6 @@
 					<!-- Topbar Start -->
 					<div class="navbar-custom">
 						<ul class="list-unstyled topbar-right-menu float-right mb-0">
-
-
-
 							<li class="dropdown notification-list">
 								<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#"
 									role="button" aria-haspopup="false" aria-expanded="false">

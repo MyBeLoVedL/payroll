@@ -16,39 +16,38 @@
 			// 		}
 			// }
 			layui.use('laydate', function() {
-				var laydate = layui.laydate;
+						var laydate = layui.laydate;
 
-				//执行一个laydate实例
-				laydate.render({
-					elem: '#st' //指定元素
-				});
-			});
-			layui.use('laydate', function() {
-				var laydate = layui.laydate;
+						//执行一个laydate实例
+						laydate.render({
+							elem: '#st' //指定元素
+						});
+						layui.use('laydate', function() {
+							var laydate = layui.laydate;
 
-				//执行一个laydate实例
-				laydate.render({
-					elem: '#et' //指定元素
-				});
-			});
+							//执行一个laydate实例
+							laydate.render({
+								elem: '#et' //指定元素
+							});
+						});
 
-			// function deletes(root) {
-			// 	var flag = confirm("【确认删除？】");
-			// 	if (flag) {
+						// function deletes(root) {
+						// 	var flag = confirm("【确认删除？】");
+						// 	if (flag) {
 
-			// 		var outid = root.nextElementSibling.value;
-			// 		var xml = new XMLHttpRequest();
-			// 		xml.open("get", "DeleteExpenseServlet?eid=" + outid, true);
-			// 		xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// 		xml.send(null);
-			// 		xml.onreadystatechange = function() {
-			// 			if (xml.readyState == 4) {
-			// 				alert("【删除成功】");
-			// 				location.href = "DisplayExpenseServlet";
-			// 			}
-			// 		}
-			// 	}
-			// }
+						// 		var outid = root.nextElementSibling.value;
+						// 		var xml = new XMLHttpRequest();
+						// 		xml.open("get", "DeleteExpenseServlet?eid=" + outid, true);
+						// 		xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						// 		xml.send(null);
+						// 		xml.onreadystatechange = function() {
+						// 			if (xml.readyState == 4) {
+						// 				alert("【删除成功】");
+						// 				location.href = "DisplayExpenseServlet";
+						// 			}
+						// 		}
+						// 	}
+						// }
 		</script>
 		<title>生成员工报告</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -299,19 +298,19 @@
 						<div class="row">
 							<div class="col-12" style="border: 0;">
 								<div class="card" style="border: 0;">
-									<div class="card-body" >
+									<div class="card-body">
 										<form action="/chargeProject" method="get">
-										<span>【分项目统计工时】</span>
-										<br><br>
-										<span>
-											<select name="chargeNumber" data-plugin="customselect" >
-												{{range .Projects}}
+											<span>【分项目统计工时】</span>
+											<br><br>
+											<span>
+												<select name="chargeNumber" data-plugin="customselect">
+													{{range .Projects}}
 													<option value={{.ChargeNumber}}>{{.ProjectName}}</option>
-												{{end}}
-											</select>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<button class="layui-btn" lay-submit>查询</button>
-										</span>
+													{{end}}
+												</select>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button class="layui-btn" lay-submit>查询</button>
+											</span>
 											<br>
 											<!-- <input type="submit" value="查询" style="width:200px"
 													class="btn btn-block btn-primary" /> -->
