@@ -163,3 +163,23 @@
 2021/10/12 05:31:34 <nil>
 2021/10/12 05:31:47 <nil>
 2021/10/12 05:31:55 empID 1 charge 2011
+2021/10/12 05:37:00 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 05:37:35 {Contact:155 Address:Anue Date:2021-10-11 00:00:00 -0400 EDT ProductID:3333 Amount:10000}
+2021/10/12 05:38:58 {Contact:133 Address:Saturn Date:2021-10-13 00:00:00 -0400 EDT ProductID:2222 Amount:10000}
+2021/10/12 05:50:02 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 06:01:45 {Contact:189 Address:Uranus Date:2021-10-12 00:00:00 -0400 EDT ProductID:3333 Amount:21000}
+2021/10/12 06:38:50 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 06:39:00 <nil>
+2021/10/12 06:39:08 <nil>
+2021/10/12 06:39:12 <nil>
+2021/10/12 06:39:51 {Contact:155 Address:Lie Date:2021-10-12 00:00:00 -0400 EDT ProductID:2222 Amount:1000}
+2021/10/12 06:40:32 <nil>
+2021/10/12 06:40:43 <nil>
+2021/10/12 06:41:59 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 06:42:04 <nil>
+2021/10/12 06:42:13 <nil>
+2021/10/12 06:46:58 <nil>
+2021/10/12 06:51:39 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 06:51:42 <nil>
+2021/10/12 06:51:55 <nil>
+2021/10/12 06:52:26 name JLU account lzy

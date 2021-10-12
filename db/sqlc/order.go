@@ -39,8 +39,9 @@ type AddOrderParams struct {
 	Amount    string    `form:"amount"`
 }
 
-func (s *Store) AddOrder(ctx context.Context, arg AddOrderParams) error {
+func (s *Store) AddOrder(ctx context.Context, arg AddOrderParams) (int64, error) {
 	var err error
+	var orderID int64
 	err = s.execTrx(ctx, func(q *Queries) error {
 		ordID, err := AddPurchaseOrder(arg.EmpID, arg.Contact, arg.Address, arg.Date)
 		if err != nil {
@@ -51,9 +52,10 @@ func (s *Store) AddOrder(ctx context.Context, arg AddOrderParams) error {
 		if err != nil {
 			return err
 		}
+		orderID = ordID
 		return nil
 	})
-	return err
+	return orderID, err
 }
 
 func UpdateOrderInfo(orderID, productID int64, amount string) error {

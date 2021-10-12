@@ -138,63 +138,6 @@ func setRouter(r *gin.Engine) {
 
 	})
 
-	// r.Any("/updatePayAction", func(c *gin.Context) {
-	// 	method := c.Query("updatePay")
-	// 	sid, _ := c.Cookie("sid")
-	// 	session, err := misc.GSS.Get(sid)
-	// 	switch method {
-	// 	case "pick_up":
-	// 		db.UpdatePayment(method, session.User.ID)
-	// 		c.JSON(http.StatusOK, gin.H{
-	// 			"error": err,
-	// 		})
-	// 	case "mail":
-	// 		mail := c.PostForm("mail")
-	// 		err = db.UpdatePaymentWIthMail(session.User.ID, mail)
-	// 		c.JSON(http.StatusOK, gin.H{
-	// 			"error": err,
-	// 		})
-	// 	case "deposit":
-	// 		bankName := c.PostForm("bankName")
-	// 		bankAccount := c.PostForm("bankAccount")
-	// 		err = db.UpdatePaymentWithBank(session.User.ID, bankName, bankAccount)
-	// 		c.JSON(http.StatusOK, gin.H{
-	// 			"error": err,
-	// 		})
-
-	// 	}
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"error":  err,
-	// 		"method": method,
-	// 	})
-
-	// })
-
-	// r.Any("/timecard", func(c *gin.Context) {
-	// 	sid, _ := c.Cookie("sid")
-	// 	session, _ := misc.GSS.Get(sid)
-	// 	card, err := db.SelectTimeCard(session.User.ID)
-	// 	if err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": "No matched timecard",
-	// 		})
-	// 		return
-	// 	}
-	// 	time := card.StartDate.Time.String()
-	// 	var com string
-	// 	if card.Committed.Int32 == 0 {
-	// 		com = "not committed"
-	// 	} else {
-	// 		com = "committed"
-	// 	}
-	// 	c.HTML(http.StatusOK, "timecard.html", gin.H{
-	// 		"ID":        card.ID,
-	// 		"StartDate": time,
-	// 		"Committed": com,
-	// 	})
-
-	// })
-
 	r.Any("/timecard", func(c *gin.Context) {
 
 		type timecardParam struct {
@@ -222,18 +165,6 @@ func setRouter(r *gin.Engine) {
 			})
 			return
 		}
-
-		// hours, _ := db.GetHours(session.User.ID)
-		// if arg.Hours > 24 || hours > int(session.User.HourLimit.Int32) {
-		// 	log.Printf("invalid hours %v\n", hours)
-		// 	c.HTML(http.StatusOK, "timecard.html", gin.H{
-		// 		"Committed":    false,
-		// 		"showUsername": session.User.Name,
-		// 		"prefix":       prefix,
-		// 		"Exceeded":     true,
-		// 	})
-		// 	return
-		// }
 
 		err = db.UpdateTimecard(session.User.ID, arg.Charge, arg.Hours, arg.Date)
 		log.Printf("%v\n", err)
@@ -274,7 +205,7 @@ func setRouter(r *gin.Engine) {
 
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
-		err = db.AddOrder(context.Background(), db.AddOrderParams{
+		orderID, err := db.AddOrder(context.Background(), db.AddOrderParams{
 			EmpID:     session.User.ID,
 			Contact:   arg.Contact,
 			Address:   arg.Address,
@@ -282,12 +213,18 @@ func setRouter(r *gin.Engine) {
 			ProductID: arg.ProductID,
 			Amount:    arg.Amount,
 		})
+
 		if err != nil {
 			c.AbortWithError(http.StatusBadRequest, err)
 		}
 
-		c.HTML(http.StatusOK, "main.html", gin.H{
-			"OK": true,
+		c.HTML(http.StatusOK, "new_order.html", gin.H{
+			"OrderID":     orderID,
+			"Contact":     arg.Contact,
+			"Address":     arg.Address,
+			"ProductName": arg.ProductID,
+			"Amount":      arg.Amount,
+			"Date":        arg.Date.String(),
 		})
 
 	})

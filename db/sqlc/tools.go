@@ -15,7 +15,7 @@ var dbIns *sql.DB
 
 func init() {
 	var err error
-	dbIns, err = sql.Open("mysql", "lee:Lp262783@/payroll?parseTime=true")
+	dbIns, err = sql.Open("mysql", "lee:@@Lp262783@/payroll?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
@@ -66,10 +66,9 @@ func GetUser(id int64) (Employee, error) {
 	return q.GetUser(context.Background(), id)
 }
 
-func AddOrder(ctx context.Context, arg AddOrderParams) error {
+func AddOrder(ctx context.Context, arg AddOrderParams) (int64, error) {
 	store := NewStore(dbIns)
-	err := store.AddOrder(context.Background(), arg)
-	return err
+	return store.AddOrder(context.Background(), arg)
 }
 
 func UpdateOrder(ctx context.Context, arg UpdateOrderParams) error {
