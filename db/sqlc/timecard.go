@@ -6,20 +6,6 @@ import (
 	"time"
 )
 
-type Project struct {
-	ChargeNumber int
-	ProjectName  string
-}
-
-func GetProjects() []Project {
-	return []Project{
-		{2011, "database"},
-		{2022, "operating system"},
-		{2023, "compiler"},
-		{2024, "web application"},
-	}
-}
-
 func IfCommitted(id int64) bool {
 	card, err := q.SelectActiveTimecard(context.Background(), id)
 	if err != nil {

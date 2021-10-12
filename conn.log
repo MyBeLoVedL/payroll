@@ -1,0 +1,109 @@
+2021/10/12 21:32:09 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:32:16 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:32:24 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:32:36 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:34:32 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:34:40 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:34:47 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:34:54 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:34:57 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:34:59 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:35:03 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:35:15 <nil>
+2021/10/12 21:35:20 empID 2 charge 2011
+2021/10/12 21:35:23 empID 2 charge 2022
+2021/10/12 21:35:26 empID 2 charge 2023
+2021/10/12 21:35:29 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 21:35:40 <nil>
+2021/10/12 21:35:45 empID 2 charge 2011
+2021/10/12 21:35:48 empID 2 charge 2023
+2021/10/12 21:35:51 empID 2 charge 2011
+2021/10/12 21:36:17 {Contact:17752254783 Address:Mecury Date:2021-10-06 00:00:00 +0800 CST ProductID:1111 Amount:20000}
+2021/10/12 21:36:25 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:36:25 Order {ID:1 Contact:17752254783 Address:Mecury Date:2021-10-05 16:00:00 +0000 UTC ProductID:1111 Amount:20000.000 Closed:0}
+2021/10/12 21:39:50 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:40:23 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:40:23 Order {ID:1 Contact:17752254783 Address:Mecury Date:2021-10-05 16:00:00 +0000 UTC ProductID:1111 Amount:20000.000 Closed:0}
+2021/10/12 21:43:00 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:43:05 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:43:05 Order {ID:1 Contact:17752254783 Address:Mecury Date:2021-10-05 16:00:00 +0000 UTC ProductID:1111 Amount:20000.000 Closed:0}
+2021/10/12 21:44:49 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:44:57 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:44:57 Order {ID:1 Contact:17752254783 Address:Mecury Date:2021-10-05 16:00:00 +0000 UTC ProductID:1111 Amount:20000.000 Closed:0}
+2021/10/12 21:44:57 [{ChargeNumber:2011 ProjectName:database} {ChargeNumber:2022 ProjectName:operating system} {ChargeNumber:2023 ProjectName:compiler} {ChargeNumber:2024 ProjectName:web application}] 
+ order ID 1111 
+2021/10/12 21:47:22 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:54:49 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:54:55 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:54:55 Order {ID:1 Contact:17752254783 Address:Mecury Date:2021-10-05 16:00:00 +0000 UTC ProductID:1111 Amount:20000.000 Closed:0}
+2021/10/12 21:54:55 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/12 21:54:59 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:54:59 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/12 21:54:59 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 0 
+2021/10/12 21:55:01 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:55:01 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/12 21:55:01 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 0 
+2021/10/12 21:55:03 select order {OrderID:4 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:55:03 Order {ID:0 Contact: Address: Date:0001-01-01 00:00:00 +0000 UTC ProductID:0 Amount: Closed:0}
+2021/10/12 21:55:03 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 0 
+2021/10/12 21:59:45 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 21:59:51 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:59:51 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/12 21:59:55 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 21:59:58 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:01 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:03 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:03 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/12 22:00:26 {Contact:9999 Address:Mars Date:2021-10-12 00:00:00 +0800 CST ProductID:2222 Amount:12999}
+2021/10/12 22:00:34 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:34 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/12 22:00:38 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:38 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 2222 
+2021/10/12 22:00:41 select order {OrderID:3 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:48 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/12 22:00:48 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/12 22:00:58 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 22:01:17 <nil>
+2021/10/12 22:01:21 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 22:02:54 name ERA account cccccc
+2021/10/12 22:04:18 empID 2 charge 2011
+2021/10/12 22:04:21 empID 2 charge 2022
+2021/10/12 22:04:24 empID 2 charge 2023
+2021/10/12 22:04:27 empID 2 charge 2024
+2021/10/12 22:04:30 empID 2 charge 2022
+2021/10/12 22:04:59 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:05:53 Server arg {Etype:salaried Mail:bbb@cc.com Security:aaaaa Tax:0.12 Other:200 Phone:177 Rate:20000}
+2021/10/12 22:06:01 emp name : {ID:3 Name:guest Password:123456 Type:salaried Mail:bbb@cc.com SocialSecurityNumber:aaaaa StandardTaxDeductions:0.12 OtherDeductions:200.00 PhoneNumber:177 SalaryRate:20000.00 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:07:20 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:10:34 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:10:43 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/12 22:17:03 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:17:10 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:18:00 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:20:08 emp name : {ID:2 Name:guest Password:123456 Type:salaried Mail:aaa@bb.com SocialSecurityNumber: StandardTaxDeductions:0.02 OtherDeductions:1.00 PhoneNumber:17752254783 SalaryRate:1.00 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:deposit Deleted:{Int32:0 Valid:true} Root:{Int32:1 Valid:true}}
+2021/10/12 22:21:30 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:21:35 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:23:52 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:24:56 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:37:14 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:37:20 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:37:50 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:39:02 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:39:43 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:44:07 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:44:12 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:46:36 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:46:40 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:46:48 update arg {empID:0 Etype:hour Mail:9921083207@gmail.com Security:564545848389455 Tax:0.12 Other:10000.00 Phone:197 Rate:0.25}
+2021/10/12 22:52:06 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 22:52:10 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 22:52:17 update arg {EmpID:1 Etype:hour Mail:9921083207@gmail.com Security:564545848389455 Tax:0.12 Other:10000.00 Phone:789 Rate:0.25}

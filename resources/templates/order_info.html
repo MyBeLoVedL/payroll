@@ -22,8 +22,7 @@
 					laydate.render({
 						elem: '#st' //指定元素
 					});
-				}
-			};
+				});
 			layui.use('laydate', function() {
 				var laydate = layui.laydate;
 
@@ -146,7 +145,7 @@
 										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
 									</li>
 									<li>
-										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
+										<a href="/resources/templates/admin_report.html" onclick="return canuse()">管理员工报告</a>
 									</li>
 								</ul>
 							</li>
@@ -318,7 +317,7 @@
 														<c:forEach items="${alist}" var="out">
 															<form action="/updateOldOrder" method="get">
 																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
-
+																{{if .Display}}
 
 																<tr>
 
@@ -330,7 +329,7 @@
 																		<span>{{.Address}}</span>
 																	</td>
 																	<td>
-																		<span>{{.ProductID}}</span>
+																		<span>{{.ProductName}}</span>
 																	</td>
 																	<td>
 																		<span>{{.Amount}}</span>
@@ -357,6 +356,7 @@
 																	</td>
 																</tr>
 
+																{{end}}
 
 															</form>
 														</c:forEach>

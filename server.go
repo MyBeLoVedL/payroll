@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -62,7 +63,7 @@ func setRouter(r *gin.Engine) {
 
 	})
 
-	r.Any("/loginForm", func(c *gin.Context) {
+	r.GET("/loginForm", func(c *gin.Context) {
 		body, _ := ioutil.ReadAll(c.Request.Body)
 		log.Printf("%v : %v : %v\n", c.Request.Method, c.Request.RequestURI, string(body))
 		var info Login
@@ -89,7 +90,7 @@ func setRouter(r *gin.Engine) {
 		}
 	})
 
-	r.Any("/updatePay", func(c *gin.Context) {
+	r.GET("/updatePay", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "change_method.html", nil)
 	})
 
@@ -137,7 +138,7 @@ func setRouter(r *gin.Engine) {
 
 	})
 
-	r.Any("/timecard", func(c *gin.Context) {
+	r.GET("/timecard", func(c *gin.Context) {
 
 		type timecardParam struct {
 			Charge int       `form:"charge"`
@@ -172,18 +173,14 @@ func setRouter(r *gin.Engine) {
 			"showUsername": session.User.Name,
 			"prefix":       prefix,
 			"Exceeded":     false,
-			"Projects":     db.GetProjects(),
+			"Projects":     misc.GetProjects(),
 		})
 	})
 
-	r.Any("/showOrder", func(c *gin.Context) {
+	r.GET("/showOrder", func(c *gin.Context) {
 
 		c.HTML(http.StatusOK, "add_order.html", gin.H{
-			"Products": []Product{
-				{1111, "RTX 3090"},
-				{2222, "GTX 1080"},
-				{3333, "Intel i9 9900k"},
-			},
+			"Products": misc.GetProducts(),
 		})
 	})
 
@@ -228,13 +225,13 @@ func setRouter(r *gin.Engine) {
 
 	})
 
-	r.Any("/updateOrder", func(c *gin.Context) {
+	r.GET("/updateOrder", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "order_info.html", gin.H{
 			"Orders": []Order{},
 		})
 	})
 
-	r.Any("/selectOrder", func(c *gin.Context) {
+	r.GET("/selectOrder", func(c *gin.Context) {
 		type Arg struct {
 			OrderID   int64  `form:"orderID" binding:"required"`
 			Contact   string `form:"contact"`
@@ -250,24 +247,44 @@ func setRouter(r *gin.Engine) {
 
 		log.Printf("select order %+v\n", arg)
 
-		order, _ := db.SelectOrderByID(arg.OrderID)
-		log.Printf("Order %+v\n", order)
-		c.HTML(http.StatusOK, "order_info.html", gin.H{
-			"ID":      order.ID,
-			"Contact": order.Contact,
-			"Address": order.Address,
-			"Amount":  order.Amount,
-			"Date":    order.Date.String(),
-			"Products": []Product{
-				{1111, "RTX 3090"},
-				{2222, "GTX 1080"},
-				{3333, "Intel i9 9900k"},
-			},
-		})
+		order, err := db.SelectOrderByID(arg.OrderID)
+		if err != nil {
+			c.HTML(http.StatusOK, "order_info.html", gin.H{
+				"Display": false,
+			})
+			return
+		}
 
+		var closed string
+		if order.Closed == 1 {
+			closed = "closed"
+		} else {
+			closed = "active"
+		}
+
+		pros := misc.GetProducts()
+		var projectName string
+		for _, pro := range pros {
+			if pro.ProductID == int(order.ProductID) {
+				projectName = pro.ProductName
+			}
+		}
+		log.Printf("%+v \n order ID %+v ", pros, order.ProductID)
+
+		c.HTML(http.StatusOK, "order_info.html", gin.H{
+			"Display":     true,
+			"ID":          order.ID,
+			"Contact":     order.Contact,
+			"Address":     order.Address,
+			"Amount":      order.Amount,
+			"Date":        order.Date.String(),
+			"ProductName": projectName,
+			"Closed":      closed,
+			"Products":    misc.GetProducts(),
+		})
 	})
 
-	r.Any("/updateOrderAction", func(c *gin.Context) {
+	r.GET("/updateOrderAction", func(c *gin.Context) {
 		type UpdateOrderParams struct {
 			Contact   string    `form:"contact"`
 			Address   string    `form:"address"`
@@ -312,7 +329,7 @@ func setRouter(r *gin.Engine) {
 		})
 	})
 
-	r.Any("/deleteOrder", func(c *gin.Context) {
+	r.GET("/deleteOrder", func(c *gin.Context) {
 		// type delOrderArg struct {
 		// 	orderID int64 `form:"orderID" binding:"required"`
 		// }
@@ -351,16 +368,12 @@ func setRouter(r *gin.Engine) {
 		}
 
 		c.HTML(http.StatusOK, "update_order.html", gin.H{
-			"ID":      id,
-			"Contact": order.Contact,
-			"Address": order.Address,
-			"Amount":  order.Amount,
-			"Date":    order.Date.String(),
-			"Products": []Product{
-				{1111, "RTX 3090"},
-				{2222, "GTX 1080"},
-				{3333, "Intel i9 9900k"},
-			},
+			"ID":       id,
+			"Contact":  order.Contact,
+			"Address":  order.Address,
+			"Amount":   order.Amount,
+			"Date":     order.Date.String(),
+			"Products": misc.GetProducts(),
 		})
 	})
 
@@ -462,8 +475,8 @@ func setRouter(r *gin.Engine) {
 			})
 		}
 
-		c.HTML(http.StatusOK, "displayEmpoyee.main", gin.H{
-			"ID":       arg.ID,
+		c.HTML(http.StatusOK, "update_employee.html", gin.H{
+			"empID":    arg.ID,
 			"Etype":    arg.Type,
 			"Mail":     arg.Mail,
 			"Security": arg.SocialSecurityNumber,
@@ -472,6 +485,35 @@ func setRouter(r *gin.Engine) {
 			"Phone":    arg.PhoneNumber,
 			"Rate":     arg.SalaryRate,
 		})
+	})
+
+	r.GET("updateEmployeeAction", func(c *gin.Context) {
+		type AddArg struct {
+			EmpID    int64  `form:"empID" binding:"required"`
+			Etype    string `form:"etype" binding:"required"`
+			Mail     string `form:"mail" binding:"required"`
+			Security string `form:"security" binding:"required"`
+			Tax      string `form:"tax" binding:"required"`
+			Other    string `form:"other" binding:"required"`
+			Phone    string `form:"phone" binding:"required"`
+			Rate     string `form:"rate" binding:"required"`
+		}
+		var arg AddArg
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update employee not enough arguments: %v", err.Error()),
+			})
+		}
+		log.Printf("update arg %+v\n", arg)
+		err = db.UpdateEmployee(arg.EmpID, arg.Etype, arg.Mail, arg.Security, arg.Tax, arg.Other, arg.Phone, arg.Rate)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update failed due to server error : %v", err.Error()),
+			})
+			return
+		}
+		c.HTML(http.StatusOK, "main.html", nil)
 	})
 
 	r.GET("/deleteEmployee", func(c *gin.Context) {
@@ -511,7 +553,7 @@ func setRouter(r *gin.Engine) {
 			"Hours":    hours,
 			"PayYear":  payYear,
 			"Vacation": DEFAULT_VACATION,
-			"Projects": db.GetProjects(),
+			"Projects": misc.GetProjects(),
 			"Records":  []ReportRecord{},
 		})
 	})
@@ -544,12 +586,12 @@ func setRouter(r *gin.Engine) {
 				"Hours":    hours,
 				"PayYear":  payYear,
 				"Vacation": DEFAULT_VACATION,
-				"Projects": db.GetProjects(),
+				"Projects": misc.GetProjects(),
 			})
 			return
 		}
 
-		pros := db.GetProjects()
+		pros := misc.GetProjects()
 		var projectName string
 		for _, pro := range pros {
 			if pro.ChargeNumber == num {
@@ -563,7 +605,7 @@ func setRouter(r *gin.Engine) {
 			"Hours":    hours,
 			"PayYear":  payYear,
 			"Vacation": DEFAULT_VACATION,
-			"Projects": db.GetProjects(),
+			"Projects": misc.GetProjects(),
 		})
 	})
 
@@ -623,11 +665,6 @@ type ReportRecord struct {
 }
 
 const DEFAULT_VACATION = 10
-
-type Product struct {
-	ProductID   int
-	ProductName string
-}
 
 type Record struct {
 	EmpID   int64
