@@ -9,17 +9,16 @@ func GetHoursByEmpID(id int64) (int, error) {
 	var hours int
 	err := dbIns.QueryRow("select sum(hours)  from timecard_record  where card_id =  ( select id from timecard where emp_id = ?);", id).Scan(&hours)
 	if err != nil {
-		log.Fatal(err)
 		return 0, err
 	}
 	return hours, nil
 }
 
 func GetHoursByProject(id int64, charge int64) (int, error) {
+	log.Printf("empID %v charge %v\n", id, charge)
 	var hours int
 	err := dbIns.QueryRow("select sum(hours)  from timecard_record  where card_id =  ( select id from timecard where emp_id = ?) and charge_number = ? ;", id, charge).Scan(&hours)
 	if err != nil {
-		log.Fatal(err)
 		return 0, err
 	}
 	return hours, nil

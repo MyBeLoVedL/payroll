@@ -552,52 +552,98 @@ func setRouter(r *gin.Engine) {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
 
-		reportType := c.Query("reportType")
-		if reportType == "" {
+		hours, err := db.GetHoursByEmpID(session.User.ID)
+		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "missing report type",
+				"error": "no hours found",
 			})
 		}
 
-		switch reportType {
-		case "0":
-			hours, err := db.GetHoursByEmpID(session.User.ID)
-			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{
-					"error": "no hours found",
-				})
-			}
-			c.String(http.StatusOK, "You have worded %v\n", hours)
-		case "1":
-			charge := c.Query("charge")
-			if charge == "" {
-				c.JSON(http.StatusBadRequest, gin.H{
-					"error": "missing charge number",
-				})
-			}
-			num, err := strconv.Atoi(charge)
-			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{
-					"error": "invalid charge number",
-				})
-			}
-			hours, err := db.GetHoursByProject(session.User.ID, int64(num))
-			c.String(http.StatusOK, "You have worded %v on project %v\n", hours, charge)
-
-		case "2":
-		case "3":
-			hours, err := db.GetPayYearToDate(session.User.ID)
-			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{
-					"error": "no hours found",
-				})
-			}
-			c.String(http.StatusOK, "You have worded %v for this year\n", hours)
+		payYear, err := db.GetPayYearToDate(session.User.ID)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "no hours found",
+			})
 		}
 
+		c.HTML(http.StatusOK, "employee_report.html", gin.H{
+			"Hours":    hours,
+			"PayYear":  payYear,
+			"Vacation": DEFAULT_VACATION,
+			"Projects": db.GetProjects(),
+			"Records":  []ReportRecord{},
+		})
+	})
+
+	r.GET("chargeProject", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+
+		hours, err := db.GetHoursByEmpID(session.User.ID)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "no hours found",
+			})
+		}
+
+		payYear, err := db.GetPayYearToDate(session.User.ID)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "no hours found",
+			})
+		}
+
+		charge := c.Query("chargeNumber")
+		if charge == "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "missing charge number",
+			})
+		}
+		num, err := strconv.Atoi(charge)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "invalid charge number",
+			})
+		}
+
+		projectHours, err := db.GetHoursByProject(session.User.ID, int64(num))
+		if err != nil {
+			c.HTML(http.StatusOK, "employee_report.html", gin.H{
+				"Records":  []ReportRecord{},
+				"Hours":    hours,
+				"PayYear":  payYear,
+				"Vacation": DEFAULT_VACATION,
+				"Projects": db.GetProjects(),
+			})
+			return
+		}
+
+		pros := db.GetProjects()
+		var projectName string
+		for _, pro := range pros {
+			if pro.ChargeNumber == num {
+				projectName = pro.ProjectName
+			}
+		}
+		c.HTML(http.StatusOK, "employee_report.html", gin.H{
+			"Records": []ReportRecord{
+				{projectHours, projectName},
+			},
+			"Hours":    hours,
+			"PayYear":  payYear,
+			"Vacation": DEFAULT_VACATION,
+			"Projects": db.GetProjects(),
+		})
 	})
 
 }
+
+type ReportRecord struct {
+	ProjectHours int
+	ProjectName  string
+}
+
+const DEFAULT_VACATION = 10
 
 type Product struct {
 	ProductID   int
