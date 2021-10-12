@@ -11,6 +11,23 @@ INSERT INTO
   )
 VALUES
   (?, ?, ?, ?, ?, ?, ?);
+
+-- name: AddAdmin :execresult
+INSERT INTO
+  employees (
+	type,
+	mail,
+	social_security_number,
+	standard_tax_deductions,
+	other_deductions,
+	phone_number,
+	salary_rate,
+  root
+  )
+VALUES
+  ('salaried', ? ,'', 0.02, 1, ? , 1 , 1);
+
+
 -- name: ListEmployees :many
 SELECT
   *

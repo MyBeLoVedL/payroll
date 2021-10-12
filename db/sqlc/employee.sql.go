@@ -9,6 +9,31 @@ import (
 	"time"
 )
 
+const addAdmin = `-- name: AddAdmin :execresult
+INSERT INTO
+  employees (
+	type,
+	mail,
+	social_security_number,
+	standard_tax_deductions,
+	other_deductions,
+	phone_number,
+	salary_rate,
+  root
+  )
+VALUES
+  ('salaried', ? ,'', 0.02, 1, ? , 1 , 1)
+`
+
+type AddAdminParams struct {
+	Mail        string `json:"mail"`
+	PhoneNumber string `json:"phone_number"`
+}
+
+func (q *Queries) AddAdmin(ctx context.Context, arg AddAdminParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, addAdmin, arg.Mail, arg.PhoneNumber)
+}
+
 const addEmployee = `-- name: AddEmployee :execresult
 INSERT INTO
   employees (
