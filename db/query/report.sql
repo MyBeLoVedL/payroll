@@ -8,6 +8,11 @@ select sum(hours)  from timecard_record
 
 
 
+-- name: GetIDByName :many
+select id from employees where name = ?; 
+
+
+
 
 
 

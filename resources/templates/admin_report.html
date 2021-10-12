@@ -6,30 +6,29 @@
 		<link rel="stylesheet" href="/resources/layui/css/layui.css">
 		<script src="/resources/layui/layui.js"></script>
 		<script type="text/javascript">
-			function canuse() {
-				var phonenumber = < %= (String) session.getAttribute("user") % >
-					if (phonenumber == "15809872335") {
-						return true;
-					} else {
-						alert("对不起，只有管理员可以使用该功能！");
-						return false;
-					}
-			}
+			// function canuse() {
+			// 	var phonenumber = < %= (String) session.getAttribute("user") % >
+			// 		if (phonenumber == "15809872335") {
+			// 			return true;
+			// 		} else {
+			// 			alert("对不起，只有管理员可以使用该功能！");
+			// 			return false;
+			// 		}
+			// }
 			layui.use('laydate', function() {
 				var laydate = layui.laydate;
-
 				//执行一个laydate实例
 				laydate.render({
 					elem: '#st' //指定元素
 				});
-			});
 			var laydate = layui.laydate;
 
 			//执行一个laydate实例
 			laydate.render({
-			elem: '#et' //指定元素
+				elem: '#et' //指定元素
 			});
 			});
+
 
 			function deletes(root) {
 				var flag = confirm("【确认删除？】");
@@ -224,7 +223,7 @@
 											<条件筛选>
 										</h4>
 										<p class="text-muted font-13 mb-4">
-										<form action="SearchExpenseServlet" method="post">
+										<form action="/adminReport" method="get">
 											<!-- <span>手机号</span>
 											<br>
 											<span><input type="text" name="phonenumber" id="pn"
@@ -234,8 +233,8 @@
 											<br>
 											<span>
 												<select name="type" data-plugin="customselect">
-													<option value="总工时">总工时</option>
-													<option value="年初至今工资">年初至今工资</option>
+													<option value="hours">总工时</option>
+													<option value="pay">年初至今工资</option>
 												</select>
 											</span>
 											<br>
@@ -253,7 +252,7 @@
 											<span>员工姓名</span>
 
 											<br>
-											<span><input type="text" name="phonenumber" id="pn"
+											<span><input type="text" name="empName" id="pn"
 													class="form-control"></span>
 											<br>
 											<span><input type="submit" value="查询"
@@ -261,6 +260,49 @@
 										</form>
 										<!-- <%-- <code>$().DataTable();</code>. --%> -->
 										</p>
+										
+										<table class="layui-table">
+											<thead>
+												<tr>
+													<th>工号</th>
+													<th>姓名</th>
+													<th>数值</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:choose>
+													<c:when test="${alist=='[]'}">
+													</c:when>
+													<c:otherwise>
+														<c:forEach items="${alist}" var="out">
+															<form action="/resources/templates/save_path.html" method="get">
+																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
+																{{range .Employees}}
+																 <tr>
+																	 <td>
+																		 <span>{{.EmpID}}</span>
+																		 
+																		</td>
+																		<td>
+																			<span>{{.Name}}</span>
+																		</td>
+																		<td>
+																			<span>{{.Numeric}}</span>
+																		</td>
+																		<td>
+																			<input type="submit" value="保存"
+																			class="btn btn-primary btn-sm">
+																			<input type="hidden" name="empID" value={{.EmpID}} id="empID" />
+																		</td>
+																	</tr>
+																{{end}}	
+										
+															</form>
+														</c:forEach>
+													</c:otherwise>
+												</c:choose>
+											</tbody>
+										</table>
 									</div> <!-- end card body-->
 								</div> <!-- end card -->
 							</div><!-- end col-->

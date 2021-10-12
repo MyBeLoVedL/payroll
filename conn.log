@@ -125,3 +125,16 @@
 2021/10/12 10:55:20 empID 1 charge 2022
 2021/10/12 10:55:23 empID 1 charge 2023
 2021/10/12 10:55:26 empID 1 charge 2024
+2021/10/12 11:59:25 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:05:41 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:10:06 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:11:08 sql: Scan error on column index 0, name "sum(amount)": converting NULL to string is unsupported
+2021/10/12 12:16:05 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:17:13 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:23:13 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:25:29 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:27:06 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:27:23 IDs [2 3 4 5 6 7]
+2021/10/12 12:29:43 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 12:29:55 IDs [2 3 4 5 6 7]
+2021/10/12 12:30:47 IDs [1]

@@ -1,8 +1,7 @@
-
 CREATE TABLE `employees` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT "guest",
-  `password` varchar(255) DEFAULT "123456",
+  `name` varchar(255) NOT NULL DEFAULT "guest",
+  `password` varchar(255) NOT NULL DEFAULT "123456",
   `type` ENUM ('hour', 'salaried', 'commissioned'),
   `mail` varchar(255) NOT NULL,
   `social_security_number` varchar(255) NOT NULL,
@@ -24,7 +23,7 @@ CREATE TABLE `employee_account` (
 CREATE TABLE `timecard` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `emp_id` bigint NOT NULL,
-  `start_date` datetime DEFAULT now(),
+  `start_date` date DEFAULT now(),
   `committed` tinyint DEFAULT 0
 );
 
@@ -72,4 +71,3 @@ ALTER TABLE `paycheck` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);
 ALTER TABLE `employee_account` ADD FOREIGN KEY (`id`) REFERENCES `employees` (`id`);
 
 CREATE INDEX `employees_index_0` ON `employees` (`id`, `password`);
-

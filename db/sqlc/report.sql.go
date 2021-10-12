@@ -19,3 +19,30 @@ func (q *Queries) GetHoursByEmpID(ctx context.Context) (interface{}, error) {
 	err := row.Scan(&sum)
 	return sum, err
 }
+
+const getIDByName = `-- name: GetIDByName :many
+select id from employees where name = ?
+`
+
+func (q *Queries) GetIDByName(ctx context.Context, name string) ([]int64, error) {
+	rows, err := q.db.QueryContext(ctx, getIDByName, name)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []int64
+	for rows.Next() {
+		var id int64
+		if err := rows.Scan(&id); err != nil {
+			return nil, err
+		}
+		items = append(items, id)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}

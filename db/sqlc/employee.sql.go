@@ -382,8 +382,8 @@ WHERE id = ?
 `
 
 type UpdatePasswordParams struct {
-	Password sql.NullString `json:"password"`
-	ID       int64          `json:"id"`
+	Password string `json:"password"`
+	ID       int64  `json:"id"`
 }
 
 func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) error {

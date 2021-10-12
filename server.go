@@ -453,7 +453,7 @@ func setRouter(r *gin.Engine) {
 		}
 		log.Printf("emp name : %+v\n", emp)
 		c.HTML(http.StatusOK, "employee_info.html", gin.H{
-			"Name":  emp.Name.String,
+			"Name":  emp.Name,
 			"empID": emp.ID,
 		})
 	})
@@ -636,6 +636,54 @@ func setRouter(r *gin.Engine) {
 		})
 	})
 
+	r.GET("/adminReport", func(c *gin.Context) {
+		type ReportArg struct {
+			Rtype     string `form:"type" binding:"required"`
+			EmpName   string `form:"empName" binding:"required"`
+			StartDate string `form:"starttime" binding:"required"`
+			EndDate   string `form:"endtime" binding:"required"`
+		}
+		var arg ReportArg
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "bad report arg",
+			})
+		}
+
+		ids, err := db.GetIDByName(arg.EmpName)
+		log.Printf("IDs %v\n", ids)
+
+		if arg.Rtype == "hours" {
+			hours := make([]Record, 0)
+			for _, id := range ids {
+				hour, err := db.GetHoursByEmpID(id)
+				if err == nil {
+					hours = append(hours, Record{id, arg.EmpName, float64(hour)})
+				}
+			}
+			c.HTML(http.StatusOK, "admin_report.html", gin.H{
+				"Employees": hours,
+			})
+
+		} else if arg.Rtype == "pay" {
+			pays := make([]Record, 0)
+			for _, id := range ids {
+				pay, err := db.GetPayYearToDate(id)
+				if err == nil {
+					pays = append(pays, Record{id, arg.EmpName, pay})
+				}
+			}
+			c.HTML(http.StatusOK, "admin_report.html", gin.H{
+				"Employees": pays,
+			})
+
+		} else {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "unknown report type",
+			})
+		}
+	})
 }
 
 type ReportRecord struct {
@@ -648,4 +696,10 @@ const DEFAULT_VACATION = 10
 type Product struct {
 	ProductID   int
 	ProductName string
+}
+
+type Record struct {
+	EmpID   int64
+	Name    string
+	Numeric float64
 }
