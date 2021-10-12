@@ -186,3 +186,10 @@
 2021/10/12 06:55:36 name ZJU account GUNNER
 2021/10/12 06:57:43 GET : /loginForm?user=1&password=123456 : 
 2021/10/12 06:59:33 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 07:52:11 GET : /loginForm?user=1&password=123456 : 
+2021/10/12 07:54:02 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 07:54:15 <nil>
+2021/10/12 07:56:59 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 07:57:08 emp name : {ID:1 Name:{String:guest Valid:true} Password:{String:new password Valid:true} Type:commissioned Mail:6458966789@gmail.com SocialSecurityNumber:097144528532000 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:07810534734 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:1 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 07:57:12 emp name : {ID:2 Name:{String:guest Valid:true} Password:{String:123456 Valid:true} Type:commissioned Mail:2725429374@gmail.com SocialSecurityNumber:149854942334549 StandardTaxDeductions:0.23 OtherDeductions:20000.00 PhoneNumber:76760345274 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/12 08:00:33 GET : /loginForm?user=2&password=123456 : 
