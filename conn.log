@@ -120,3 +120,13 @@
 2021/10/13 08:55:25 GET : /loginForm?user=1&password=123456 : 
 2021/10/13 09:00:45 GET : /loginForm?user=1&password=123456 : 
 2021/10/13 09:00:58 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 09:06:53 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 09:07:07 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 09:11:52 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 09:14:00 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 09:14:10 select order {OrderID:1 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/13 09:14:10 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 1111 
+2021/10/13 09:14:13 select order {OrderID:2 Contact: ProductID:0 StartDate: EndDate:}
+2021/10/13 09:14:13 [{ProductID:1111 ProductName:RTX 3090} {ProductID:2222 ProductName:GTX 1080} {ProductID:3333 ProductName:Intel i9 9900k}] 
+ order ID 2222 
