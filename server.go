@@ -233,6 +233,14 @@ func setRouter(r *gin.Engine) {
 			return
 		}
 		id := session.User.ID
+		err = db.CheckTimecard(id)
+		if err != nil {
+			c.HTML(http.StatusBadRequest, "error_page.html", gin.H{
+				"Msg": "Create timecard failed",
+			})
+			return
+		}
+
 		card, err := db.SelectTimeCard(id)
 		if err != nil {
 			c.HTML(http.StatusOK, "error_page.html", gin.H{

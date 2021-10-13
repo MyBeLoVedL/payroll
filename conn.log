@@ -192,3 +192,39 @@
 2021/10/13 13:06:02 timecard info {ID:1 EmpID:2 StartDate:{Time:2021-10-12 21:32:16 +0000 UTC Valid:true} Committed:{Int32:1 Valid:true}}
 2021/10/13 13:10:08 GET : /loginForm?user=2&password=123456 : 
 2021/10/13 13:10:10 timecard info {ID:1 EmpID:2 StartDate:{Time:2021-10-12 21:32:16 +0000 UTC Valid:true} Committed:{Int32:1 Valid:true}}
+2021/10/13 01:37:32 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 01:37:39 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 01:40:40 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 01:52:15 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 02:02:53 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 02:02:55 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:02:55 <nil>
+2021/10/13 02:02:59 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:02:59 <nil>
+2021/10/13 02:03:06 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:03:06 <nil>
+2021/10/13 02:04:06 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:06 <nil>
+2021/10/13 02:04:06 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:06 <nil>
+2021/10/13 02:04:07 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:07 <nil>
+2021/10/13 02:04:08 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:08 <nil>
+2021/10/13 02:04:09 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:09 <nil>
+2021/10/13 02:04:09 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:09 <nil>
+2021/10/13 02:04:13 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:13 <nil>
+2021/10/13 02:04:14 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:14 <nil>
+2021/10/13 02:04:14 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:14 <nil>
+2021/10/13 02:04:22 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:22 <nil>
+2021/10/13 02:04:27 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:27 <nil>
+2021/10/13 02:04:50 timecard info {ID:1 EmpID:1 StartDate:{Time:2021-10-13 02:02:55 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 02:04:50 <nil>
+2021/10/13 02:05:04 GET : /loginForm?user=2&password=123456 : 
