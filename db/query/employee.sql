@@ -130,5 +130,7 @@ DELETE FROM purchase_order WHERE id = ?;
 DELETE FROM order_info WHERE order_id = ?;
 
 
+-- name: UpdateNamePassword :exec
+UPDATE employees SET name = ?,password = ? where id = ?;
 
 

@@ -76,3 +76,7 @@ func UpdateOrder(ctx context.Context, arg UpdateOrderParams) error {
 	err := store.UpdateOrder(context.Background(), arg)
 	return err
 }
+
+func UpdateNamePassword(ID int64, Name, Password string) error {
+	return q.UpdateNamePassword(context.Background(), UpdateNamePasswordParams{Name, Password, ID})
+}

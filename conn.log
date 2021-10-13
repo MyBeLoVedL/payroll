@@ -107,3 +107,16 @@
 2021/10/12 22:52:06 GET : /loginForm?user=2&password=123456 : 
 2021/10/12 22:52:10 emp name : {ID:1 Name:guest Password:123456 Type:salaried Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:00712595884 SalaryRate:0.25 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
 2021/10/12 22:52:17 update arg {EmpID:1 Etype:hour Mail:9921083207@gmail.com Security:564545848389455 Tax:0.12 Other:10000.00 Phone:789 Rate:0.25}
+2021/10/12 23:09:58 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:12:30 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:23:31 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:48:13 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:48:36 update arg {EmpID:0 Name:Here Password:123456}
+2021/10/12 23:51:40 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:51:53 update arg {EmpID:2 Name:Here Password:123456}
+2021/10/12 23:53:16 GET : /loginForm?user=2&password=123456 : 
+2021/10/12 23:53:39 update arg {EmpID:2 Name:Cayn Password:123456}
+2021/10/13 08:53:49 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 08:55:25 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 09:00:45 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 09:00:58 GET : /loginForm?user=2&password=123456 : 

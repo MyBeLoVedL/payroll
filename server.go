@@ -53,6 +53,85 @@ func setRouter(r *gin.Engine) {
 		c.HTML(http.StatusOK, "login.html", gin.H{
 			"error": "No error",
 		})
+
+	})
+
+	r.GET("/profile", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+
+		arg, err := db.SelectEmployee(int64(session.User.ID))
+		if err != nil {
+			if err != nil {
+				c.HTML(http.StatusOK, "error_page.html", gin.H{
+					"Msg": "no user when selecting employee",
+				})
+				return
+			}
+		}
+
+		c.HTML(http.StatusOK, "profile.html", gin.H{
+			"EmpID": arg.ID,
+			"Name":  arg.Name,
+			"Etype": arg.Type,
+			"Mail":  arg.Mail,
+			"S":     arg.SocialSecurityNumber,
+			"Tax":   arg.StandardTaxDeductions,
+			"Other": arg.OtherDeductions,
+			"Phone": arg.PhoneNumber,
+			"Rate":  arg.SalaryRate,
+		})
+
+	})
+
+	r.GET("/updateProfile", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, err := misc.GSS.Get(sid)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "NO session",
+			})
+			return
+		}
+
+		emp, err := db.SelectEmployee(session.User.ID)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "no user when selecting employee",
+			})
+			return
+		}
+
+		c.HTML(http.StatusOK, "update_profile.html", gin.H{
+			"Name":     emp.Name,
+			"Password": emp.Password,
+			"EmpID":    emp.ID,
+		})
+	})
+
+	r.GET("/updateProfileAction", func(c *gin.Context) {
+		type AddArg struct {
+			EmpID    int64  `form:"empID" binding:"required"`
+			Name     string `form:"name" binding:"required"`
+			Password string `form:"password" binding:"required"`
+		}
+		var arg AddArg
+		err := c.BindQuery(&arg)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update employee not enough arguments: %v", err.Error()),
+			})
+			return
+		}
+		log.Printf("update arg %+v\n", arg)
+		err = db.UpdateNamePassword(arg.EmpID, arg.Name, arg.Password)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update profile failed due to server error : %v", err.Error()),
+			})
+			return
+		}
+		c.HTML(http.StatusOK, "main.html", nil)
 	})
 
 	r.GET("/cookie", func(c *gin.Context) {
@@ -389,6 +468,18 @@ func setRouter(r *gin.Engine) {
 		c.HTML(http.StatusOK, "employee_info.html", gin.H{})
 	})
 
+	r.GET("/disReport", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+		if session.User.Root.Int32 != 1 {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "您并非管理员，无法进行此项操作",
+			})
+			return
+		}
+		c.HTML(http.StatusOK, "admin_report.html", nil)
+	})
+
 	r.GET("/searchEmployee", func(c *gin.Context) {
 		idStr := c.Query("empID")
 		if idStr == "" {
@@ -504,6 +595,7 @@ func setRouter(r *gin.Engine) {
 			c.HTML(http.StatusOK, "error_page.html", gin.H{
 				"Msg": fmt.Sprintf("update employee not enough arguments: %v", err.Error()),
 			})
+			return
 		}
 		log.Printf("update arg %+v\n", arg)
 		err = db.UpdateEmployee(arg.EmpID, arg.Etype, arg.Mail, arg.Security, arg.Tax, arg.Other, arg.Phone, arg.Rate)
