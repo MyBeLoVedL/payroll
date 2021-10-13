@@ -53,10 +53,10 @@ CREATE TABLE `purchase_order` (
 
 CREATE TABLE `paycheck` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
-  `emp_id` bigint,
-  `amount` decimal(10,2),
-  `start_date` timestamp,
-  `end_date` timestamp
+  `emp_id` bigint not null,
+  `amount` decimal(10,2) not null,
+  `start_date` timestamp not null,
+  `end_date` timestamp not null
 );
 
 ALTER TABLE `timecard` ADD FOREIGN KEY (`emp_id`) REFERENCES `employees` (`id`);

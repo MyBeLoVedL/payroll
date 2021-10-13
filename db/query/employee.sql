@@ -134,3 +134,14 @@ DELETE FROM order_info WHERE order_id = ?;
 UPDATE employees SET name = ?,password = ? where id = ?;
 
 
+-- name: GetPayInfo :many
+SELECT id,payment_method from employees;
+
+
+-- name: CreatePaycheck :exec
+INSERT INTO paycheck(emp_id,amount,start_date,end_date) VALUES (?,?,?,?);
+
+
+-- name: CommitCard :exec
+UPDATE timecard SET committed = 1 WHERE emp_id = ?;
+

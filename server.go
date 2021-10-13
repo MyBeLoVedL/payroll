@@ -554,18 +554,19 @@ func setRouter(r *gin.Engine) {
 		idStr := c.Query("empID")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "No such employee to update",
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update employee not enough arguments: %v", err.Error()),
 			})
+			return
 		}
 
 		arg, err := db.SelectEmployee(int64(id))
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "No such employee to delete",
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": fmt.Sprintf("update employee not enough arguments: %v", err.Error()),
 			})
+			return
 		}
-
 		c.HTML(http.StatusOK, "update_employee.html", gin.H{
 			"empID":    arg.ID,
 			"Etype":    arg.Type,
@@ -747,6 +748,90 @@ func setRouter(r *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": "unknown report type",
 			})
+		}
+	})
+
+	r.GET("/runPayroll", func(c *gin.Context) {
+		info, err := db.GetPayInfo()
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "no user when selecting employee",
+			})
+			return
+		}
+		for _, emp := range info {
+			empInfo, _ := db.SelectEmployee(emp.ID)
+
+			switch emp.PaymentMethod {
+			case "hour":
+				hours, err := db.GetHoursByEmpID(emp.ID)
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "employee info not available",
+					})
+					return
+				}
+				rate, err := strconv.ParseFloat(empInfo.SalaryRate, 64)
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "invalid salary rate for employee",
+					})
+					return
+				}
+				err = db.CreatePaycheck(emp.ID, fmt.Sprintf("%f", float64(hours)*rate), time.Now(), time.Now())
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "create paycheck failed",
+					})
+					return
+				}
+			case "salaried":
+				rate, err := strconv.ParseFloat(empInfo.SalaryRate, 64)
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "invalid salary rate for employee",
+					})
+					return
+				}
+				err = db.CreatePaycheck(emp.ID, fmt.Sprintf("%f", rate), time.Now(), time.Now())
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "create paycheck failed",
+					})
+					return
+				}
+
+			case "commissioned":
+				total, err := db.GetAmountByID(emp.ID)
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "Get amount failed",
+					})
+					return
+				}
+				rate, err := strconv.ParseFloat(empInfo.SalaryRate, 64)
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "invalid salary rate for employee",
+					})
+					return
+				}
+
+				err = db.CreatePaycheck(emp.ID, fmt.Sprintf("%f", rate*total), time.Now(), time.Now())
+				if err != nil {
+					c.HTML(http.StatusOK, "error_page.html", gin.H{
+						"Msg": "create paycheck failed",
+					})
+					return
+				}
+			}
+			err = db.CommitCard(emp.ID)
+			if err != nil {
+				c.HTML(http.StatusOK, "error_page.html", gin.H{
+					"Msg": "commit timecard failed",
+				})
+				return
+			}
 		}
 	})
 }

@@ -78,11 +78,11 @@ type OrderInfo struct {
 }
 
 type Paycheck struct {
-	ID        int64          `json:"id"`
-	EmpID     sql.NullInt64  `json:"emp_id"`
-	Amount    sql.NullString `json:"amount"`
-	StartDate sql.NullTime   `json:"start_date"`
-	EndDate   sql.NullTime   `json:"end_date"`
+	ID        int64     `json:"id"`
+	EmpID     int64     `json:"emp_id"`
+	Amount    string    `json:"amount"`
+	StartDate time.Time `json:"start_date"`
+	EndDate   time.Time `json:"end_date"`
 }
 
 type PurchaseOrder struct {

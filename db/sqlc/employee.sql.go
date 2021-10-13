@@ -137,6 +137,36 @@ func (q *Queries) AddTimecardRecord(ctx context.Context, arg AddTimecardRecordPa
 	return err
 }
 
+const commitCard = `-- name: CommitCard :exec
+UPDATE timecard SET committed = 1 WHERE emp_id = ?
+`
+
+func (q *Queries) CommitCard(ctx context.Context, empID int64) error {
+	_, err := q.db.ExecContext(ctx, commitCard, empID)
+	return err
+}
+
+const createPaycheck = `-- name: CreatePaycheck :exec
+INSERT INTO paycheck(emp_id,amount,start_date,end_date) VALUES (?,?,?,?)
+`
+
+type CreatePaycheckParams struct {
+	EmpID     int64     `json:"emp_id"`
+	Amount    string    `json:"amount"`
+	StartDate time.Time `json:"start_date"`
+	EndDate   time.Time `json:"end_date"`
+}
+
+func (q *Queries) CreatePaycheck(ctx context.Context, arg CreatePaycheckParams) error {
+	_, err := q.db.ExecContext(ctx, createPaycheck,
+		arg.EmpID,
+		arg.Amount,
+		arg.StartDate,
+		arg.EndDate,
+	)
+	return err
+}
+
 const deleteEmployee = `-- name: DeleteEmployee :exec
 UPDATE employees SET deleted = 1 where id = ?
 `
@@ -162,6 +192,38 @@ DELETE FROM purchase_order WHERE id = ?
 func (q *Queries) DeletePurchaseOrderById(ctx context.Context, id int64) error {
 	_, err := q.db.ExecContext(ctx, deletePurchaseOrderById, id)
 	return err
+}
+
+const getPayInfo = `-- name: GetPayInfo :many
+SELECT id,payment_method from employees
+`
+
+type GetPayInfoRow struct {
+	ID            int64                  `json:"id"`
+	PaymentMethod EmployeesPaymentMethod `json:"payment_method"`
+}
+
+func (q *Queries) GetPayInfo(ctx context.Context) ([]GetPayInfoRow, error) {
+	rows, err := q.db.QueryContext(ctx, getPayInfo)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []GetPayInfoRow
+	for rows.Next() {
+		var i GetPayInfoRow
+		if err := rows.Scan(&i.ID, &i.PaymentMethod); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const getUser = `-- name: GetUser :one

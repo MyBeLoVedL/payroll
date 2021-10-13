@@ -6,6 +6,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -79,4 +80,22 @@ func UpdateOrder(ctx context.Context, arg UpdateOrderParams) error {
 
 func UpdateNamePassword(ID int64, Name, Password string) error {
 	return q.UpdateNamePassword(context.Background(), UpdateNamePasswordParams{Name, Password, ID})
+}
+
+func GetPayInfo() ([]GetPayInfoRow, error) {
+	info, err := q.GetPayInfo(context.Background())
+	if err != nil {
+		return nil, nil
+	}
+	return info, nil
+}
+
+func CreatePaycheck(empID int64, amount string, startDate, endDate time.Time) error {
+	return q.CreatePaycheck(context.Background(), CreatePaycheckParams{
+		empID, amount, startDate, endDate,
+	})
+}
+
+func CommitCard(empID int64) error {
+	return q.CommitCard(context.Background(), empID)
 }
