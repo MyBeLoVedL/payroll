@@ -20,6 +20,12 @@
 			// 	}
 			// }
 			//
+
+
+			function pay() {
+				alert("操作成功！！这一周工作辛苦了～～");
+				location.href = "/runPayroll"
+			}
 			function updatePay() {
 				var xml = new XMLHttpRequest();
 				xml.open("get", "/updatePickupPay", true);
@@ -124,6 +130,10 @@
 									<li>
 										<a href="/disReport" onclick="return canuse()">管理员工报告</a>
 									</li>
+
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
+                  </li>
 								</ul>
 							</li>
 						</ul>

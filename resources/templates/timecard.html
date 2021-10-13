@@ -23,6 +23,12 @@
 					elem: '#st' //指定元素
 				});
 			});
+
+
+			function pay() {
+				alert("操作成功！！这一周工作辛苦了～～");
+				location.href = "/runPayroll"
+			}
 			layui.use('laydate', function() {
 				var laydate = layui.laydate;
 
@@ -152,6 +158,10 @@
 									<li>
 										<a href="/disReport" onclick="return canuse()">管理员工报告</a>
 									</li>
+
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
+                  </li>
 								</ul>
 							</li>
 						</ul>

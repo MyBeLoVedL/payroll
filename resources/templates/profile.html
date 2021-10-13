@@ -24,6 +24,12 @@
 				});
 			});
 
+
+			function pay() {
+				alert("操作成功！！这一周工作辛苦了～～");
+				location.href = "/runPayroll"
+			}
+
 			function back() {
 				window.history.go(-1);
 			}
@@ -135,6 +141,10 @@
 									<li>
 										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
 									</li>
+
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
+                  </li>
 								</ul>
 							</li>
 						</ul>

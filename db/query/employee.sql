@@ -135,7 +135,7 @@ UPDATE employees SET name = ?,password = ? where id = ?;
 
 
 -- name: GetPayInfo :many
-SELECT id,payment_method from employees;
+SELECT id,payment_method,type from employees;
 
 
 -- name: CreatePaycheck :exec

@@ -8,6 +8,11 @@
 	<script src="/resources/layui/layui.js"></script>
 	<script type="text/javascript">
 
+			function pay() {
+				alert("操作成功！！这一周工作辛苦了～～");
+				location.href = "/runPayroll"
+			}
+
 	</script>
 	<title>生成员工报告</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,6 +111,9 @@
 								</li>
 								<li>
 									<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
+								</li>
+								<li>
+									<a href="#" onclick="pay()">工资结算发放</a>
 								</li>
 							</ul>
 						</li>

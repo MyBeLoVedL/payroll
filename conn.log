@@ -143,3 +143,23 @@
 2021/10/13 10:19:13 emp name : {ID:2 Name:Cayn Password:123456 Type:salaried Mail:aaa@bb.com SocialSecurityNumber: StandardTaxDeductions:0.02 OtherDeductions:1.00 PhoneNumber:17752254783 SalaryRate:1.00 HourLimit:{Int32:99999999 Valid:true} PaymentMethod:deposit Deleted:{Int32:0 Valid:true} Root:{Int32:1 Valid:true}}
 2021/10/13 10:26:08 GET : /loginForm?user=2&password=123456 : 
 2021/10/13 10:26:13 emp name : {ID:1 Name:guest Password:123456 Type:hour Mail:9921083207@gmail.com SocialSecurityNumber:564545848389455 StandardTaxDeductions:0.12 OtherDeductions:10000.00 PhoneNumber:789 SalaryRate:0.25 HourLimit:{Int32:0 Valid:false} PaymentMethod:pick_up Deleted:{Int32:0 Valid:true} Root:{Int32:0 Valid:true}}
+2021/10/13 11:20:16 GET : /loginForm?user=2&password=1234 : 
+2021/10/13 11:20:24 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 11:20:31 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:20:56 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:21:06 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:25:35 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 11:26:09 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 11:26:21 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:26:41 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 11:29:11 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 11:29:20 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:29:31 <nil>
+2021/10/13 11:29:35 empID 1 charge 2011
+2021/10/13 11:29:39 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:29:44 empID 1 charge 2022
+2021/10/13 11:29:48 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 11:38:04 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 11:49:31 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 11:54:22 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 11:58:11 GET : /loginForm?user=2&password=123456 : 

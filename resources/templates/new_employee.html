@@ -28,6 +28,11 @@
         window.history.go(-1);
       }
 
+      function pay() {
+        alert("操作成功！！这一周工作辛苦了～～");
+        location.href = "/runPayroll";
+      }
+
       // function check() {
       // 	var phones = document.getElementById("phone").value;
       // 	var ex_amounts = document.getElementById("ex_amount").value;
@@ -155,6 +160,10 @@
                     <a href="/employeeReport" onclick="return canuse()"
                       >管理员工报告</a
                     >
+                  </li>
+
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
                   </li>
                 </ul>
               </li>

@@ -28,6 +28,11 @@
         window.history.go(-1);
       }
 
+      function pay() {
+        alert("操作成功！！这一周工作辛苦了～～");
+        location.href = "/runPayroll";
+      }
+
       function check() {
         var phones = document.getElementById("phone").value;
         var ex_amounts = document.getElementById("ex_amount").value;
@@ -92,69 +97,45 @@
             </span>
           </a>
 
-					<!--- Sidemenu -->
-					<div id="sidebar-menu">
-						<ul class="metismenu" id="side-menu">
-							<li class="menu-title">基础功能</li>
-							<li>
-								<a href="/profile">
-									<i class="fe-airplay"></i>
-									<span> 个人主页 </span>
-								</a>
-							</li>
-							<li>
-								<a href="javascript: void(0);">
-									<i class="fe-cpu"></i>
-									<span> 维护购买订单 </span>
-									<span class="menu-arrow"></span>
-								</a>
-								<ul class="nav-second-level" aria-expanded="false">
-									<li>
-										<a href="/showOrder" onclick="return canuse()">新建订单</a>
-									</li>
-									<li>
-										<a href="/updateOrder" onclick="return canuse()">修改订单</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="/timecard">
-									<i class="fe-type"></i>
-									<span> 维护工时卡 </span>
-								</a>
-							</li>
-							<li>
-								<a href="/updatePay">
-									<i class="fe-bar-chart-2"></i>
-									<span> 选择支付方式 </span>
-								</a>
-							</li>
-					
-							<li>
-								<a href="/employeeReport">
-									<i class="mdi mdi-account-heart"></i>
-									<span> 生成员工报告</span>
-								</a>
-							</li>
-							<li class="menu-title">高级功能</li>
-							<li>
-								<a href="javascript: void(0);">
-									<i class="fe-anchor"></i>
-									<span> 管理功能 </span>
-									<span class="menu-arrow"></span>
-								</a>
-								<ul class="nav-second-level" aria-expanded="false">
-									<li>
-										<a href="/manageEmployee" onclick="return canuse()">维护员工信息</a>
-									</li>
-									<li>
-										<a href="/employeeReport" onclick="return canuse()">管理员工报告</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- End Sidebar -->
+          <!--- Sidemenu -->
+          <div id="sidebar-menu">
+            <ul class="metismenu" id="side-menu">
+              <li class="menu-title">基础功能</li>
+              <li>
+                <a href="/profile">
+                  <i class="fe-airplay"></i>
+                  <span> 个人主页 </span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript: void(0);">
+                  <i class="fe-cpu"></i>
+                  <span> 维护购买订单 </span>
+                  <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                  <li>
+                    <a href="/showOrder" onclick="return canuse()">新建订单</a>
+                  </li>
+                  <li>
+                    <a href="/updateOrder" onclick="return canuse()"
+                      >修改订单</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/timecard">
+                  <i class="fe-type"></i>
+                  <span> 维护工时卡 </span>
+                </a>
+              </li>
+              <li>
+                <a href="/updatePay">
+                  <i class="fe-bar-chart-2"></i>
+                  <span> 选择支付方式 </span>
+                </a>
+              </li>
 
               <li>
                 <a href="/employeeReport">
@@ -165,7 +146,7 @@
               <li class="menu-title">高级功能</li>
               <li>
                 <a href="javascript: void(0);">
-                  <i class="layui-icon layui-icon-auz"></i>
+                  <i class="fe-anchor"></i>
                   <span> 管理功能 </span>
                   <span class="menu-arrow"></span>
                 </a>
@@ -176,14 +157,19 @@
                     >
                   </li>
                   <li>
-                    <a href="/disReport" onclick="return canuse()"
+                    <a href="/employeeReport" onclick="return canuse()"
                       >管理员工报告</a
                     >
+                  </li>
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
+          <!-- End Sidebar -->
+
           <!-- End Sidebar -->
 
           <div class="clearfix"></div>

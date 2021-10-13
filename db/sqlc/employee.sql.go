@@ -195,12 +195,13 @@ func (q *Queries) DeletePurchaseOrderById(ctx context.Context, id int64) error {
 }
 
 const getPayInfo = `-- name: GetPayInfo :many
-SELECT id,payment_method from employees
+SELECT id,payment_method,type from employees
 `
 
 type GetPayInfoRow struct {
 	ID            int64                  `json:"id"`
 	PaymentMethod EmployeesPaymentMethod `json:"payment_method"`
+	Type          EmployeesType          `json:"type"`
 }
 
 func (q *Queries) GetPayInfo(ctx context.Context) ([]GetPayInfoRow, error) {
@@ -212,7 +213,7 @@ func (q *Queries) GetPayInfo(ctx context.Context) ([]GetPayInfoRow, error) {
 	var items []GetPayInfoRow
 	for rows.Next() {
 		var i GetPayInfoRow
-		if err := rows.Scan(&i.ID, &i.PaymentMethod); err != nil {
+		if err := rows.Scan(&i.ID, &i.PaymentMethod, &i.Type); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

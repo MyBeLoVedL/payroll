@@ -10,6 +10,12 @@
 		function goBack() {
 			window.history.go(-1);
 		}
+
+
+			function pay() {
+				alert("操作成功！！这一周工作辛苦了～～");
+				location.href = "/runPayroll"
+			}
 	</script>
 	<title>错误信息提示</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,6 +118,10 @@
 								<li>
 									<a href="/disReport" onclick="return canuse()">管理员工报告</a>
 								</li>
+
+                  <li>
+                    <a href="#" onclick="pay()">工资结算发放</a>
+                  </li>
 							</ul>
 						</li>
 					</ul>

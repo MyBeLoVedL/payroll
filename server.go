@@ -234,6 +234,7 @@ func setRouter(r *gin.Engine) {
 				"showUsername": session.User.Name,
 				"prefix":       prefix,
 			})
+			return
 		}
 
 		var arg timecardParam
@@ -241,6 +242,9 @@ func setRouter(r *gin.Engine) {
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err,
+			})
+			c.HTML(http.StatusBadRequest, "error_page.html", gin.H{
+				"Msg": err.Error(),
 			})
 			return
 		}
@@ -631,13 +635,6 @@ func setRouter(r *gin.Engine) {
 		sid, _ := c.Cookie("sid")
 		session, _ := misc.GSS.Get(sid)
 
-		if session.User.Root.Int32 != 1 {
-			c.HTML(http.StatusOK, "error_page.html", gin.H{
-				"Msg": "您并非管理员，无法进行此项操作",
-			})
-			return
-		}
-
 		hours, _ := db.GetHoursByEmpID(session.User.ID)
 
 		payYear, _ := db.GetPayYearToDate(session.User.ID)
@@ -703,6 +700,15 @@ func setRouter(r *gin.Engine) {
 	})
 
 	r.GET("/adminReport", func(c *gin.Context) {
+		sid, _ := c.Cookie("sid")
+		session, _ := misc.GSS.Get(sid)
+		if session.User.Root.Int32 != 1 {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": "您并非管理员，无法进行此项操作",
+			})
+			return
+		}
+
 		type ReportArg struct {
 			Rtype     string `form:"type" binding:"required"`
 			EmpName   string `form:"empName" binding:"required"`
@@ -762,7 +768,7 @@ func setRouter(r *gin.Engine) {
 		for _, emp := range info {
 			empInfo, _ := db.SelectEmployee(emp.ID)
 
-			switch emp.PaymentMethod {
+			switch emp.Type {
 			case "hour":
 				hours, err := db.GetHoursByEmpID(emp.ID)
 				if err != nil {
@@ -833,6 +839,7 @@ func setRouter(r *gin.Engine) {
 				return
 			}
 		}
+		c.Redirect(http.StatusTemporaryRedirect, "/resources/templates/main.html")
 	})
 }
 
