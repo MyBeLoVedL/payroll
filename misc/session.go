@@ -1,6 +1,7 @@
 package misc
 
 import (
+	"errors"
 	db "payroll/db/sqlc"
 	"payroll/db/util"
 )
@@ -30,7 +31,7 @@ func (s *SessionManager) Get(id string) (Session, error) {
 	if pre {
 		return sess, nil
 	} else {
-		return Session{}, nil
+		return Session{}, errors.New("session error")
 	}
 }
 

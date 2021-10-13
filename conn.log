@@ -163,3 +163,32 @@
 2021/10/13 11:49:31 GET : /loginForm?user=2&password=123456 : 
 2021/10/13 11:54:22 GET : /loginForm?user=2&password=123456 : 
 2021/10/13 11:58:11 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 12:23:53 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 12:24:53 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:42:11 GET : /loginForm?user=3&password=123456 : 
+2021/10/13 12:42:53 GET : /loginForm?user=3&password=123456 : 
+2021/10/13 12:42:56 GET : /loginForm?user=3&password=123456 : 
+2021/10/13 12:43:13 <nil>
+2021/10/13 12:45:37 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:50:49 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:50:51 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:51:30 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:51:32 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:53:02 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:53:03 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:57:00 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:57:05 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:57:20 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:57:26 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:57:30 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:57:43 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 12:58:41 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 12:58:57 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 13:02:27 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 13:05:27 GET : /loginForm?user=1&password=123456 : 
+2021/10/13 13:05:29 timecard info {ID:2 EmpID:1 StartDate:{Time:2021-10-13 11:26:21 +0000 UTC Valid:true} Committed:{Int32:0 Valid:true}}
+2021/10/13 13:05:29 Error 1292: Incorrect date value: '0000-00-00' for column 'date' at row 1
+2021/10/13 13:06:01 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 13:06:02 timecard info {ID:1 EmpID:2 StartDate:{Time:2021-10-12 21:32:16 +0000 UTC Valid:true} Committed:{Int32:1 Valid:true}}
+2021/10/13 13:10:08 GET : /loginForm?user=2&password=123456 : 
+2021/10/13 13:10:10 timecard info {ID:1 EmpID:2 StartDate:{Time:2021-10-12 21:32:16 +0000 UTC Valid:true} Committed:{Int32:1 Valid:true}}

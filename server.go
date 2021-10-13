@@ -58,7 +58,12 @@ func setRouter(r *gin.Engine) {
 
 	r.GET("/profile", func(c *gin.Context) {
 		sid, _ := c.Cookie("sid")
-		session, _ := misc.GSS.Get(sid)
+		session, err := misc.GSS.Get(sid)
+		if err != nil {
+			c.HTML(http.StatusBadRequest, "error_page.html", gin.H{
+				"Msg": err.Error(),
+			})
+		}
 
 		arg, err := db.SelectEmployee(int64(session.User.ID))
 		if err != nil {
@@ -219,26 +224,47 @@ func setRouter(r *gin.Engine) {
 
 	r.GET("/timecard", func(c *gin.Context) {
 
-		type timecardParam struct {
-			Charge int       `form:"charge"`
-			Hours  int       `form:"hours"`
-			Date   time.Time `form:"date" time_format:"2006-01-02"`
-		}
-
 		sid, _ := c.Cookie("sid")
-		session, _ := misc.GSS.Get(sid)
-
-		if db.IfCommitted(session.User.ID) {
+		session, err := misc.GSS.Get(sid)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": err.Error(),
+			})
+			return
+		}
+		id := session.User.ID
+		card, err := db.SelectTimeCard(id)
+		if err != nil {
+			c.HTML(http.StatusOK, "error_page.html", gin.H{
+				"Msg": err.Error(),
+			})
+			return
+		}
+		var msg string
+		if card.Committed.Int32 == 1 {
+			msg = "已提交"
+		} else {
+			msg = "未提交"
+		}
+		if db.IfCommitted(id) {
 			c.HTML(http.StatusOK, "timecard.html", gin.H{
-				"Committed":    false,
+				"ID":           card.ID,
+				"StartDate":    card.StartDate.Time.String(),
+				"Committed":    msg,
 				"showUsername": session.User.Name,
 				"prefix":       prefix,
 			})
 			return
 		}
 
+		type timecardParam struct {
+			Charge int       `form:"charge"`
+			Hours  int       `form:"hours"`
+			Date   time.Time `form:"date" time_format:"2006-01-02"`
+		}
+
 		var arg timecardParam
-		err := c.BindQuery(&arg)
+		err = c.BindQuery(&arg)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err,

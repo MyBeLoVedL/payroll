@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"log"
 	"time"
 )
 
@@ -11,6 +12,7 @@ func IfCommitted(id int64) bool {
 	if err != nil {
 		return false
 	}
+	log.Printf("timecard info %+v\n", card)
 	return card.Committed.Int32 == 1
 }
 

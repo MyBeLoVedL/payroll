@@ -105,7 +105,7 @@
 						<ul class="metismenu" id="side-menu">
 							<li class="menu-title">基础功能</li>
 							<li>
-								<a href="/profiles">
+								<a href="/profile">
 									<i class="fe-airplay"></i>
 									<span> 个人主页 </span>
 								</a>
@@ -255,51 +255,7 @@
 										<h4 class="header-title">
 											<查看当前工时卡>
 										</h4>
-										<!-- <p class="text-muted font-13 mb-4">
-										<form action="SearchExpenseServlet" method="post">
 
-											<span>客户联系方式</span>
-
-											<br>
-											<span><input type="text" name="phonenumber" id="pn"
-													class="form-control"></span>
-
-											<br>
-											<span>商品类别</span>
-
-											<br>
-
-											<span>
-												<select name="kind" data-plugin="customselect">
-													<option value="null">全部</option>
-													<option value="服装">服装</option>
-													<option value="运动">运动</option>
-													<option value="文具">文具</option>
-													<option value="家电">家电</option>
-												</select>
-											</span>
-
-											<br>
-											<br>
-											<span>开始时间</span>
-
-											<br>
-											<span><input type="text" name="starttime" id="st" placeholder="YYYY-MM-DD"
-													class="form-control"></span>
-
-											<br>
-											<span>截止时间</span>
-
-											<br>
-											<span><input type="text" name="endtime" id="et" placeholder="YYYY-MM-DD"
-													class="form-control"></span>
-
-											<br>
-											<span><input type="submit" value="查询"
-													class="btn btn-block btn-primary"></span>
-											<br>
-										</form>
-										</p> -->
 
 										<table class="layui-table">
 											<thead>
@@ -320,7 +276,7 @@
 													</c:when>
 													<c:otherwise>
 														<c:forEach items="${alist}" var="out">
-															<form action="GetExpenseByID" method="post">
+															<form action="/resources/templates/main.html" method="GET">
 																<!-- 默认显示最近一条，输出要替换成Golang提取数据的方式 -->
 																<tr>
 																	<td>
